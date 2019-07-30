@@ -3,10 +3,94 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:KeepInMind"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        xmlns:local="clr-namespace:KeepInMind.ViewModels"
+		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+		mc:Ignorable="d"
+		TextElement.Foreground="{DynamicResource MaterialDesignBody}"		
+        Background="{DynamicResource MaterialDesignPaper}"
+		TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+		FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+		Title="Remember The Words" 
+		Height="300" 
+		Width="500"
+		MinHeight="300"
+		MinWidth="500"
+		ResizeMode="NoResize"
+		Icon="/Resources/Icon1.ico"
+		FocusManager.FocusedElement="{x:Reference Name=TextBoxWord}">
+	<Window.DataContext>
+		<local:MainVM/>
+	</Window.DataContext>
+	<Grid Margin="16">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="0.5*"/>
+			<RowDefinition/>
+			<RowDefinition/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<materialDesign:PopupBox 
+			HorizontalAlignment="Right"
+			StaysOpen="True" 
+			IsEnabled="{Binding IsChecked, ElementName=PopupEnabled}">
+			<Grid 
+				Width="200" 
+				Margin="8,8,8,8">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<Button 
+					x:Name="ButtonList"
+					Grid.Row="1" 
+					Style="{StaticResource MaterialDesignFlatButton}">
+					LIST
+				</Button>
+				<Button 
+					x:Name="ButtonShow" 
+					Grid.Row="0" 
+					Style="{StaticResource MaterialDesignFlatButton}">
+					NEXT WORD
+				</Button>
+				<Button 
+					x:Name="ButtonRollback"
+					Grid.Row="2" 
+					Style="{StaticResource MaterialDesignFlatButton}">
+					ROLLBACK
+				</Button>
+				<Button 
+					x:Name="ButtonSettings" 
+					Grid.Row="3"
+					Style="{StaticResource MaterialDesignFlatButton}">
+					SETTINGS
+				</Button>
+				<Button 
+					x:Name="ButtonExit" 
+					Grid.Row="4" 
+					Style="{StaticResource MaterialDesignFlatButton}">
+					EXIT
+				</Button>
+			</Grid>
+		</materialDesign:PopupBox>
+		<TextBox x:Name="TextBoxWord" 
+				 Grid.Row="1" 
+				 materialDesign:HintAssist.Hint="word" 
+				 Margin="20"/>
+		<TextBox x:Name="TextBoxTranslate" 
+				 Grid.Row="2"
+				 materialDesign:HintAssist.Hint="translate"
+				 Margin="20"/>
+		<Button x:Name="ButtonAddWord"
+				Grid.Row="3"
+				Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+				HorizontalAlignment="Right">
+			<materialDesign:PackIcon 
+				Kind="Plus"    
+				Height="24" 
+				Width="24" />
+		</Button>
+	</Grid>
 </Window>
