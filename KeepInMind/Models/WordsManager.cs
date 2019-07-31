@@ -11,9 +11,11 @@ namespace KeepInMind.Models
 	class WordsManager:BindableBase
 	{
 		WordRepository wordRepository;
+		WordsLoader wordsLoader;
 		public WordsManager()
 		{
-			wordRepository = new WordRepository();
+			wordsLoader = new WordsLoader();
+			wordRepository = new WordRepository(wordsLoader.LoadLastFile());
 		}
 		public void AddWord(string word, string translate)
 		{
@@ -23,6 +25,12 @@ namespace KeepInMind.Models
 				Translate = translate
 			};
 			wordRepository.Add(newWord);
+			wordsLoader.Save(wordRepository.Words);
+		}
+		public void GetWordsToShow()
+		{
+			List<Word> list = new List<Word>();
+
 		}
 	}
 }

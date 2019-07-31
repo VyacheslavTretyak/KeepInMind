@@ -32,6 +32,7 @@ namespace KeepInMind.Models
 		{
 			configLoader = new ConfigLoader();
 			configLoader.LoadConfig();
+			GetConfig();
 		}
 
 		public void SaveConfig()

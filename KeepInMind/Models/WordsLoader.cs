@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Win32;
 
 namespace KeepInMind.Models
 {
 	class WordsLoader
 	{
 		private Configurator configurator;
-		public DataFile()
+		public WordsLoader()
 		{
-			configurator = Controller.GetInstance().Configurator;
+			configurator = new Configurator();
 		}
 
-		public List<Word> LoadLastFile()
+		public ObservableCollection<Word> LoadLastFile()
 		{
 			FileInfo fi = new FileInfo(configurator.DirectoryName);
 			if (!fi.Exists)
@@ -25,7 +29,7 @@ namespace KeepInMind.Models
 			FileInfo[] files = info.GetFiles();
 			if (files.Length == 0)
 			{
-				throw new FileNotFoundException();
+				return new ObservableCollection<Word>();
 			}
 			//Looking for newest file
 			FileInfo newestFile = files[0];
@@ -47,10 +51,10 @@ namespace KeepInMind.Models
 			return ReadData(newestFile.FullName);
 		}
 
-		private List<Word> ReadData(string fileName)
+		private ObservableCollection<Word> ReadData(string fileName)
 		{
 			//Read file			
-			List<Word> words = new List<Word>();
+			ObservableCollection<Word> words = new ObservableCollection<Word>();
 			using (StreamReader sr = new StreamReader(fileName))
 			{
 				while (!sr.EndOfStream)
@@ -73,19 +77,19 @@ namespace KeepInMind.Models
 			return words;
 		}
 
-		public List<Word> RollBack()
+		public ObservableCollection<Word> RollBack()
 		{
-			System.Windows.Forms.OpenFileDialog fileDialog = new System.Windows.Forms.OpenFileDialog();
+			OpenFileDialog fileDialog = new OpenFileDialog();
 			DirectoryInfo info = new DirectoryInfo(configurator.DirectoryName);
 			fileDialog.InitialDirectory = info.FullName;
-			if (fileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (fileDialog.ShowDialog() == true)
 			{
 				return ReadData(fileDialog.FileName);
 			}
 			return null;
 		}
 
-		public void Save(List<Word> words)
+		public void Save(ReadOnlyObservableCollection<Word> words)
 		{
 			string time = DateTime.Now.ToString(configurator.FormatInFile);
 			string fullpath = $"{configurator.DirectoryName}\\{configurator.FileName}__{time}.{configurator.FileExtension}";

@@ -44,7 +44,8 @@ namespace KeepInMind.Models
 			stringBuilder.Append(TimeShow.ToString(formatInWord));
 			stringBuilder.Append(spliter);
 			stringBuilder.Append(TimeCreate.ToString(formatInWord));
-			stringBuilder.Append(Level);
+			stringBuilder.Append(spliter);
+			stringBuilder.Append(Level);			
 			return stringBuilder.ToString();
 		}
 	}

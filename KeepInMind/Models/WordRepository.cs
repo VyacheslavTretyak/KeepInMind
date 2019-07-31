@@ -11,8 +11,17 @@ namespace KeepInMind.Models
 	{
 		private readonly ObservableCollection<Word> words = new ObservableCollection<Word>();
 		public ReadOnlyObservableCollection<Word> Words { get; }
+		public WordRepository(ObservableCollection<Word> words)
+		{
+			this.words = words;
+			Words = new ReadOnlyObservableCollection<Word>(this.words);
+		}
 		public int LastId()
 		{
+			if(words.Count == 0)
+			{
+				return 1;
+			}
 			return words.Max(w => w.Id);
 		}
 
