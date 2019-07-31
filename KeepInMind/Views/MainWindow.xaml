@@ -19,9 +19,12 @@
 		ResizeMode="NoResize"
 		Icon="/Resources/Icon1.ico"
 		FocusManager.FocusedElement="{x:Reference Name=TextBoxWord}">
-	<Window.DataContext>
+	<Window.DataContext>	
 		<local:MainVM/>
 	</Window.DataContext>
+	<Window.Resources>
+		<local:MainVM x:Key="MainConverter"/>
+	</Window.Resources>
 	<Grid Margin="16">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="0.5*"/>
@@ -78,15 +81,51 @@
 		<TextBox x:Name="TextBoxWord" 
 				 Grid.Row="1" 
 				 materialDesign:HintAssist.Hint="word" 
-				 Margin="20"/>
+				 Margin="20"
+				 Text="{Binding TextWordClear, Mode=OneWay}"/>
 		<TextBox x:Name="TextBoxTranslate" 
 				 Grid.Row="2"
 				 materialDesign:HintAssist.Hint="translate"
-				 Margin="20"/>
+				 Margin="20"
+				 Text="{Binding TextTranslateClear, Mode=OneWay}"/>
 		<Button x:Name="ButtonAddWord"
-				Grid.Row="3"
-				Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
-				HorizontalAlignment="Right">
+				Grid.Row="3"				
+				HorizontalAlignment="Right"
+				Command="{Binding AddWordCommand}">
+			<Button.Style>
+				<Style BasedOn="{StaticResource MaterialDesignFloatingActionAccentButton}" TargetType="{x:Type Button}">
+					<Style.Triggers>
+						<DataTrigger 
+							Binding="{
+								Binding Text.Length, 
+								ElementName=TextBoxWord,
+								UpdateSourceTrigger=PropertyChanged}" 
+							Value="0">
+							<Setter 
+								Property="IsEnabled" 
+								Value="False"/>
+						</DataTrigger>
+						<DataTrigger 
+							Binding="{
+								Binding Text.Length, 
+								ElementName=TextBoxTranslate,	
+								UpdateSourceTrigger=PropertyChanged}"
+							Value="0">
+							<Setter 
+								Property="IsEnabled" 
+								Value="False"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Button.Style>
+			<Button.CommandParameter>
+				<MultiBinding Converter="{StaticResource MainConverter}">
+					<Binding Path="Text" 
+							 ElementName="TextBoxWord"/>
+					<Binding Path="Text"
+							 ElementName="TextBoxTranslate"/>
+				</MultiBinding>
+			</Button.CommandParameter>
 			<materialDesign:PackIcon 
 				Kind="Plus"    
 				Height="24" 
