@@ -85,10 +85,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\ConfigLoader.cs" />
+    <Compile Include="Models\Configurator.cs" />
     <Compile Include="Models\Exception\NotFoundException.cs" />
     <Compile Include="Models\Exception\RepositoryException.cs" />
     <Compile Include="Models\Word.cs" />
     <Compile Include="Models\WordRepository.cs" />
+    <Compile Include="Models\WordsLoader.cs" />
     <Compile Include="Models\WordsManager.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
