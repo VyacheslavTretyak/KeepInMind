@@ -85,6 +85,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Exception\NotFoundException.cs" />
+    <Compile Include="Models\Exception\RepositoryException.cs" />
     <Compile Include="Models\Word.cs" />
     <Compile Include="Models\WordRepository.cs" />
     <Compile Include="Models\WordsManager.cs" />

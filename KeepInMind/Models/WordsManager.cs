@@ -22,6 +22,7 @@ namespace KeepInMind.Models
 				Origin = word,
 				Translate = translate
 			};
+			wordRepository.
 
 		}
 
