@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static KeepInMind.Models.Configurator;
 
 namespace KeepInMind.Models
 {
 	class ConfigLoader
 	{
 		private string fileName = "config.ini";
-		private Dictionary<string, string> config;
+		private Configurator config;
 		public ConfigLoader()
 		{
-			config = new Dictionary<string, string>();
+			config = new Configurator();
 		}
 
-		public void LoadConfig()
-		{
-			config = new Dictionary<string, string>();
+		public Configurator LoadConfig()
+		{			
 			if (!File.Exists(fileName))
 			{
 				SetDefaultConfig();
@@ -36,42 +37,75 @@ namespace KeepInMind.Models
 							continue;
 						}
 						string[] keyVal = line.Split(":".ToCharArray());
-						config[keyVal[0]] = keyVal[1];
+						SetValueToConfigurator(keyVal[0], keyVal[1]);
 					}
 				}
 			}
+			return config;
 		}
 
-		public Dictionary<string, string> GetConfig()
+		private void SetValueToConfigurator(string key, string val)
+		{
+			PropertyInfo prop = null;
+			foreach (var p in typeof(Configurator).GetProperties())
+			{
+				if(key == p.Name)
+				{
+					prop = p;
+					break;
+				}
+			}
+			if(prop == null)
+			{
+				return;
+			}
+			var str = prop.PropertyType.Name;
+			switch (str.ToLower())
+			{
+				case "string":
+					prop.SetValue(config, val);
+					break;
+				case "int32":
+					prop.SetValue(config, int.Parse(val));
+					break;
+				case "boolean":
+					prop.SetValue(config, bool.Parse(val));
+					break;
+				case "askwordstype":
+					prop.SetValue(config, Enum.Parse(typeof(AskWordsType),val));
+					break;
+			}
+				
+			
+		}
+
+		public Configurator GetConfig()
 		{
 			return config;
 		}
 
 		private void SetDefaultConfig()
 		{
-			config["hours"] = "8";
-			config["days"] = "10";
-			config["weeks"] = "6";
-			config["ask"] = "2";
-			config["autorun"] = "1";
-			config["directoryName"] = "data";
-			config["fileName"] = "words";
-			config["fileExtension"] = "wrd";
-			config["formatInFile"] = "yyyy_MM_dd_HH_mm_ss";
-			config["maxCountFiles"] = 20.ToString();
+			config = new Configurator();
 		}
 
 		public void SaveConfig()
 		{
 			using (StreamWriter sw = File.CreateText(fileName))
 			{
-				foreach (var pair in config)
+				foreach (var p in typeof(Configurator).GetProperties())
 				{
-					if (pair.Key == "ask")
+					if (p.Name == "AskWords")
 					{
-						sw.WriteLine($"# 0 - Word, 1 - Translate, 2 - Both");
+						sw.Write($"# ");
+						foreach (var val in Enum.GetValues(typeof(AskWordsType)))
+						{
+							sw.Write($"{val}, ");
+						}
+						sw.Write("\n");
+
 					}
-					sw.WriteLine($"{pair.Key}:{pair.Value}");
+					sw.WriteLine($"{p.Name}:{p.GetValue(new Configurator()).ToString()}");
 				}
 			}
 		}

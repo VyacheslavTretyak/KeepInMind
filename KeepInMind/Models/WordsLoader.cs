@@ -16,6 +16,7 @@ namespace KeepInMind.Models
 		public WordsLoader()
 		{
 			configurator = new Configurator();
+			configurator.Load();
 		}
 
 		public ObservableCollection<Word> LoadLastFile()

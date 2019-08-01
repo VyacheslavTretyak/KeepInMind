@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,53 +16,44 @@ namespace KeepInMind.Models
 			Translate,
 			Both
 		}
-		public AskWordsType AskWords { get; set; }
-		public int Hours { get; set; }
-		public int Days { get; set; }
-		public int Weeks { get; set; }
-		public bool AutoRun { get; set; }
-		public string DirectoryName { get; set; }
-		public string FileName { get; set; }
-		public string FileExtension { get; set; }
-		public string FormatInFile { get; set; }
-		public int MaxCountFiles { get; set; }
+		
+		public AskWordsType AskWords { get; set; } = AskWordsType.Both;		
+		public int Hours { get; set; } = 8;		
+		public int Days { get; set; } = 7;
+		public int Weeks { get; set; } = 4;
+		public bool AutoRun { get; set; } = false;
+		public string DirectoryName { get; set; } = "data";
+		public string FileName { get; set; } = "words";
+		public string FileExtension { get; set; } = "wrd";
+		public string FormatInFile { get; set; } = "yyyy_MM_dd_HH_mm_ss";
+		public int MaxCountFiles { get; set; } = 20;
+		public int CountOldWords { get; set; } = 1;
+		public int LevelPercent { get; set; } = 30;
 
 		private string appName = "KeepInMind";
 		private ConfigLoader configLoader;
 		public Configurator()
 		{
+			
+		}
+
+		public void Load()
+		{
 			configLoader = new ConfigLoader();
-			configLoader.LoadConfig();
-			GetConfig();
+			SetConfig(configLoader.LoadConfig());
+		}
+		private void SetConfig(Configurator config)
+		{
+			foreach (var p in typeof(Configurator).GetProperties())
+			{
+				p.SetValue(this, p.GetValue(config));
+			}
 		}
 
 		public void SaveConfig()
 		{
 			configLoader.SaveConfig();
-		}
-
-		public void GetConfig()
-		{
-			Dictionary<string, string> config = configLoader.GetConfig();
-			Hours = int.Parse(config["hours"]);
-			Days = int.Parse(config["days"]);
-			Weeks = int.Parse(config["weeks"]);
-			AutoRun = config["autorun"] == "1";
-			DirectoryName = config["directoryName"];
-			FileName = config["fileName"];
-			FileExtension = config["fileExtension"];
-			FormatInFile = config["formatInFile"];
-			MaxCountFiles = int.Parse(config["maxCountFiles"]);
-			AskWords = (AskWordsType)int.Parse(config["ask"]);
-			if (AutoRun)
-			{
-				AutoRunSet();
-			}
-			else
-			{
-				AutoRunUnset();
-			}
-		}
+		}	
 
 		public void AutoRunSet()
 		{
