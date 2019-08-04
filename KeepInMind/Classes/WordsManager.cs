@@ -1,42 +1,48 @@
 ﻿using KeepInMind.Classes;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KeepInMind.Models
 {
 	class WordsManager
-	{
-		private WordModel wordModel;
+	{	
 		private WordRepository wordRepository;
 		private WordsLoader wordsLoader;
 		private Configurator configurator;
+		private List<Word> showList;
 		public int LevelEvent => 2;
 		static private WordsManager instance = null;
-		static public WordsManager getInstance()
+		static public WordsManager Instance
 		{
-			if(instance == null)
+			get
 			{
-				instance = new WordsManager();
+				if (instance == null)
+				{
+					instance = new WordsManager();
+				}
+				return instance;
 			}
-			return instance;
 		}
 		private WordsManager()
-		{
-			wordModel = new WordModel();
+		{		
 			wordsLoader = new WordsLoader();
 			wordRepository = new WordRepository(wordsLoader.LoadLastFile());
 			configurator = new Configurator();
 			configurator.Load();
-			GetWordsToShow();					
-			var wnd = new Views.WordWindow();
-			wordModel.LevelEvent = 1;
-			wnd.Show();
+			showList = GetWordsToShow();			
 		}
-		
+
+		public Word GetWord() { 
+			if(showList.Count == 0)
+			{
+				return null;
+			}
+			Word word = showList[0];
+			showList.RemoveAt(0);
+			return word;
+		}
+
 		public void AddWord(string word, string translate)
 		{
 			Word newWord = new Word()

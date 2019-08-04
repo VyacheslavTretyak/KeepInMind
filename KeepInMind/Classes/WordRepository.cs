@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using KeepInMind.Classes;
 
 namespace KeepInMind.Models
 {
@@ -54,6 +55,6 @@ namespace KeepInMind.Models
 				throw new NotFoundException();
 			}
 			words.Remove(found);
-		}
+		}		
 	}
 }

@@ -1,18 +1,37 @@
-﻿using KeepInMind.Classes;
-using Prism.Mvvm;
+﻿using KeepInMind.Views;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace KeepInMind.Models
 {
-	class WordModel: BindableBase
+	class WordModel: INotifyPropertyChanged
 	{
-		public int LevelEvent { get; set; } = 1;
+		WordsManager wordsManager = WordsManager.Instance();
+		Word Word { get; set; }
 		public WordModel()
 		{
-		}		
+			GetWord();
+		}
+
+		public void GetWord()
+		{
+			Word = wordsManager.GetWord();
+			if (Word != null)
+			{
+				WordView wordWindow = new WordView();
+				OnPropertyChanged("Word");
+				wordWindow.ShowDialog();
+				
+			}
+		}
+
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void OnPropertyChanged([CallerMemberName]string prop = "")
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+		}
+
+	
 	}
 }

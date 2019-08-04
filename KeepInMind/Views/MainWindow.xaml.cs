@@ -1,4 +1,5 @@
-﻿using KeepInMind.ViewModels;
+﻿using KeepInMind.Classes;
+using KeepInMind.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace KeepInMind
 		public MainWindow()
 		{
 			InitializeComponent();
+			wordWindow.DataContext = ChildWindowManager.Instance;
+			this.DataContext = new MainViewModel();
 		}
 	}
 }

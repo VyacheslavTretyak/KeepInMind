@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KeepInMind.Models
+namespace KeepInMind.Classes
 {
-	
-	class Word
+	public class Word
 	{
 		public enum WordLevel
 		{

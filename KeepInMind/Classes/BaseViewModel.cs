@@ -1,34 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
-using Prism.Mvvm;
-using KeepInMind.Models;
-using KeepInMind.Classes;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
-using MaterialDesignThemes.Wpf;
+using System.Windows.Data;
 
-namespace KeepInMind.ViewModels
+namespace KeepInMind.Classes
 {
-	class WordVM : IMultiValueConverter
+	abstract class BaseViewModel: INotifyPropertyChanged, IMultiValueConverter
 	{
-		private WordModel model = new WordModel();
-		public int LevelEvent { get; set; }		
-		public WordVM() {			
-			LevelEvent = 1;
-		}
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void OnPropertyChanged([CallerMemberName]string prop = "")
 		{
-			var a = LevelEvent;
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
 		}
 		public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-		{			
+		{
 			return values.Clone();
 		}
 

@@ -17,9 +17,9 @@ namespace KeepInMind.Views
 	/// <summary>
 	/// Interaction logic for WordWindow.xaml
 	/// </summary>
-	public partial class WordWindow : Window
+	public partial class WordView : UserControl
 	{
-		public WordWindow()
+		public WordView()
 		{
 			InitializeComponent();
 		}
@@ -30,7 +30,7 @@ namespace KeepInMind.Views
 
 		private void Card_MouseUp(object sender, MouseButtonEventArgs e)
 		{
-			Close();
+			//Close();
 		}
 
 		private void BackCard_MouseUp(object sender, MouseButtonEventArgs e)

@@ -20,10 +20,10 @@
 		Icon="/Resources/Icon1.ico"
 		FocusManager.FocusedElement="{x:Reference Name=TextBoxWord}">
 	<Window.DataContext>	
-		<local:MainVM/>
+		<local:MainViewModel/>
 	</Window.DataContext>
 	<Window.Resources>
-		<local:MainVM x:Key="MainConverter"/>
+		<local:MainViewModel x:Key="MainConverter"/>
 	</Window.Resources>
 	<Grid Margin="16">
 		<Grid.RowDefinitions>
@@ -131,5 +131,8 @@
 				Height="24" 
 				Width="24" />
 		</Button>
-	</Grid>
+		<Border Name="wordWindow" Visibility="{Binding WindowVisibility}" Background="#88000000" >
+			<ContentControl Content="{Binding XmlContent}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></ContentControl>
+		</Border>
+	</Grid>	
 </Window>
