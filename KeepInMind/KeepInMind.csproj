@@ -77,6 +77,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\DelegateCommand.cs" />
+    <Compile Include="Classes\Loger.cs" />
+    <Compile Include="Models\MainModel.cs" />
+    <Compile Include="Models\WordModel.cs" />
+    <Compile Include="ViewModels\WordVM.cs" />
+    <Compile Include="Views\WordWindow.xaml.cs">
+      <DependentUpon>WordWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -85,19 +93,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\ConfigLoader.cs" />
-    <Compile Include="Models\Configurator.cs" />
-    <Compile Include="Models\Exception\NotFoundException.cs" />
-    <Compile Include="Models\Exception\RepositoryException.cs" />
-    <Compile Include="Models\Word.cs" />
-    <Compile Include="Models\WordRepository.cs" />
-    <Compile Include="Models\WordsLoader.cs" />
-    <Compile Include="Models\WordsManager.cs" />
+    <Compile Include="Classes\ConfigLoader.cs" />
+    <Compile Include="Classes\Configurator.cs" />
+    <Compile Include="Classes\Exception\NotFoundException.cs" />
+    <Compile Include="Classes\Exception\RepositoryException.cs" />
+    <Compile Include="Classes\Word.cs" />
+    <Compile Include="Classes\WordRepository.cs" />
+    <Compile Include="Classes\WordsLoader.cs" />
+    <Compile Include="Classes\WordsManager.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\WordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

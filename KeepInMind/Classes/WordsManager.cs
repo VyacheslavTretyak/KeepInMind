@@ -1,25 +1,42 @@
-﻿using System;
+﻿using KeepInMind.Classes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Prism.Mvvm;
 
 namespace KeepInMind.Models
 {
-	class WordsManager:BindableBase
+	class WordsManager
 	{
+		private WordModel wordModel;
 		private WordRepository wordRepository;
 		private WordsLoader wordsLoader;
 		private Configurator configurator;
-		public WordsManager()
+		public int LevelEvent => 2;
+		static private WordsManager instance = null;
+		static public WordsManager getInstance()
 		{
+			if(instance == null)
+			{
+				instance = new WordsManager();
+			}
+			return instance;
+		}
+		private WordsManager()
+		{
+			wordModel = new WordModel();
 			wordsLoader = new WordsLoader();
 			wordRepository = new WordRepository(wordsLoader.LoadLastFile());
 			configurator = new Configurator();
 			configurator.Load();
+			GetWordsToShow();					
+			var wnd = new Views.WordWindow();
+			wordModel.LevelEvent = 1;
+			wnd.Show();
 		}
+		
 		public void AddWord(string word, string translate)
 		{
 			Word newWord = new Word()
@@ -30,7 +47,7 @@ namespace KeepInMind.Models
 			wordRepository.Add(newWord);
 			wordsLoader.Save(wordRepository.Words);
 		}
-		public void GetWordsToShow()
+		public List<Word> GetWordsToShow()
 		{
 			List<Word> list = new List<Word>();
 			DateTime now = DateTime.Now;
@@ -73,9 +90,27 @@ namespace KeepInMind.Models
 				} while (indexes.Contains(index));
 				indexes.Add(index);				
 			}
-
-
-
+			for(int i = 0; i<oldWords.Count; i++)
+			{
+				if (indexes.Contains(i))
+				{
+					list.Add(oldWords[i]);
+				}
+			}
+			//Тасуємо список слів
+			List<int> shuffle = new List<int>();
+			List<Word> newList = new List<Word>();
+			for (int i = 0; i<list.Count; i++)
+			{
+				int r = 0;
+				do
+				{
+					r = rnd.Next(0, list.Count);
+				} while (shuffle.Contains(r));
+				shuffle.Add(r);
+				newList.Add(list[r]);
+			}
+			return newList;
 		}
 	}
 }

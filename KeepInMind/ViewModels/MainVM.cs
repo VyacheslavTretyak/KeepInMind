@@ -5,36 +5,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using Prism.Commands;
-using Prism.Mvvm;
 using KeepInMind.Models;
+using KeepInMind.Classes;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace KeepInMind.ViewModels
 {
-	class MainVM : BindableBase, IMultiValueConverter
+	class MainVM : INotifyPropertyChanged, IMultiValueConverter
 	{
-		private WordsManager model = new WordsManager();
-		public string TextWordClear => "";
-		public string TextTranslateClear => "";
-		public DelegateCommand<object[]> AddWordCommand { get; }
-		public MainVM() {			
-			model.PropertyChanged += (s, e) =>
-			  {
-				  RaisePropertyChanged(e.PropertyName);
-			  };
-			AddWordCommand= new DelegateCommand<object[]>(AddWord);
-
+		private MainModel model = new MainModel();
+		public string TextClearEvent { get; set; }
+		public DelegateCommand AddWordCommand { get; }
+		public MainVM()
+		{
+			//System.Diagnostics.Debug.WriteLine("CONSTRUCTOR");			
+			AddWordCommand = new DelegateCommand(AddWordExecute, CanAddWordExecute);		
+			
 		}
-
-		public void AddWord(object[] objects)
+		public event PropertyChangedEventHandler PropertyChanged;
+		public void OnPropertyChanged([CallerMemberName]string prop = "")
+		{			
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+		}
+		
+		private bool CanAddWordExecute(object param)
+		{
+			return true;
+		}
+		private void AddWordExecute(object param)
+		{
+			AddWord((object[])param);
+		}
+		private void AddWord(object[] objects)
 		{
 			model.AddWord(objects[0].ToString(), objects[1].ToString());
-			RaisePropertyChanged("TextWordClear");
-			RaisePropertyChanged("TextTranslateClear");
+			TextClearEvent = "";
+			OnPropertyChanged("TextClearEvent");
 		}
 
 		public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-		{			
+		{		
 			return values.Clone();
 		}
 

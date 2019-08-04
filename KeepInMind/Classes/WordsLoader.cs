@@ -63,10 +63,7 @@ namespace KeepInMind.Models
 					string[] line = sr.ReadLine().Split(Word.spliter.ToCharArray());
 					int n = 0;
 					Word word = new Word();
-					if (line.Length == 6)
-					{
-						word.Id = int.Parse(line[n++]);
-					}
+					word.Id = int.Parse(line[n++]);				
 					word.Origin = line[n++];
 					word.Translate = line[n++];
 					word.CountShow = int.Parse(line[n++]);

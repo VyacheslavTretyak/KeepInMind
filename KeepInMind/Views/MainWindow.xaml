@@ -82,12 +82,12 @@
 				 Grid.Row="1" 
 				 materialDesign:HintAssist.Hint="word" 
 				 Margin="20"
-				 Text="{Binding TextWordClear, Mode=OneWay}"/>
+				 Text="{Binding TextClearEvent, Mode=TwoWay}"/>
 		<TextBox x:Name="TextBoxTranslate" 
 				 Grid.Row="2"
 				 materialDesign:HintAssist.Hint="translate"
 				 Margin="20"
-				 Text="{Binding TextTranslateClear, Mode=OneWay}"/>
+				 Text="{Binding TextClearEvent, Mode=TwoWay}"/>
 		<Button x:Name="ButtonAddWord"
 				Grid.Row="3"				
 				HorizontalAlignment="Right"
