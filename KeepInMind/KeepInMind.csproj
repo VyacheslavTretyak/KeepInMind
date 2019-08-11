@@ -72,12 +72,17 @@
     <Compile Include="Classes\ChildWindowManager.cs" />
     <Compile Include="Classes\DelegateCommand.cs" />
     <Compile Include="Classes\Loger.cs" />
+    <Compile Include="Classes\MultyCommandConverter.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\WordModel.cs" />
-    <Compile Include="Classes\WordWindowView.cs" />
-    <Compile Include="Views\WordView.cs">
-      <DependentUpon>WordView.xaml</DependentUpon>
+    <Compile Include="ViewModels\WordViewModel.cs" />
+    <Compile Include="Views\WordWindow.xaml.cs">
+      <DependentUpon>WordWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\WordWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -99,10 +104,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\WordView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

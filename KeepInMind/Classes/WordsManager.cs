@@ -6,7 +6,7 @@ using System.Linq;
 namespace KeepInMind.Models
 {
 	class WordsManager
-	{	
+	{
 		private WordRepository wordRepository;
 		private WordsLoader wordsLoader;
 		private Configurator configurator;
@@ -25,29 +25,34 @@ namespace KeepInMind.Models
 			}
 		}
 		private WordsManager()
-		{		
+		{
 			wordsLoader = new WordsLoader();
 			wordRepository = new WordRepository(wordsLoader.LoadLastFile());
 			configurator = new Configurator();
 			configurator.Load();
-			showList = GetWordsToShow();			
+			showList = GetWordsToShow();
 		}
 
-		public Word GetWord() { 
-			if(showList.Count == 0)
+		public Word GetWord() {
+			if (showList.Count == 0)
 			{
+				wordsLoader.Save(wordRepository.Words);
 				return null;
 			}
 			Word word = showList[0];
 			showList.RemoveAt(0);
 			return word;
 		}
+		public void UpdateWord(Word word)
+		{
+			wordRepository.Update(word);
+		}
 
-		public void AddWord(string word, string translate)
+		public void AddWord(string original, string translate)
 		{
 			Word newWord = new Word()
 			{
-				Origin = word,
+				Origin = original,
 				Translate = translate
 			};
 			wordRepository.Add(newWord);

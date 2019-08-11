@@ -7,6 +7,7 @@ using System.Windows;
 
 namespace KeepInMind.Classes
 {
+	//TODO delete if dont't need it
 	class ChildWindowManager:BaseViewModel
 	{
 		private ChildWindowManager()

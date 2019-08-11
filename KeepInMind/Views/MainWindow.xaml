@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeepInMind.ViewModels"
+        xmlns:classes="clr-namespace:KeepInMind.Classes"		
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 		mc:Ignorable="d"
 		TextElement.Foreground="{DynamicResource MaterialDesignBody}"		
@@ -23,7 +24,7 @@
 		<local:MainViewModel/>
 	</Window.DataContext>
 	<Window.Resources>
-		<local:MainViewModel x:Key="MainConverter"/>
+		<classes:MultyCommandConverter x:Key="MainConverter"/>
 	</Window.Resources>
 	<Grid Margin="16">
 		<Grid.RowDefinitions>
@@ -78,16 +79,16 @@
 				</Button>
 			</Grid>
 		</materialDesign:PopupBox>
-		<TextBox x:Name="TextBoxWord" 
-				 Grid.Row="1" 
-				 materialDesign:HintAssist.Hint="word" 
+		<TextBox x:Name="TextBoxWord"
+				 Grid.Row="1"
+				 materialDesign:HintAssist.Hint="word"
 				 Margin="20"
-				 Text="{Binding TextClearEvent, Mode=TwoWay}"/>
+				 Text="{Binding TextClearEvent, Mode=OneWay}"/>
 		<TextBox x:Name="TextBoxTranslate" 
 				 Grid.Row="2"
 				 materialDesign:HintAssist.Hint="translate"
 				 Margin="20"
-				 Text="{Binding TextClearEvent, Mode=TwoWay}"/>
+				 Text="{Binding TextClearEvent, Mode=OneWay}"/>
 		<Button x:Name="ButtonAddWord"
 				Grid.Row="3"				
 				HorizontalAlignment="Right"

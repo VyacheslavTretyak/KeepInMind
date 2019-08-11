@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KeepInMind.Classes;
+using KeepInMind.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,18 +12,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace KeepInMind.Views
+namespace KeepInMind
 {
 	/// <summary>
-	/// Interaction logic for WordWindow.xaml
+	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class WordView : UserControl
+	public partial class WordWindow : Window
 	{
-		public WordView()
+		public WordWindow()
 		{
-			InitializeComponent();
+			InitializeComponent();		
 		}
 		private void Flipper_IsFlippedChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)
 		{
@@ -29,8 +32,9 @@ namespace KeepInMind.Views
 		}
 
 		private void Card_MouseUp(object sender, MouseButtonEventArgs e)
-		{
-			//Close();
+		{			
+			(this.DataContext as WordViewModel).Close();
+			Close();
 		}
 
 		private void BackCard_MouseUp(object sender, MouseButtonEventArgs e)

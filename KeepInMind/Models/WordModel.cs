@@ -1,37 +1,24 @@
-﻿using KeepInMind.Views;
+﻿using KeepInMind.Classes;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace KeepInMind.Models
 {
-	class WordModel: INotifyPropertyChanged
+	class WordModel
 	{
-		WordsManager wordsManager = WordsManager.Instance();
-		Word Word { get; set; }
+		private WordsManager wordsManager = WordsManager.Instance;
+		public  Word Word { get; set; }
 		public WordModel()
 		{
-			GetWord();
+			
 		}
 
-		public void GetWord()
+		internal void CloseWord(Word word)
 		{
-			Word = wordsManager.GetWord();
-			if (Word != null)
-			{
-				WordView wordWindow = new WordView();
-				OnPropertyChanged("Word");
-				wordWindow.ShowDialog();
-				
-			}
+			word.CountShow++;
+			word.TimeShow = DateTime.Now;
+			wordsManager.UpdateWord(word);
 		}
-
-		public event PropertyChangedEventHandler PropertyChanged;
-		public void OnPropertyChanged([CallerMemberName]string prop = "")
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-		}
-
-	
 	}
 }

@@ -10,9 +10,8 @@ namespace KeepInMind.ViewModels
 {
 	class MainViewModel : BaseViewModel
 	{
-		private WordsManager wordsManager = WordsManager.Instance;
-		private Action Closed;
-		public string TextClearEvent { get; } = "";
+		private MainModel mainModel = new MainModel();
+		public string TextClearEvent => mainModel.ClearTextBox();
 		public DelegateCommand AddWordCommand { get; }
 		public MainViewModel()
 		{
@@ -22,15 +21,8 @@ namespace KeepInMind.ViewModels
 		private void AddWord(object obj)
 		{
 			object[] objects = (object[])obj;
-			wordsManager.AddWord(objects[0].ToString(), objects[1].ToString());			
+			mainModel.AddWord(objects[0].ToString(), objects[1].ToString());			
 			OnPropertyChanged("TextClearEvent");
-		}
-
-		private void ShowWordWindow()
-		{
-			var wordWindow = new WordWindowView();
-			wordWindow.Closed += Closed;
-			wordWindow.Show(new Word());
-		}
+		}		
 	}
 }
