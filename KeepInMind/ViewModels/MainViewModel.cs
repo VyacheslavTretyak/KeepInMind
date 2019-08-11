@@ -9,14 +9,17 @@ using System.Runtime.CompilerServices;
 namespace KeepInMind.ViewModels
 {
 	class MainViewModel : BaseViewModel
-	{
+	{		
 		private MainModel mainModel = new MainModel();
 		public string TextClearEvent => mainModel.ClearTextBox();
+		public WindowRect RectEvent { get; }
 		public DelegateCommand AddWordCommand { get; }
 		public MainViewModel()
 		{
 			//System.Diagnostics.Debug.WriteLine("CONSTRUCTOR");			
-			AddWordCommand = new DelegateCommand((obj) => AddWord(obj), (obj) => true);			
+			AddWordCommand = new DelegateCommand((obj) => AddWord(obj), (obj) => true);
+			RectEvent = mainModel.GetRect(); 
+			OnPropertyChanged("RectEvent");
 		}	
 		private void AddWord(object obj)
 		{

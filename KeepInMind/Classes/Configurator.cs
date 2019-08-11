@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using KeepInMind.Classes;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace KeepInMind.Models
 			Translate,
 			Both
 		}
-		
+
+		[CommentEnum]
 		public AskWordsType AskWords { get; set; } = AskWordsType.Both;		
 		public int Hours { get; set; } = 8;		
 		public int Days { get; set; } = 7;
@@ -29,6 +31,10 @@ namespace KeepInMind.Models
 		public int MaxCountFiles { get; set; } = 20;
 		public int CountOldWords { get; set; } = 1;
 		public int LevelPercent { get; set; } = 30;
+		public int WidowHeight { get; set; } = 300;
+		public int WidowWidth { get; set; } = 500;
+		[Comment("Time between shows (in seconds)")]
+		public int SleepBetweenShows { get; set; } = 3600;
 
 		private string appName = "KeepInMind";
 		private ConfigLoader configLoader;
@@ -45,7 +51,7 @@ namespace KeepInMind.Models
 		private void SetConfig(Configurator config)
 		{
 			foreach (var p in typeof(Configurator).GetProperties())
-			{
+			{				
 				p.SetValue(this, p.GetValue(config));
 			}
 		}

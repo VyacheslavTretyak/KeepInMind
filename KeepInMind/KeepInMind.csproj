@@ -38,6 +38,9 @@
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.2.0.325, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.2.0\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -50,6 +53,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,9 +74,12 @@
     </ApplicationDefinition>
     <Compile Include="Classes\BaseViewModel.cs" />
     <Compile Include="Classes\ChildWindowManager.cs" />
+    <Compile Include="Classes\CommentEnum.cs" />
+    <Compile Include="Classes\Comment.cs" />
     <Compile Include="Classes\DelegateCommand.cs" />
     <Compile Include="Classes\Loger.cs" />
     <Compile Include="Classes\MultyCommandConverter.cs" />
+    <Compile Include="Classes\WindowRect.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\WordModel.cs" />
     <Compile Include="ViewModels\WordViewModel.cs" />

@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace KeepInMind
 {
@@ -9,7 +11,7 @@ namespace KeepInMind
 	{
 		public MainWindow()
 		{
-			InitializeComponent();			
+			InitializeComponent();
 		}
 	}
 }

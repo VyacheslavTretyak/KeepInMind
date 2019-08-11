@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeepInMind.Classes;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -95,15 +96,21 @@ namespace KeepInMind.Models
 			{
 				foreach (var p in typeof(Configurator).GetProperties())
 				{
-					if (p.Name == "AskWords")
+					foreach (var attr in p.GetCustomAttributes())
 					{
-						sw.Write($"# ");
-						foreach (var val in Enum.GetValues(typeof(AskWordsType)))
+						if (attr is Comment)
 						{
-							sw.Write($"{val}, ");
+							sw.WriteLine($"# {(attr as Comment).CommentText}");
 						}
-						sw.Write("\n");
-
+						if(attr is CommentEnum)
+						{
+							sw.Write($"# ");
+							foreach (var val in Enum.GetValues(p.PropertyType))
+							{
+								sw.Write($"{val}, ");
+							}
+							sw.Write("\n");
+						}
 					}
 					sw.WriteLine($"{p.Name}:{p.GetValue(new Configurator()).ToString()}");
 				}

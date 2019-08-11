@@ -6,27 +6,30 @@
         xmlns:local="clr-namespace:KeepInMind.ViewModels"
         xmlns:classes="clr-namespace:KeepInMind.Classes"		
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+		xmlns:tb="http://www.hardcodet.net/taskbar"		
 		mc:Ignorable="d"
 		TextElement.Foreground="{DynamicResource MaterialDesignBody}"		
         Background="{DynamicResource MaterialDesignPaper}"
 		TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
 		FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-		Title="Remember The Words" 
-		Height="300" 
-		Width="500"
-		MinHeight="300"
-		MinWidth="500"
+		Title="KeepInMind" 
+		Height="{Binding RectEvent.Height, Mode=TwoWay}" 
+		Width="{Binding RectEvent.Width, Mode=TwoWay}"
+		MinHeight="{Binding RectEvent.Height, Mode=TwoWay}"
+		MinWidth="{Binding RectEvent.Width, Mode=TwoWay}"
+		Top="{Binding RectEvent.Top, Mode=TwoWay}"
+		Left="{Binding RectEvent.Left, Mode=TwoWay}"
 		ResizeMode="NoResize"
 		Icon="/Resources/Icon1.ico"
-		FocusManager.FocusedElement="{x:Reference Name=TextBoxWord}">
+		FocusManager.FocusedElement="{x:Reference Name=TextBoxWord}">	
 	<Window.DataContext>	
 		<local:MainViewModel/>
 	</Window.DataContext>
 	<Window.Resources>
 		<classes:MultyCommandConverter x:Key="MainConverter"/>
 	</Window.Resources>
-	<Grid Margin="16">
+	<Grid Margin="16">		
 		<Grid.RowDefinitions>
 			<RowDefinition Height="0.5*"/>
 			<RowDefinition/>
@@ -35,10 +38,9 @@
 		</Grid.RowDefinitions>
 		<materialDesign:PopupBox 
 			HorizontalAlignment="Right"
-			StaysOpen="True" 
+			StaysOpen="True" 			
 			IsEnabled="{Binding IsChecked, ElementName=PopupEnabled}">
-			<Grid 
-				Width="200" 
+			<Grid 						 
 				Margin="8,8,8,8">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="*" />
@@ -47,35 +49,40 @@
 					<RowDefinition Height="*" />
 					<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
+				<Button 						
+					x:Name="ButtonShow" 
+					Grid.Row="0" 
+					HorizontalAlignment="Left"
+					Style="{StaticResource MaterialDesignFlatButton}">
+					Show Now
+				</Button>
 				<Button 
 					x:Name="ButtonList"
 					Grid.Row="1" 
+					HorizontalAlignment="Left"
 					Style="{StaticResource MaterialDesignFlatButton}">
-					LIST
-				</Button>
-				<Button 
-					x:Name="ButtonShow" 
-					Grid.Row="0" 
-					Style="{StaticResource MaterialDesignFlatButton}">
-					NEXT WORD
+					List
 				</Button>
 				<Button 
 					x:Name="ButtonRollback"
 					Grid.Row="2" 
+					HorizontalAlignment="Left"
 					Style="{StaticResource MaterialDesignFlatButton}">
-					ROLLBACK
+					Rollback
 				</Button>
 				<Button 
 					x:Name="ButtonSettings" 
 					Grid.Row="3"
+					HorizontalAlignment="Left"
 					Style="{StaticResource MaterialDesignFlatButton}">
-					SETTINGS
+					Settings
 				</Button>
 				<Button 
 					x:Name="ButtonExit" 
 					Grid.Row="4" 
+					HorizontalAlignment="Left"
 					Style="{StaticResource MaterialDesignFlatButton}">
-					EXIT
+					Exit
 				</Button>
 			</Grid>
 		</materialDesign:PopupBox>
@@ -131,9 +138,20 @@
 				Kind="Plus"    
 				Height="24" 
 				Width="24" />
-		</Button>
-		<Border Name="wordWindow" Visibility="{Binding WindowVisibility}" Background="#88000000" >
-			<ContentControl Content="{Binding XmlContent}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></ContentControl>
-		</Border>
+		</Button>		
+		<tb:TaskbarIcon x:Name="myNotifyIcon"
+            Visibility="Visible"
+            ToolTipText="Fallback ToolTip for Windows xp"
+            IconSource="/Resources/Icon1.ico">
+			<tb:TaskbarIcon.ContextMenu>
+				<ContextMenu Background="{DynamicResource PrimaryHueLightBrush}">
+					<MenuItem Header="Show Now" />
+					<MenuItem Header="List" />
+					<MenuItem Header="Rollback" />
+					<MenuItem Header="Settings" />
+					<MenuItem Header="Exit" />
+				</ContextMenu>
+			</tb:TaskbarIcon.ContextMenu>
+		</tb:TaskbarIcon>
 	</Grid>	
 </Window>
