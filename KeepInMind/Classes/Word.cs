@@ -14,6 +14,11 @@ namespace KeepInMind.Classes
 			Normal,
 			Hard
 		}
+		public enum WordChangeLevel
+		{
+			Up,
+			Down
+		}
 		public static string spliter = ";";
 		public static string formatInWord = "dd.MM.yyyy HH:mm:ss";
 		public int Id { get; set; } = 0;
@@ -46,6 +51,30 @@ namespace KeepInMind.Classes
 			stringBuilder.Append(spliter);
 			stringBuilder.Append(Level);			
 			return stringBuilder.ToString();
+		}
+
+		public void LevelDown()
+		{
+			if (Level == WordLevel.Normal)
+			{
+				Level = WordLevel.Easy;
+			}
+			else if (Level == WordLevel.Hard)
+			{
+				Level = WordLevel.Normal;
+			}
+		}
+
+		public void LevelUp()
+		{
+			if (Level == WordLevel.Normal)
+			{
+				Level = WordLevel.Hard;
+			}
+			else if (Level == WordLevel.Easy)
+			{
+				Level = WordLevel.Normal;
+			}
 		}
 	}
 }

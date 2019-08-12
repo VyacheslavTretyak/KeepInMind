@@ -16,7 +16,6 @@ namespace KeepInMind.Models
 			//System.Diagnostics.Debug.WriteLine("\nCONSTRUCTOR\n");
 			wordsManager = WordsManager.Instance;
 			Task task = Task.Run(() => GetWord());
-			//config.SaveConfig();
 		}
 		public void AddWord(string original, string translate)
 		{
@@ -42,7 +41,7 @@ namespace KeepInMind.Models
 				{
 					WordWindow wordWindow = new WordWindow();
 					WordViewModel wordViewModel = wordWindow.DataContext as WordViewModel;
-					wordViewModel.Word = word;
+					wordViewModel.WordEvent = word;
 					wordWindow.ShowDialog();
 				});
 				GetWord();

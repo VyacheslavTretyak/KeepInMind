@@ -12,14 +12,14 @@ namespace KeepInMind.ViewModels
 	{		
 		private MainModel mainModel = new MainModel();
 		public string TextClearEvent => mainModel.ClearTextBox();
-		public WindowRect RectEvent { get; }
+		public WindowRect MainWindowRectEvent { get; }
 		public DelegateCommand AddWordCommand { get; }
 		public MainViewModel()
 		{
 			//System.Diagnostics.Debug.WriteLine("CONSTRUCTOR");			
 			AddWordCommand = new DelegateCommand((obj) => AddWord(obj), (obj) => true);
-			RectEvent = mainModel.GetRect(); 
-			OnPropertyChanged("RectEvent");
+			MainWindowRectEvent = mainModel.GetRect(); 
+			OnPropertyChanged("MainWindowRectEvent");
 		}	
 		private void AddWord(object obj)
 		{
