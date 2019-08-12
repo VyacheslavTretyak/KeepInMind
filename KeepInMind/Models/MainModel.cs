@@ -8,18 +8,17 @@ using System.Windows;
 namespace KeepInMind.Models
 {
 	public class MainModel
-	{
-		private WordsManager wordsManager;
+	{		
 		private Configurator config = new Configurator();
+		private Thread thread;
 		public MainModel()
 		{
-			//System.Diagnostics.Debug.WriteLine("\nCONSTRUCTOR\n");
-			wordsManager = WordsManager.Instance;
-			Task task = Task.Run(() => GetWord());
+			//System.Diagnostics.Debug.WriteLine("\nCONSTRUCTOR\n");			
+			RunTask();
 		}
 		public void AddWord(string original, string translate)
 		{
-			wordsManager.AddWord(original, translate);
+			WordsManager.Instance.AddWord(original, translate);
 		}
 
 		internal WindowRect GetRect()
@@ -33,7 +32,7 @@ namespace KeepInMind.Models
 
 		public void GetWord()
 		{
-			Thread thread = Thread.CurrentThread;
+			thread = Thread.CurrentThread;
 			Word word = WordsManager.Instance.GetWord();
 			if (word != null)
 			{
@@ -47,7 +46,19 @@ namespace KeepInMind.Models
 				GetWord();
 			}
 			Thread.Sleep(config.SleepBetweenShows * 1000);
+			WordsManager.Instance.GetNextWordsList();
 			GetWord();
+		}
+		private void RunTask()
+		{
+			thread?.Abort();
+			Task.Run(() => GetWord());
+		}
+
+		internal void ShowNow()
+		{
+			WordsManager.Instance.GetNextWordsList();
+			RunTask();
 		}
 
 		public string ClearTextBox()

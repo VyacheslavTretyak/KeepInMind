@@ -49,11 +49,11 @@
 					<RowDefinition Height="*" />
 					<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
-				<Button 						
-					x:Name="ButtonShow" 
+				<Button 	
 					Grid.Row="0" 
 					HorizontalAlignment="Left"
-					Style="{StaticResource MaterialDesignFlatButton}">
+					Style="{StaticResource MaterialDesignFlatButton}"
+					Command="{Binding ShowNowCommand}">
 					Show Now
 				</Button>
 				<Button 

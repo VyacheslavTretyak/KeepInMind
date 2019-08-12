@@ -14,13 +14,21 @@ namespace KeepInMind.ViewModels
 		public string TextClearEvent => mainModel.ClearTextBox();
 		public WindowRect MainWindowRectEvent { get; }
 		public DelegateCommand AddWordCommand { get; }
+		public DelegateCommand ShowNowCommand { get; }
 		public MainViewModel()
 		{
 			//System.Diagnostics.Debug.WriteLine("CONSTRUCTOR");			
 			AddWordCommand = new DelegateCommand((obj) => AddWord(obj), (obj) => true);
+			ShowNowCommand = new DelegateCommand((obj) => ShowNow(obj), (obj) => true);
 			MainWindowRectEvent = mainModel.GetRect(); 
 			OnPropertyChanged("MainWindowRectEvent");
-		}	
+		}
+
+		private void ShowNow(object obj)
+		{
+			mainModel.ShowNow();
+		}
+
 		private void AddWord(object obj)
 		{
 			object[] objects = (object[])obj;

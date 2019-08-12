@@ -11,7 +11,6 @@ namespace KeepInMind.Models
 		private WordsLoader wordsLoader;
 		private Configurator configurator;
 		private List<Word> showList;
-		public int LevelEvent => 2;
 		static private WordsManager instance = null;
 		static public WordsManager Instance
 		{
@@ -30,6 +29,11 @@ namespace KeepInMind.Models
 			wordRepository = new WordRepository(wordsLoader.LoadLastFile());
 			configurator = new Configurator();
 			configurator.Load();
+			GetNextWordsList();
+		}
+
+		public void GetNextWordsList()
+		{
 			showList = GetWordsToShow();
 		}
 
@@ -69,7 +73,7 @@ namespace KeepInMind.Models
 			}
 			return count;
 		}
-		public List<Word> GetWordsToShow()
+		private List<Word> GetWordsToShow()
 		{
 			List<Word> list = new List<Word>();
 			DateTime now = DateTime.Now;
