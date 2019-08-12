@@ -58,6 +58,17 @@ namespace KeepInMind.Models
 			wordRepository.Add(newWord);
 			wordsLoader.Save(wordRepository.Words);
 		}
+		public int GetCount(Word word, int count)
+		{			
+			switch (word.Level)
+			{
+				case Word.WordLevel.Easy:
+					return (int)(count*0.3f);
+				case Word.WordLevel.Hard:
+					return (int)(count * 1.3f);					
+			}
+			return count;
+		}
 		public List<Word> GetWordsToShow()
 		{
 			List<Word> list = new List<Word>();
@@ -66,28 +77,28 @@ namespace KeepInMind.Models
 			//Шукаємо слова, які маємо показувати кожну годину
 			int to = configurator.Hours;
 			int from = 0;
-			list.AddRange(wordRepository.Words.Where(a => a.CountShow <= to));
+			list.AddRange(wordRepository.Words.Where(w => w.CountShow <= GetCount(w, to)));
 
 			//Шукаємо слова, які маємо показувати раз в день
 			from = to;
 			to = configurator.Days + from;
 			list.AddRange(wordRepository.Words.Where(w => 
-										w.CountShow > from &&
-										w.CountShow <= to &&
+										w.CountShow > GetCount(w, from) &&
+										w.CountShow <= GetCount(w, to) &&
 										(now - w.TimeShow).TotalHours > 24));
 
 			//Шукаємо слова, які маємо показувати раз в тиждень
 			from = to;
 			to = configurator.Weeks + from;
 			list.AddRange(wordRepository.Words.Where(w =>
-										w.CountShow > from &&
-										w.CountShow <= to &&
+										w.CountShow > GetCount(w, from) &&
+										w.CountShow <= GetCount(w, to) &&
 										(now - w.TimeShow).TotalDays > 7));
 
 			//Шукаємо слова, які не показували більше місяця тому			
 			var oldWords = wordRepository.Words.Where(w =>
-										w.CountShow > to &&									
-										(now - w.TimeShow).TotalDays > 30)
+										w.CountShow > GetCount(w, to) &&								
+										(now - w.TimeShow).TotalDays > GetCount(w, 30))
 								.OrderBy(w=>w.CountShow).Take(configurator.CountOldWords*3).ToList();
 			//Виподково вибираємо CountOldWords старих слів для показу
 			Random rnd = new Random();
