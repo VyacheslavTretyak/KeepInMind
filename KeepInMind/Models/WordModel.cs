@@ -8,7 +8,7 @@ namespace KeepInMind.Models
 	class WordModel
 	{
 		private WordsManager wordsManager = WordsManager.Instance;
-		public  Word Word { get; set; }
+		//public  Word Word { get; set; }
 		private Configurator config = new Configurator();
 		public WordModel()
 		{
@@ -22,25 +22,17 @@ namespace KeepInMind.Models
 			rect.Width = config.WordWidowWidth;
 			rect.SetRightBottom();
 			return rect;
+		}		
+
+		internal void DeleteWord(Word word)
+		{
+			wordsManager.DeleteWord(word);
 		}
 
 		internal void CloseWord(Word word)
 		{
 			word.CountShow++;
 			word.TimeShow = DateTime.Now;
-			wordsManager.UpdateWord(word);
-		}
-
-		internal void SetLevel(Word word, Word.WordChangeLevel changeLevel)
-		{
-			if(changeLevel == Word.WordChangeLevel.Down)
-			{
-				word.LevelDown();
-			}
-			else
-			{
-				word.LevelUp();
-			}
 			wordsManager.UpdateWord(word);
 		}
 	}

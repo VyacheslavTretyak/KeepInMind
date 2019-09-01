@@ -10,15 +10,10 @@ namespace KeepInMind.Classes
 	{
 		public enum WordLevel
 		{
-			Easy,
-			Normal,
-			Hard
-		}
-		public enum WordChangeLevel
-		{
-			Up,
-			Down
-		}
+			Easy = 1,
+			Normal = 2,
+			Hard = 3
+		}	
 		public static string spliter = ";";
 		public static string formatInWord = "dd.MM.yyyy HH:mm:ss";
 		public int Id { get; set; } = 0;
@@ -28,6 +23,15 @@ namespace KeepInMind.Classes
 		public DateTime TimeCreate { get; set; } = DateTime.Now;
 		public int CountShow { get; set; } = 0;
 		public WordLevel Level{ get; set; } = Word.WordLevel.Normal;
+		//public int LevelNum {
+		//	get { return (int)Level; }
+		//	set {
+		//		WordLevel level;
+		//		Enum.TryParse<WordLevel>(value.ToString(), out level);				
+		//		Level = level;
+		//	}
+		//}
+
 
 		public Word()
 		{

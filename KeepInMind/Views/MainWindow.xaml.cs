@@ -1,6 +1,5 @@
 ﻿using System.Windows;
-using System.Drawing;
-using System.Windows.Forms;
+using KeepInMind.ViewModels;
 
 namespace KeepInMind
 {
@@ -9,9 +8,19 @@ namespace KeepInMind
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		private MainViewModel vm;
 		public MainWindow()
 		{
 			InitializeComponent();
+			vm = new MainViewModel();
+			vm.SetMainWindow(this);
+			this.DataContext = vm;
+			Closing += MainWindow_Closing;
+		}
+
+		private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			vm.Close();
 		}
 	}
 }

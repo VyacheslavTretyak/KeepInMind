@@ -22,10 +22,7 @@
 		Left="{Binding MainWindowRectEvent.Left, Mode=TwoWay}"
 		ResizeMode="NoResize"
 		Icon="/Resources/Icon1.ico"
-		FocusManager.FocusedElement="{x:Reference Name=TextBoxWord}">	
-	<Window.DataContext>	
-		<local:MainViewModel/>
-	</Window.DataContext>
+		FocusManager.FocusedElement="{x:Reference Name=TextBoxWord}">		
 	<Window.Resources>
 		<classes:MultyCommandConverter x:Key="MainConverter"/>
 	</Window.Resources>
@@ -90,12 +87,12 @@
 				 Grid.Row="1"
 				 materialDesign:HintAssist.Hint="word"
 				 Margin="20"
-				 Text="{Binding TextClearEvent, Mode=OneWay}"/>
+				 Text="{Binding OriginTextEvent, Mode=TwoWay}"/>
 		<TextBox x:Name="TextBoxTranslate" 
 				 Grid.Row="2"
 				 materialDesign:HintAssist.Hint="translate"
 				 Margin="20"
-				 Text="{Binding TextClearEvent, Mode=OneWay}"/>
+				 Text="{Binding TranslateTextEvent, Mode=OneWay}"/>
 		<Button x:Name="ButtonAddWord"
 				Grid.Row="3"				
 				HorizontalAlignment="Right"

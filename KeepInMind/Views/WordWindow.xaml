@@ -11,15 +11,12 @@
         TextElement.FontSize="14"
 		FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="Word KeepInMind"
-		Height="{Binding WordWindowRectEvent.Height, Mode=TwoWay}" 
-		Width="{Binding WordWindowRectEvent.Width, Mode=TwoWay}"
-		MinHeight="{Binding WordWindowRectEvent.Height, Mode=TwoWay}"
-		MinWidth="{Binding WordWindowRectEvent.Width, Mode=TwoWay}"
-		Top="{Binding WordWindowRectEvent.Top, Mode=TwoWay}"
-		Left="{Binding WordWindowRectEvent.Left, Mode=TwoWay}"
 		AllowsTransparency="True" 
 		WindowStyle="None" 
-		Topmost="True"		
+		Topmost="True"	
+		Name="window"	
+		Width="{Binding WordWindowRectEvent.Width, Mode=TwoWay}"		
+		Left="{Binding WordWindowRectEvent.Left, Mode=TwoWay}"		
 		Icon="/Resources/Icon1.ico">
 	<Window.DataContext>
 		<local:WordViewModel/>
@@ -41,10 +38,10 @@
 			IsFlippedChanged="Flipper_IsFlippedChanged">
 			<materialDesign:Flipper.FrontContent>
 				<materialDesign:Card 
+						Name="card"
+						Width="{Binding WordWindowRectEvent.Width, Mode=TwoWay}"						
 						MouseUp="Card_MouseUp"
-						Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
-						Width="{Binding WordWindowRectEvent.Width, Mode=TwoWay}"  
-						Height="{Binding WordWindowRectEvent.Height, Mode=TwoWay}" >
+						Foreground="{DynamicResource PrimaryHueLightForegroundBrush}">
 					<materialDesign:Card.Style>
 						<Style TargetType="materialDesign:Card">
 							<Style.Triggers>
@@ -72,79 +69,155 @@
 							</Style.Triggers>
 						</Style>
 					</materialDesign:Card.Style>
-					<StackPanel Orientation="Vertical">
-						<Grid>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto"/>
+						</Grid.RowDefinitions>
+						<Grid Grid.Row="0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition/>
+								<ColumnDefinition/>
+							</Grid.ColumnDefinitions>
+							<materialDesign:RatingBar						
+								Grid.Column="0"
+								Max="3"
+								Value="{Binding LevelNumEvent, Mode=TwoWay}"
+								Orientation="Horizontal"
+								Margin="8">
+								<materialDesign:RatingBar.ValueItemTemplate>
+									<DataTemplate
+										DataType="system:Int32">
+										<materialDesign:PackIcon
+												Kind="Star"
+												Height="24"
+												Width="24" 
+											Foreground="{DynamicResource PrimaryHueMidForegroundBrush}"/>
+									</DataTemplate>
+								</materialDesign:RatingBar.ValueItemTemplate>
+							</materialDesign:RatingBar>
+							<Button 
+								Grid.Column="1"
+								HorizontalAlignment="Right"
+								Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+								Command="{x:Static materialDesign:Flipper.FlipCommand}"
+								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"							Margin="8">
+								<materialDesign:PackIcon 
+									Kind="Help" 
+									Height="14" 
+								Width="14"/>
+							</Button>
+						</Grid>
+						<TextBlock 
+							x:Name="origin"
+							Grid.Row="1"												
+							Text="{Binding WordEvent.Origin, Mode=TwoWay}"
+							Margin="40" 
+							FontSize="24"
+							HorizontalAlignment="Center"							
+							TextWrapping="Wrap">
+							Word
+						</TextBlock>
+						<Grid Grid.Row="2"
+							  Name="ButtonsGrid">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition/>
 								<ColumnDefinition/>
 								<ColumnDefinition/>
 							</Grid.ColumnDefinitions>
-
 							<Button 
-							Grid.Column="0"
-							Style="{StaticResource MaterialDesignRaisedLightButton}" 
-							Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
-							HorizontalAlignment="Center"
-							Command="{Binding LevelDownCommand}"
-							Margin="8">
+								Grid.Column="0"
+								Style="{StaticResource MaterialDesignRaisedButton}"
+								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+								HorizontalAlignment="Center"
+								Margin="8"
+								Click="DeleteButton_Click">
 								<materialDesign:PackIcon 
-								Kind="ArrowDownBold" 
-								Height="24" 
-								Width="24"/>
+									Kind="DeleteForever" 
+									Height="24" 
+									Width="24"/>								
 							</Button>
 							<Button 
-							Grid.Column="1"
-							Style="{StaticResource MaterialDesignRaisedButton}" 
-							Command="{Binding LevelUpCommand}"
-							Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
-							HorizontalAlignment="Center"
-							Margin="8">
+								Grid.Column="1"
+								Style="{StaticResource MaterialDesignRaisedLightButton}" 
+								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+								Command="{Binding EditWordCommand}"
+								Click="CheckButton_Click"
+								HorizontalAlignment="Center"
+								Margin="8">
 								<materialDesign:PackIcon 
-								Kind="ArrowUpBold" 
-								Height="24" 
-								Width="24"/>
+									Kind="Pen" 
+									Height="24" 
+									Width="24"/>
 							</Button>
 							<Button 
-							Grid.Column="2"
-							Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}" 
-							Command="{x:Static materialDesign:Flipper.FlipCommand}"
-							Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
-							HorizontalAlignment="Right"
-							Margin="8">
+								Grid.Column="2"
+								Style="{StaticResource MaterialDesignRaisedLightButton}" 
+								Command="{Binding PreventWordCommand}"
+								Click="CheckButton_Click"
+								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+								HorizontalAlignment="Center"
+								Margin="8">
 								<materialDesign:PackIcon 
-								Kind="Help" 
-								Height="14" 
-								Width="14"/>
+									Kind="ArrowLeftThick" 
+									Height="24" 
+									Width="24"/>
 							</Button>
 						</Grid>
-						<TextBlock 									
-								Name="TextBlockWord"
-								Text="{Binding WordEvent.Origin, Mode=TwoWay}"
-								Margin="20" 
-								FontSize="24"
+						<Grid Grid.Row="3"
+							  Visibility="Collapsed"
+							  Name="AcceptionGrid">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition/>
+								<ColumnDefinition/>
+							</Grid.ColumnDefinitions>
+							<Button 
+								Grid.Column="0"
+								Style="{StaticResource MaterialDesignRaisedButton}" 
+								Command="{Binding DeleteWordCommand}"
+								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
 								HorizontalAlignment="Center"
-								VerticalAlignment="Center"
-								TextWrapping="Wrap">
-								Word
-						</TextBlock>
-					</StackPanel>
+								Margin="8"
+								Click="CheckButton_Click">
+								<materialDesign:PackIcon 
+									Kind="Check" 
+									Height="24" 
+									Width="24"/>
+							</Button>
+							<Button 
+								Grid.Column="1"
+								Style="{StaticResource MaterialDesignRaisedLightButton}" 
+								Click="CancelButton_Click"
+								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+								HorizontalAlignment="Center"
+								Margin="8">
+								<materialDesign:PackIcon 
+									Kind="Cancel" 
+									Height="24" 
+									Width="24"/>
+							</Button>
+						</Grid>
+					</Grid>
 				</materialDesign:Card>
 			</materialDesign:Flipper.FrontContent>
-			<materialDesign:Flipper.BackContent>
+			<materialDesign:Flipper.BackContent>				
 				<materialDesign:Card
-					MouseUp="BackCard_MouseUp"
+					Name="backCard"
+					Width="{Binding WordWindowRectEvent.Width, Mode=TwoWay}"
+					MouseUp="BackCard_MouseUp"					
 					Background="{DynamicResource PrimaryHueDarkBrush}"
-					Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
-						Width="{Binding WordWindowRectEvent.Width, Mode=TwoWay}"  
-						Height="{Binding WordWindowRectEvent.Height, Mode=TwoWay}" >
-					<TextBlock 
-						Name="TextBlockTranslate" 
+					Foreground="{DynamicResource PrimaryHueLightForegroundBrush}">
+					<TextBlock 					
 						Text="{Binding WordEvent.Translate, Mode=TwoWay}"
-						Margin="20" 
+						Margin="50" 
 						FontSize="24" 
 						HorizontalAlignment="Center"
 						VerticalAlignment="Center"
-						TextWrapping="Wrap">Translate</TextBlock>
+						TextWrapping="Wrap">
+						Translate
+					</TextBlock>
 				</materialDesign:Card>
 			</materialDesign:Flipper.BackContent>
 		</materialDesign:Flipper>

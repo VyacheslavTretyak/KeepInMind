@@ -24,8 +24,18 @@ namespace KeepInMind
 	{
 		public WordWindow()
 		{
-			InitializeComponent();		
+			InitializeComponent();
+			origin.SizeChanged += Origin_SizeChanged;
 		}
+
+		private void Origin_SizeChanged(object sender, SizeChangedEventArgs e)
+		{
+			Height = card.ActualHeight;
+			backCard.Height = card.ActualHeight;
+			Top = WindowRect.GetWorkAreaHeight() - Height;
+
+		}
+
 		private void Flipper_IsFlippedChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)
 		{
 
@@ -36,11 +46,26 @@ namespace KeepInMind
 			(this.DataContext as WordViewModel).Close();
 			Close();
 		}
+		private void CheckButton_Click(object sender, RoutedEventArgs e)
+		{			
+			Close();
+		}
 
 		private void BackCard_MouseUp(object sender, MouseButtonEventArgs e)
 		{
 			CommandBinding command = new CommandBinding(MaterialDesignThemes.Wpf.Flipper.FlipCommand);
 			command.Command.Execute(sender);
+		}
+
+		private void DeleteButton_Click(object sender, RoutedEventArgs e)
+		{
+			ButtonsGrid.Visibility = Visibility.Collapsed;
+			AcceptionGrid.Visibility = Visibility.Visible;
+		}
+		private void CancelButton_Click(object sender, RoutedEventArgs e)
+		{
+			ButtonsGrid.Visibility = Visibility.Visible;
+			AcceptionGrid.Visibility = Visibility.Collapsed;
 		}
 	}
 }

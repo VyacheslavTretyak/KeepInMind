@@ -70,6 +70,7 @@ namespace KeepInMind.Models
 					word.CountShow = int.Parse(line[n++]);
 					word.TimeShow = DateTime.ParseExact(line[n++], Word.formatInWord, System.Globalization.CultureInfo.InvariantCulture);
 					word.TimeCreate = DateTime.ParseExact(line[n++], Word.formatInWord, System.Globalization.CultureInfo.InvariantCulture);
+					word.Level = (Word.WordLevel)Enum.Parse(typeof(Word.WordLevel), line[n++]);
 					words.Add(word);
 				}
 			}

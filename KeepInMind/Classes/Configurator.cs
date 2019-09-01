@@ -33,7 +33,7 @@ namespace KeepInMind.Models
 		public int LevelPercent { get; set; } = 30;
 		public int WidowHeight { get; set; } = 300;
 		public int WidowWidth { get; set; } = 500;
-		public int WordWidowHeight { get; set; } = 200;
+		public int WordWidowHeight { get; set; } = 250;
 		public int WordWidowWidth { get; set; } = 350;
 		[Comment("Time between shows (in seconds)")]
 		public int SleepBetweenShows { get; set; } = 3600;

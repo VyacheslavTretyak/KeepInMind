@@ -11,6 +11,8 @@ namespace KeepInMind.Models
 		private WordsLoader wordsLoader;
 		private Configurator configurator;
 		private List<Word> showList;
+		private int currentNum = 0;
+
 		static private WordsManager instance = null;
 		static public WordsManager Instance
 		{
@@ -26,7 +28,7 @@ namespace KeepInMind.Models
 		private WordsManager()
 		{
 			wordsLoader = new WordsLoader();
-			wordRepository = new WordRepository(wordsLoader.LoadLastFile());
+			wordRepository = new WordRepository(wordsLoader.LoadLastFile());			
 			configurator = new Configurator();
 			configurator.Load();
 			GetNextWordsList();
@@ -36,20 +38,33 @@ namespace KeepInMind.Models
 		{
 			showList = GetWordsToShow();
 		}
-
-		public Word GetWord() {
-			if (showList.Count == 0)
+		public Word GetWord(bool prevent = false) {
+			if (prevent)
+			{
+				currentNum-=2;
+				if (currentNum < 0)
+				{
+					currentNum = 0;
+				}
+			}
+			if (currentNum >= showList.Count)
 			{
 				wordsLoader.Save(wordRepository.Words);
+				showList.Clear();
 				return null;
 			}
-			Word word = showList[0];
-			showList.RemoveAt(0);
+			Word word = showList[currentNum++];
 			return word;
 		}
 		public void UpdateWord(Word word)
 		{
 			wordRepository.Update(word);
+			wordsLoader.Save(wordRepository.Words);
+		}
+
+		public void DeleteWord(Word word)
+		{
+			wordRepository.Delete(word);
 		}
 
 		public void AddWord(string original, string translate)
@@ -137,6 +152,10 @@ namespace KeepInMind.Models
 				newList.Add(list[r]);
 			}
 			return newList;
+		}
+		public void Close()
+		{
+			//wordsLoader.Save(wordRepository.Words);
 		}
 	}
 }
