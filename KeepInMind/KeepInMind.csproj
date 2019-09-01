@@ -165,10 +165,17 @@
     <Compile Include="Classes\WindowRect.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\WordModel.cs" />
+    <Compile Include="SettingWindow.xaml.cs">
+      <DependentUpon>SettingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\WordViewModel.cs" />
     <Compile Include="Views\WordWindow.xaml.cs">
       <DependentUpon>WordWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="SettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WordWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
