@@ -13,7 +13,7 @@ namespace KeepInMind.ViewModels
 		private MainModel mainModel;
 		private string originText;
 		private MainWindow mainWindow;
-		private Word editWord;		
+		
 		public string OriginTextEvent
 		{
 			get { return originText; }
@@ -49,14 +49,21 @@ namespace KeepInMind.ViewModels
 		public WindowRect MainWindowRectEvent { get; }
 		public DelegateCommand AddWordCommand { get; }
 		public DelegateCommand ShowNowCommand { get; }
+		public DelegateCommand SettingsCommand { get; }
 		public MainViewModel()
 		{
 			//System.Diagnostics.Debug.WriteLine("CONSTRUCTOR");
 			mainModel = new MainModel(this);
 			AddWordCommand = new DelegateCommand((obj) => AddWord(obj), (obj) => true);
 			ShowNowCommand = new DelegateCommand((obj) => ShowNow(obj), (obj) => true);
+			SettingsCommand = new DelegateCommand((obj) => OpenSettings(obj), (obj) => true);
 			MainWindowRectEvent = mainModel.GetRect(); 
 			OnPropertyChanged("MainWindowRectEvent");
+		}
+
+		private void OpenSettings(object obj)
+		{
+			mainModel.OpenSettings();
 		}
 
 		private void ShowNow(object obj)

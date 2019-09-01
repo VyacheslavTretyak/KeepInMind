@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using KeepInMind.Classes;
 using Microsoft.Win32;
 
-namespace KeepInMind.Models
+namespace KeepInMind.Classes
 {
 	class WordsLoader
 	{

@@ -7,17 +7,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KeepInMind.Models
+namespace KeepInMind.Classes
 {
 	class Configurator
 	{
-		public enum AskWordsType
-		{
-			Word,
-			Translate,
-			Both
-		}
-
 		[CommentEnum]
 		public AskWordsType AskWords { get; set; } = AskWordsType.Both;		
 		public int Hours { get; set; } = 8;		
@@ -35,6 +28,9 @@ namespace KeepInMind.Models
 		public int WidowWidth { get; set; } = 500;				
 		public int WordWidowHeight { get; set; } = 250;//Не впливає на висоту вікна, так як вона встановлюється з розміру тексту 
 		public int WordWidowWidth { get; set; } = 350;
+		public int SettingsWidowHeight { get; set; } = 400;
+		public int SettingsWidowWidth { get; set; } = 300;
+
 		[Comment("Time between shows (in seconds)")]
 		public int SleepBetweenShows { get; set; } = 3600;
 

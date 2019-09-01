@@ -14,9 +14,9 @@ namespace KeepInMind.ViewModels
 		public WindowRect WordWindowRectEvent { get; }
 		public DelegateCommand DeleteWordCommand { get; }
 		public DelegateCommand EditWordCommand { get; }
-		public DelegateCommand PreventWordCommand { get; }		
+		public DelegateCommand PreviousWordCommand { get; }		
 		public Word EditWordEvent { get; set; }
-		public bool PreventWordEvent { get; set; }
+		public bool PreviousWordEvent { get; set; }
 
 		
 		private Word word;
@@ -43,14 +43,14 @@ namespace KeepInMind.ViewModels
 		{
 			DeleteWordCommand = new DelegateCommand((obj) => DeleteWord(obj), (obj) => true);
 			EditWordCommand = new DelegateCommand((obj) => EditWord(obj), (obj) => true);
-			PreventWordCommand = new DelegateCommand((obj) => PreventWord(obj), (obj) => true);
+			PreviousWordCommand = new DelegateCommand((obj) => PreviousWord(obj), (obj) => true);
 			WordWindowRectEvent = wordModel.GetRect();
 			OnPropertyChanged("WordWindowRectEvent");
 		}
 
-		private void PreventWord(object obj)
+		private void PreviousWord(object obj)
 		{
-			PreventWordEvent = true;			
+			PreviousWordEvent = true;			
 		}
 
 		private void EditWord(Object obj)

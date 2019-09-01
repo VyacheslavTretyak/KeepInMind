@@ -72,13 +72,19 @@ namespace KeepInMind.Models
 						mainViewModel.TranslateTextEvent = editWord.Translate;
 						thread.Suspend();
 					}
-					isPreventWord = wordViewModel.PreventWordEvent;
+					isPreventWord = wordViewModel.PreviousWordEvent;
 				});
 				GetWord();
 			}
 			Thread.Sleep(config.SleepBetweenShows * 1000);
 			WordsManager.Instance.GetNextWordsList();
 			GetWord();
+		}
+
+		internal void OpenSettings()
+		{
+			SettingsWindow wnd = new SettingsWindow();
+			wnd.ShowDialog();			
 		}
 
 		internal void Close()

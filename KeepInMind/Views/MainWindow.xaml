@@ -71,7 +71,8 @@
 					x:Name="ButtonSettings" 
 					Grid.Row="3"
 					HorizontalAlignment="Left"
-					Style="{StaticResource MaterialDesignFlatButton}">
+					Style="{StaticResource MaterialDesignFlatButton}"
+					Command="{Binding SettingsCommand}">
 					Settings
 				</Button>
 				<Button 

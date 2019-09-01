@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace KeepInMind.Models
+namespace KeepInMind.Classes
 {
 	class WordsManager
 	{
