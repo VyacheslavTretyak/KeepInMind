@@ -53,11 +53,11 @@
 					Command="{Binding ShowNowCommand}">
 					Show Now
 				</Button>
-				<Button 
-					x:Name="ButtonList"
+				<Button 					
 					Grid.Row="1" 
 					HorizontalAlignment="Left"
-					Style="{StaticResource MaterialDesignFlatButton}">
+					Style="{StaticResource MaterialDesignFlatButton}"
+					Command="{Binding WordsListCommand}">
 					List
 				</Button>
 				<Button 
@@ -67,16 +67,14 @@
 					Style="{StaticResource MaterialDesignFlatButton}">
 					Rollback
 				</Button>
-				<Button 
-					x:Name="ButtonSettings" 
+				<Button 					
 					Grid.Row="3"
 					HorizontalAlignment="Left"
 					Style="{StaticResource MaterialDesignFlatButton}"
 					Command="{Binding SettingsCommand}">
 					Settings
 				</Button>
-				<Button 
-					x:Name="ButtonExit" 
+				<Button 					
 					Grid.Row="4" 
 					HorizontalAlignment="Left"
 					Style="{StaticResource MaterialDesignFlatButton}">

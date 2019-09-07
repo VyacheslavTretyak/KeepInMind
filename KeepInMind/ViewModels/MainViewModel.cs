@@ -50,6 +50,7 @@ namespace KeepInMind.ViewModels
 		public DelegateCommand AddWordCommand { get; }
 		public DelegateCommand ShowNowCommand { get; }
 		public DelegateCommand SettingsCommand { get; }
+		public DelegateCommand WordsListCommand { get; }
 		public MainViewModel()
 		{
 			//System.Diagnostics.Debug.WriteLine("CONSTRUCTOR");
@@ -57,8 +58,14 @@ namespace KeepInMind.ViewModels
 			AddWordCommand = new DelegateCommand((obj) => AddWord(obj), (obj) => true);
 			ShowNowCommand = new DelegateCommand((obj) => ShowNow(obj), (obj) => true);
 			SettingsCommand = new DelegateCommand((obj) => OpenSettings(obj), (obj) => true);
+			WordsListCommand = new DelegateCommand((obj) => OpenWordsList(obj), (obj) => true);
 			MainWindowRectEvent = mainModel.GetRect(); 
 			OnPropertyChanged("MainWindowRectEvent");
+		}
+
+		private void OpenWordsList(object obj)
+		{
+			mainModel.OpenWordsList();
 		}
 
 		private void OpenSettings(object obj)

@@ -1,5 +1,6 @@
 ﻿using KeepInMind.Classes;
 using KeepInMind.ViewModels;
+using KeepInMind.Views;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -79,6 +80,12 @@ namespace KeepInMind.Models
 			Thread.Sleep(config.SleepBetweenShows * 1000);
 			WordsManager.Instance.GetNextWordsList();
 			GetWord();
+		}
+
+		internal void OpenWordsList()
+		{
+			WordsListWindow wnd = new WordsListWindow();
+			wnd.ShowDialog();
 		}
 
 		internal void OpenSettings()
