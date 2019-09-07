@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using KeepInMind.ViewModels;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,7 +14,7 @@ namespace KeepInMind
 		public SettingsWindow()
 		{
 			InitializeComponent();
-		}
+		} 
 
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{

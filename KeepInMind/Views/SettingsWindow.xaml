@@ -125,11 +125,10 @@
 					Style="{StaticResource MaterialDesignTitleTextBlock}" >
 					Ask
 			</TextBlock>
-			<ComboBox 
-					Text="{Binding AskWordTypeEvent, Mode=TwoWay}"
-					ItemsSource="{Binding Source={StaticResource dataFromEnum}}"
-					SelectedItem="{Binding AskWordTypeEvent, Mode=TwoWay}" 
-					FontSize="18" 
+			<ComboBox 	
+					ItemsSource="{Binding Source={StaticResource dataFromEnum}}"					
+					SelectedValue="{Binding AskWordsTypeEvent}"
+				FontSize="18" 
 					Grid.Row="3"
 					Grid.Column="1" 
 					Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
@@ -166,9 +165,10 @@
 				Cancel
 			</Button>
 			<Button 
-					Command="{Binding SaveSettingsCommand}"
-					Width="100"  
-					Grid.Column="1">
+				Click="CancelButton_Click"
+				Command="{Binding SaveSettingsCommand}"
+				Width="100"  
+				Grid.Column="1">
 				Ok
 			</Button>
 		</Grid>

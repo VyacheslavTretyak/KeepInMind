@@ -23,9 +23,14 @@ namespace KeepInMind.Models
 			return rect;
 		}
 
-		internal void SaveSettings()
+		internal void SaveSettings(SettingsViewModel vm)
 		{
-			throw new NotImplementedException();
+			config.AskWords = vm.AskWordsTypeEvent;
+			config.Hours = vm.HoursEvent;
+			config.Days = vm.DaysEvent;
+			config.Weeks = vm.WeeksEvent;
+			config.AutoRun = vm.AutoRunEvent;
+			config.SaveConfig();
 		}
 
 		internal void GetConfig(SettingsViewModel vm)

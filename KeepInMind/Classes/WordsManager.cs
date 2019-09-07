@@ -27,9 +27,9 @@ namespace KeepInMind.Classes
 		}
 		private WordsManager()
 		{
-			wordsLoader = new WordsLoader();
-			wordRepository = new WordRepository(wordsLoader.LoadLastFile());			
 			configurator = new Configurator();
+			wordsLoader = new WordsLoader(configurator);
+			wordRepository = new WordRepository(wordsLoader.LoadLastFile());				
 			configurator.Load();
 			GetNextWordsList();
 		}

@@ -38,12 +38,12 @@ namespace KeepInMind.Classes
 		private ConfigLoader configLoader;
 		public Configurator()
 		{
-			
+			configLoader = new ConfigLoader(this);
+			Load();
 		}
 
 		public void Load()
-		{
-			configLoader = new ConfigLoader();
+		{			
 			SetConfig(configLoader.LoadConfig());
 		}
 		private void SetConfig(Configurator config)

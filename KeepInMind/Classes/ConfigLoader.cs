@@ -14,9 +14,9 @@ namespace KeepInMind.Classes
 	{
 		private string fileName = "config.ini";
 		private Configurator config;
-		public ConfigLoader()
+		public ConfigLoader(Configurator configurator)
 		{
-			config = new Configurator();
+			config = configurator;
 		}
 
 		public Configurator LoadConfig()
@@ -76,8 +76,6 @@ namespace KeepInMind.Classes
 					prop.SetValue(config, Enum.Parse(typeof(AskWordsType),val));
 					break;
 			}
-				
-			
 		}
 
 		public Configurator GetConfig()
@@ -112,7 +110,8 @@ namespace KeepInMind.Classes
 							sw.Write("\n");
 						}
 					}
-					sw.WriteLine($"{p.Name}:{p.GetValue(new Configurator()).ToString()}");
+					var a = p.GetValue(config).ToString();
+					sw.WriteLine($"{p.Name}:{a}");
 				}
 			}
 		}

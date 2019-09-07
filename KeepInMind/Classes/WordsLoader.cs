@@ -14,10 +14,9 @@ namespace KeepInMind.Classes
 	class WordsLoader
 	{
 		private Configurator configurator;
-		public WordsLoader()
+		public WordsLoader(Configurator configurator)
 		{
-			configurator = new Configurator();
-			configurator.Load();
+			this.configurator = configurator;			
 		}
 
 		public ObservableCollection<Word> LoadLastFile()
