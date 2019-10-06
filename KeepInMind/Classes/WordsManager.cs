@@ -1,10 +1,12 @@
 ﻿using KeepInMind.Classes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 
 namespace KeepInMind.Classes
-{
+{	
 	class WordsManager
 	{
 		private WordRepository wordRepository;
@@ -34,8 +36,14 @@ namespace KeepInMind.Classes
 			GetNextWordsList();
 		}
 
+		public ReadOnlyObservableCollection<Word> GetWords()
+		{
+			return wordRepository.Words;
+		}
+
 		public void GetNextWordsList()
 		{
+			currentNum = 0;
 			showList = GetWordsToShow();
 		}
 		public Word GetWord(bool prevent = false) {

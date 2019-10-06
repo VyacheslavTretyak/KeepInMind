@@ -10,10 +10,10 @@ namespace KeepInMind.ViewModels
 {
 	public class MainViewModel : BaseViewModel
 	{
-		private MainModel mainModel;
-		private string originText;
+		private MainModel mainModel;		
 		private MainWindow mainWindow;
-		
+
+		private string originText;
 		public string OriginTextEvent
 		{
 			get { return originText; }

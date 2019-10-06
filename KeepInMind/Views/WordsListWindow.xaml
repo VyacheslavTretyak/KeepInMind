@@ -12,28 +12,31 @@
         TextElement.FontSize="14"
 		FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
 		Title="Words List" 
-		Height="400" 
-		Width="550" 
-		MinHeight="400" 
-		MinWidth="500"
+		Height="{Binding ListWindowRectEvent.Height, Mode=TwoWay}" 
+		Width="{Binding ListWindowRectEvent.Width, Mode=TwoWay}"		
+		Top="{Binding ListWindowRectEvent.Top, Mode=TwoWay}"
+		Left="{Binding ListWindowRectEvent.Left, Mode=TwoWay}"		
 		Icon="/Resources/Icon1.ico">
+	<Window.DataContext>
+		<local:WordsListViewModel/>
+	</Window.DataContext>
 <Grid>
 	<Grid.RowDefinitions>
-		<RowDefinition Height="30"/>
+		<RowDefinition Height="60"/>
 		<RowDefinition Height="*"/>
 	</Grid.RowDefinitions>
 	<StackPanel Orientation="Horizontal">
-		<TextBox 
-				Name ="TBOriginalSearch"
-				Margin="20 0"
+			<TextBox 
+				Margin="30 0"
+				Width="200"				
+				materialDesign:HintAssist.Hint="original search"				
+				TextChanged="TextBox_TextChanged"/>
+			<TextBox 				
+				Margin="30 0" 
 				Width="200"
-				materialDesign:HintAssist.Hint="original search"></TextBox>
-		<TextBox 
-				Name ="TBTranslateSearch"
-				Margin="20 0" 
-				Width="200"
-				materialDesign:HintAssist.Hint="translate search"></TextBox>
-	</StackPanel>
+				materialDesign:HintAssist.Hint="translate search"				
+				TextChanged="TextBox_TextChanged"/>
+		</StackPanel>
 	<DataGrid Grid.Row="1"
 			  Margin="0 8 0 0"
 			  Name="DataGridWords"
@@ -41,6 +44,7 @@
 			  CanUserAddRows="False"		
 			  materialDesign:DataGridAssist.CellPadding="4 2 2 2"
 			  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2"
-			  ToolTip="Double click for open word card"/>
+			  ToolTip="Double click for open word card"
+			  ItemsSource ="{Binding WordsListEvent, Mode=OneTime}"/>
 	</Grid>
 </Window>

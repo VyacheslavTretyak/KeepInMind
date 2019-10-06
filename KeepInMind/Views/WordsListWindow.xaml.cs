@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeepInMind.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,12 @@ namespace KeepInMind.Views
 		public WordsListWindow()
 		{
 			InitializeComponent();
+		}
+
+		private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			WordsListViewModel vm = DataContext as WordsListViewModel;
+			vm.ListFilter();
 		}
 	}
 }

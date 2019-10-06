@@ -166,7 +166,9 @@
     <Compile Include="Classes\WindowRect.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\SettingsModel.cs" />
+    <Compile Include="Models\WordsListModel.cs" />
     <Compile Include="Models\WordModel.cs" />
+    <Compile Include="ViewModels\WordsListViewModel.cs" />
     <Compile Include="Views\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>

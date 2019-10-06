@@ -28,6 +28,8 @@ namespace KeepInMind.Classes
 		public int WidowWidth { get; set; } = 500;				
 		public int WordWidowHeight { get; set; } = 250;//Не впливає на висоту вікна, так як вона встановлюється з розміру тексту 
 		public int WordWidowWidth { get; set; } = 350;
+		public int ListWidowHeight { get; set; } = 800;
+		public int ListWidowWidth { get; set; } = 600;
 		public int SettingsWidowHeight { get; set; } = 400;
 		public int SettingsWidowWidth { get; set; } = 300;
 
