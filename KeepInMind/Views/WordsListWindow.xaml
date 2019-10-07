@@ -30,12 +30,12 @@
 				Margin="30 0"
 				Width="200"				
 				materialDesign:HintAssist.Hint="original search"				
-				TextChanged="TextBox_TextChanged"/>
+				TextChanged="OriginTextChanged"/>
 			<TextBox 				
 				Margin="30 0" 
 				Width="200"
 				materialDesign:HintAssist.Hint="translate search"				
-				TextChanged="TextBox_TextChanged"/>
+				TextChanged="TranslateTextChanged"/>
 		</StackPanel>
 	<DataGrid Grid.Row="1"
 			  Margin="0 8 0 0"
@@ -45,6 +45,6 @@
 			  materialDesign:DataGridAssist.CellPadding="4 2 2 2"
 			  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2"
 			  ToolTip="Double click for open word card"
-			  ItemsSource ="{Binding WordsListEvent, Mode=OneTime}"/>
+			  ItemsSource ="{Binding WordsListEvent, Mode=OneWay}"/>
 	</Grid>
 </Window>

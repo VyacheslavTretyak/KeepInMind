@@ -25,10 +25,18 @@ namespace KeepInMind.Views
 			InitializeComponent();
 		}
 
-		private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+		private void OriginTextChanged(object sender, TextChangedEventArgs e)
 		{
+			TextBox tb = sender as TextBox;
 			WordsListViewModel vm = DataContext as WordsListViewModel;
-			vm.ListFilter();
+			vm.ListFilter(tb.Text, WordsListViewModel.WordType.ORIGIN);
+		}
+
+		private void TranslateTextChanged(object sender, TextChangedEventArgs e)
+		{
+			TextBox tb = sender as TextBox;
+			WordsListViewModel vm = DataContext as WordsListViewModel;
+			vm.ListFilter(tb.Text, WordsListViewModel.WordType.TRANSLATE);
 		}
 	}
 }

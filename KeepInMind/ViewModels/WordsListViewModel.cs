@@ -7,57 +7,34 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace KeepInMind.ViewModels
 {
 	class WordsListViewModel : BaseViewModel
 	{
-		private WordsListModel listModel = new WordsListModel();
+		public enum WordType { ORIGIN, TRANSLATE};		
 		public WindowRect ListWindowRectEvent { get; }
-		public ReadOnlyObservableCollection<Word> WordsListEvent { get; }
 
+		private WordsListModel listModel = new WordsListModel();		
 
-		private string originText;
-		public string OriginTextEvent
-		{
-			get { return originText; }
-			set
-			{
-				originText = value;
-				FilterList();
-				OnPropertyChanged("OriginTextEvent");
-			}
-		}
-
-		private string translateText;
-
-		internal void ListFilter()
-		{
-			throw new NotImplementedException();
-		}
-
-		public string TranslateTextEvent
-		{
-			get { return translateText; }
-			set
-			{
-				translateText = value;
-				FilterList();
-				OnPropertyChanged("TranslateTextEvent");
-			}
-		}
-
-		private void FilterList()
-		{
-			throw new NotImplementedException();
-		}
-
+		public List<Word> WordsListEvent { get; set; }
+			
 		public WordsListViewModel()
 		{				
-			WordsListEvent = listModel.GetList();
+			WordsListEvent = listModel.List;
 			OnPropertyChanged("WordsListEvent");
 			ListWindowRectEvent = listModel.GetRect();
 			OnPropertyChanged("ListWindowRectEvent");
+		}
+
+		public void ListFilter(String text, WordType wordType)
+		{
+			WordsListEvent = null;
+			OnPropertyChanged("WordsListEvent");
+			WordsListEvent = listModel.ListFilter(text, wordType);
+			OnPropertyChanged("WordsListEvent");
 		}
 	}
 }
