@@ -36,5 +36,10 @@ namespace KeepInMind.ViewModels
 			WordsListEvent = listModel.ListFilter(text, wordType);
 			OnPropertyChanged("WordsListEvent");
 		}
+
+		internal void EditWorld(int id)
+		{
+			listModel.EditWorld(id);
+		}
 	}
 }

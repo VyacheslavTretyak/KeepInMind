@@ -46,6 +46,10 @@ namespace KeepInMind.Classes
 			currentNum = 0;
 			showList = GetWordsToShow();
 		}
+		public Word FindWord(int id)
+		{
+			return wordRepository.Get(id);
+		}
 		public Word GetWord(bool prevent = false) {
 			if (prevent)
 			{

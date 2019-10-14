@@ -54,17 +54,14 @@ namespace KeepInMind.Models
 				}
 				list = List.Where(w => w.Origin.ToLower().Contains(originText)).Where(w => w.Translate.ToLower().Contains(translateText)).ToList();				
 				return list;
-				//.Select(a => new { a.Origin, a.Translate, a.CountShow, a.TimeShow, a.TimeCreate, a.Id });
-
-
-				//Dispatcher.Invoke(() =>
-				//{
-				//	DataGridWords.ItemsSource = list.Select(a => new { a.Origin, a.Translate, a.CountShow, a.TimeShow, a.TimeCreate, a.Id });
-				//});
-
 			});
 			task.Start();			
 			return task.Result;
-		}			
+		}
+
+		internal void EditWorld(int id)
+		{
+			Word word = wordsManager.FindWord(id);
+		}
 	}
 }
