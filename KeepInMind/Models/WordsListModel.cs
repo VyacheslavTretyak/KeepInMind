@@ -40,7 +40,8 @@ namespace KeepInMind.Models
 			
 
 		internal List<Word> ListFilter(string text, WordsListViewModel.WordType wordType)
-		{			
+		{
+			
 			Task<List<Word>> task = new Task<List<Word>>(() =>
 			{
 				List<Word> list = new List<Word>();
@@ -52,7 +53,7 @@ namespace KeepInMind.Models
 				{
 					translateText = text.ToLower();
 				}
-				list = List.Where(w => w.Origin.ToLower().Contains(originText)).Where(w => w.Translate.ToLower().Contains(translateText)).ToList();				
+				list = List.Where(w => w.Origin.ToLower().Contains(originText)).Where(w => w.Translate.ToLower().Contains(translateText)).ToList();
 				return list;
 			});
 			task.Start();			

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeepInMind.ViewModels"
+		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"		
         mc:Ignorable="d"
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 		TextElement.Foreground="{DynamicResource MaterialDesignBody}"		
@@ -17,6 +18,7 @@
 		Top="{Binding ListWindowRectEvent.Top, Mode=TwoWay}"
 		Left="{Binding ListWindowRectEvent.Left, Mode=TwoWay}"		
 		Icon="/Resources/Icon1.ico">
+	
 	<Window.DataContext>
 		<local:WordsListViewModel/>
 	</Window.DataContext>
@@ -30,14 +32,14 @@
 				Margin="30 0"
 				Width="200"				
 				materialDesign:HintAssist.Hint="original search"				
-				TextChanged="OriginTextChanged"/>
-			<TextBox 				
+				Text="{Binding OriginTextChangedEvent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+			<TextBox 		
 				Margin="30 0" 
 				Width="200"
 				materialDesign:HintAssist.Hint="translate search"				
-				TextChanged="TranslateTextChanged"/>
+				Text="{Binding TranslateTextChangedEvent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 		</StackPanel>
-	<DataGrid Grid.Row="1"
+		<DataGrid Grid.Row="1"
 			  Margin="0 8 0 0"
 			  Name="DataGridWords"
 			  CanUserSortColumns="True"
@@ -45,10 +47,17 @@
 			  CanUserResizeRows="False"
 			  CanUserResizeColumns="True"
 			  CanUserDeleteRows="False"		
-			  MouseDoubleClick="DataGridWords_MouseDoubleClick"
+			  
 			  materialDesign:DataGridAssist.CellPadding="4 2 2 2"
 			  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2"
 			  ToolTip="Double click for open word card"
-			  ItemsSource ="{Binding WordsListEvent, Mode=OneWay}"/>
+			  SelectedItem="{Binding SelectedItemEvent, Mode=TwoWay}"
+			  ItemsSource ="{Binding WordsListEvent, Mode=OneWay}">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="MouseDoubleClick">
+					<i:InvokeCommandAction Command="{Binding DoubleClickCommand}" />
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+		</DataGrid>
 	</Grid>
 </Window>

@@ -11,7 +11,7 @@ namespace KeepInMind.ViewModels
 	public class MainViewModel : BaseViewModel
 	{
 		private MainModel mainModel;		
-		private MainWindow mainWindow;
+		//private MainWindow mainWindow;
 
 		private string originText;
 		public string OriginTextEvent

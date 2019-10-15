@@ -25,38 +25,5 @@ namespace KeepInMind.Views
 		{
 			InitializeComponent();
 		}
-
-		private void OriginTextChanged(object sender, TextChangedEventArgs e)
-		{
-			TextBox tb = sender as TextBox;
-			WordsListViewModel vm = DataContext as WordsListViewModel;
-			vm.ListFilter(tb.Text, WordsListViewModel.WordType.ORIGIN);
-		}
-
-		private void TranslateTextChanged(object sender, TextChangedEventArgs e)
-		{
-			TextBox tb = sender as TextBox;
-			WordsListViewModel vm = DataContext as WordsListViewModel;
-			vm.ListFilter(tb.Text, WordsListViewModel.WordType.TRANSLATE);
-		}
-
-		private void DataGridWords_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			DataGrid dg = sender as DataGrid;
-			WordsListViewModel vm = DataContext as WordsListViewModel;			
-			var prop = dg.SelectedItem.GetType();
-			int id = 0;
-			foreach(var propInfo in prop.GetProperties())
-			{
-				if(propInfo.Name == "Id") 
-				{
-					id = (int)propInfo.GetValue(dg.SelectedItem);
-				}
-			}
-			if (id != 0)
-			{
-				vm.EditWorld(id);
-			}			
-		}
 	}
 }
