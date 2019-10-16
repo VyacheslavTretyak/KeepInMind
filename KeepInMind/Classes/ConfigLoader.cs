@@ -85,6 +85,7 @@ namespace KeepInMind.Classes
 
 		private void SetDefaultConfig()
 		{
+			//TODO запуск без існуючого файлу конфігурації
 			config = new Configurator();
 		}
 

@@ -15,7 +15,7 @@ namespace KeepInMind.ViewModels
 		public DelegateCommand DeleteWordCommand { get; }
 		public DelegateCommand EditWordCommand { get; }
 		public DelegateCommand PreviousWordCommand { get; }		
-		public Word EditWordEvent { get; set; }
+		public Word EditingWord { get; set; }
 		public bool PreviousWordEvent { get; set; }
 
 		
@@ -55,7 +55,7 @@ namespace KeepInMind.ViewModels
 
 		private void EditWord(Object obj)
 		{
-			EditWordEvent = word;
+			EditingWord = word;
 		}
 		private void DeleteWord(Object obj)
 		{

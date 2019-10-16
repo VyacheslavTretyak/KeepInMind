@@ -58,11 +58,6 @@ namespace KeepInMind.Models
 			});
 			task.Start();			
 			return task.Result;
-		}
-
-		internal void EditWorld(int id)
-		{
-			Word word = wordsManager.FindWord(id);
-		}
+		}		
 	}
 }

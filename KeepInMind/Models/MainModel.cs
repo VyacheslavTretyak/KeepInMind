@@ -8,24 +8,31 @@ using System.Windows;
 
 namespace KeepInMind.Models
 {
-	public class MainModel
+	public class MainModel : BaseViewModel
 	{		
 		private Configurator config = new Configurator();
 		private GoogleTranslator translator = new GoogleTranslator();
-		private Thread thread;
-		private Word editWord;
+		private Thread thread;		
 		private bool isPreventWord = false;
-		private MainViewModel mainViewModel;
-		public MainModel(MainViewModel vm)
+
+		private Word editWord;
+
+		public Word EditWordEvent
 		{
-			//System.Diagnostics.Debug.WriteLine("\nCONSTRUCTOR\n");	
-			mainViewModel = vm;
+			get { return editWord; }
+			set { editWord = value; }
+		}
+
+		//public Word EditWordEvent { get; set; }
+		public MainModel()
+		{
+			//System.Diagnostics.Debug.WriteLine("\nCONSTRUCTOR\n");				
 			RunTask();
 			GoogleTranslator googleTranslator = new GoogleTranslator();
 		}
 		public void AddWord(string original, string translate)
 		{
-			if (editWord != null)
+			if (EditWordEvent != null)
 			{
 				editWord.Origin = original;
 				editWord.Translate = translate;
@@ -66,11 +73,10 @@ namespace KeepInMind.Models
 					WordViewModel wordViewModel = wordWindow.DataContext as WordViewModel;
 					wordViewModel.WordEvent = word;
 					wordWindow.ShowDialog();
-					if (wordViewModel.EditWordEvent != null)
+					if (wordViewModel.EditingWord != null)
 					{
-						editWord = wordViewModel.EditWordEvent;
-						mainViewModel.OriginTextEvent = editWord.Origin;
-						mainViewModel.TranslateTextEvent = editWord.Translate;
+						EditWordEvent = wordViewModel.EditingWord;
+						OnPropertyChanged("EditWordEvent");
 						thread.Suspend();
 					}
 					isPreventWord = wordViewModel.PreviousWordEvent;
@@ -85,6 +91,8 @@ namespace KeepInMind.Models
 		internal void OpenWordsList()
 		{
 			WordsListWindow wnd = new WordsListWindow();
+			WordsListViewModel vm = wnd.DataContext as WordsListViewModel;
+			Word selectedWord = vm.SelectedWordEvent;
 			wnd.ShowDialog();
 		}
 
@@ -101,6 +109,7 @@ namespace KeepInMind.Models
 
 		private void RunTask()
 		{
+			//TODO показати два рази підряд
 			thread?.Abort();
 			Task.Run(() => GetWord());
 		}

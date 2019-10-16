@@ -18,9 +18,18 @@ namespace KeepInMind.ViewModels
 		public enum WordType { ORIGIN, TRANSLATE};		
 		public WindowRect ListWindowRectEvent { get; }
 
+		
 		private WordsListModel listModel = new WordsListModel();
 		public List<Word> WordsListEvent { get; set; }
-		public object SelectedItemEvent { get; set; }
+		private object selectedItem;
+		public object SelectedItemEvent {
+			get { return selectedItem; }
+			set {
+				selectedItem = value;
+				SelectedWordEvent = selectedItem as Word;
+			} 
+		}
+		public Word SelectedWordEvent { get; set; }
 		private string originChanged;
 		public string OriginTextChangedEvent
 		{
@@ -54,8 +63,12 @@ namespace KeepInMind.ViewModels
 		}
 
 		private void DoubleClick(object obj)
-		{
-			Word a = SelectedItemEvent as Word;
+		{			
+			if (SelectedWordEvent != null)
+			{
+				//TODO обробка DoubleClick в списку слів
+				//MainViewModel.EditWorld(SelectedWordEvent);
+			}
 		}
 
 		private void ListFilter(String text, WordType wordType)
@@ -64,11 +77,6 @@ namespace KeepInMind.ViewModels
 			OnPropertyChanged("WordsListEvent");
 			WordsListEvent = listModel.ListFilter(text, wordType);
 			OnPropertyChanged("WordsListEvent");
-		}
-
-		internal void EditWorld(int id)
-		{
-			listModel.EditWorld(id);
-		}
+		}	
 	}
 }

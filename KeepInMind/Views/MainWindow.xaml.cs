@@ -12,10 +12,10 @@ namespace KeepInMind
 		public MainWindow()
 		{
 			InitializeComponent();
-			vm = new MainViewModel();
-			vm.SetMainWindow(this);
-			this.DataContext = vm;
-			Closing += MainWindow_Closing;
+			//vm = new MainViewModel();
+			//vm.SetMainWindow(this);
+			//this.DataContext = vm;
+			//Closing += MainWindow_Closing;
 		}
 
 		private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

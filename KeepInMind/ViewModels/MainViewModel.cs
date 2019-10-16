@@ -27,15 +27,6 @@ namespace KeepInMind.ViewModels
 				OnPropertyChanged("OriginTextEvent");				
 			}
 		}
-		public void SetMainWindow(MainWindow wnd)
-		{
-			mainWindow = wnd;
-		}
-		private string GetTranslate(string text)
-		{
-			return mainModel.GetTranslate(text);
-		}
-
 		private string translateText;
 		public string TranslateTextEvent
 		{
@@ -51,16 +42,33 @@ namespace KeepInMind.ViewModels
 		public DelegateCommand ShowNowCommand { get; }
 		public DelegateCommand SettingsCommand { get; }
 		public DelegateCommand WordsListCommand { get; }
+		
 		public MainViewModel()
 		{
 			//System.Diagnostics.Debug.WriteLine("CONSTRUCTOR");
-			mainModel = new MainModel(this);
+			mainModel = new MainModel();
+			mainModel.PropertyChanged += EditWordEvent_PropertyChanged;
+
 			AddWordCommand = new DelegateCommand((obj) => AddWord(obj), (obj) => true);
 			ShowNowCommand = new DelegateCommand((obj) => ShowNow(obj), (obj) => true);
 			SettingsCommand = new DelegateCommand((obj) => OpenSettings(obj), (obj) => true);
 			WordsListCommand = new DelegateCommand((obj) => OpenWordsList(obj), (obj) => true);
 			MainWindowRectEvent = mainModel.GetRect(); 
 			OnPropertyChanged("MainWindowRectEvent");
+		}		
+		private string GetTranslate(string text)
+		{
+			return mainModel.GetTranslate(text);
+		}
+
+		private void EditWordEvent_PropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			if(e.PropertyName == "EditWordEvent")
+			{
+				Word word = sender.GetType().GetProperty("EditWordEvent").GetValue(sender) as Word;
+				OriginTextEvent = word.Origin;
+				TranslateTextEvent = word.Translate;
+			}			
 		}
 
 		private void OpenWordsList(object obj)
