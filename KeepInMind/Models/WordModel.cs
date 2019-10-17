@@ -33,5 +33,29 @@ namespace KeepInMind.Models
 			word.TimeShow = DateTime.Now;
 			wordsManager.UpdateWord(word);
 		}
+
+		internal Word GetWordShowType(Word word)
+		{
+			if(wordsManager.GetConfig().AskWords == AskWordsType.Translate)
+			{
+				word = WrapWord(word);
+			}
+			else if(wordsManager.GetConfig().AskWords == AskWordsType.Both)
+			{
+				Random rnd = new Random();
+				if(rnd.Next(0, 1) == 0)
+				{
+					word = WrapWord(word);
+				}				
+			}
+			return word;
+		}
+		private Word WrapWord(Word word)
+		{
+			string tmp = word.Translate;
+			word.Translate = word.Origin;
+			word.Origin = tmp;
+			return word;
+		}
 	}
 }

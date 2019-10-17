@@ -22,11 +22,8 @@ namespace KeepInMind.Models
 			get { return editWord; }
 			set { editWord = value; }
 		}
-
-		//public Word EditWordEvent { get; set; }
 		public MainModel()
-		{
-			//System.Diagnostics.Debug.WriteLine("\nCONSTRUCTOR\n");				
+		{							
 			RunTask();
 			GoogleTranslator googleTranslator = new GoogleTranslator();
 		}
@@ -115,6 +112,7 @@ namespace KeepInMind.Models
 
 		internal void Close()
 		{
+			thread?.Abort();
 			WordsManager.Instance.Close();
 		}
 
@@ -122,7 +120,7 @@ namespace KeepInMind.Models
 		{
 			//TODO показати два рази підряд
 			thread?.Abort();
-			Task.Run(() => GetWord(word));
+			Task.Run(() => GetWord(word));			
 		}
 
 		internal void ShowNow()

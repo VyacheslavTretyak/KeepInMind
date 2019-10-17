@@ -18,14 +18,16 @@ namespace KeepInMind.ViewModels
 		public Word EditingWord { get; set; }
 		public bool PreviousWordEvent { get; set; }
 
-		
 		private Word word;
+		private Word wordEvent;
 		public Word WordEvent
 		{
 			get { return word; }
 			set {
 				word = value;
-				levelNum = (int)word.Level;
+				wordEvent = value;
+				wordEvent = wordModel.GetWordShowType(wordEvent);
+				levelNum = (int)wordEvent.Level;
 				OnPropertyChanged("WordEvent");				
 			}
 		}
