@@ -34,9 +34,16 @@ namespace KeepInMind.Classes
 			wordRepository = new WordRepository(wordsLoader.LoadLastFile());				
 			GetNextWordsList();
 		}
+
+		
 		public Configurator GetConfig()
 		{
 			return configurator;
+		}
+
+		public void Rollback()
+		{
+			wordRepository = new WordRepository(wordsLoader.RollBack());
 		}
 
 		public ReadOnlyObservableCollection<Word> GetWords()
@@ -71,10 +78,13 @@ namespace KeepInMind.Classes
 			Word word = showList[currentNum++];
 			return word;
 		}
+		public void Save()
+		{
+			wordsLoader.Save(wordRepository.Words);
+		}
 		public void UpdateWord(Word word)
 		{
-			wordRepository.Update(word);
-			wordsLoader.Save(wordRepository.Words);
+			wordRepository.Update(word);			
 		}
 
 		public void DeleteWord(Word word)
@@ -170,7 +180,7 @@ namespace KeepInMind.Classes
 		}
 		public void Close()
 		{
-			//wordsLoader.Save(wordRepository.Words);
+			wordsLoader.Save(wordRepository.Words);
 		}
 	}
 }

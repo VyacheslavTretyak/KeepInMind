@@ -26,7 +26,7 @@
 		FocusManager.FocusedElement="{x:Reference Name=TextBoxWord}"
 		Name="ThisWindow">
 	<i:Interaction.Behaviors>
-		<classes:WindowBehavior/>
+		<classes:CloseWindowBehavior/>
 	</i:Interaction.Behaviors>	
 	<Window.DataContext>
 		<local:MainViewModel/>
@@ -67,14 +67,7 @@
 					Style="{StaticResource MaterialDesignFlatButton}"
 					Command="{Binding WordsListCommand}">
 					List
-				</Button>
-				<Button 
-					x:Name="ButtonRollback"
-					Grid.Row="2" 
-					HorizontalAlignment="Left"
-					Style="{StaticResource MaterialDesignFlatButton}">
-					Rollback
-				</Button>
+				</Button>				
 				<Button 					
 					Grid.Row="3"
 					HorizontalAlignment="Left"
@@ -153,8 +146,7 @@
 			<tb:TaskbarIcon.ContextMenu>
 				<ContextMenu Background="{DynamicResource PrimaryHueLightBrush}">
 					<MenuItem Header="Show Now" Command="{Binding ShowNowCommand}"/>
-					<MenuItem Header="List" Command="{Binding WordsListCommand}" />
-					<MenuItem Header="Rollback" />
+					<MenuItem Header="List" Command="{Binding WordsListCommand}" />					
 					<MenuItem Header="Settings" Command="{Binding SettingsCommand}"/>
 					<MenuItem Header="Exit" Command="{Binding ClosingCommand}"/>
 				</ContextMenu>

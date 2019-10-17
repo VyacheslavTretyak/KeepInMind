@@ -17,7 +17,7 @@ namespace KeepInMind.Classes
 		public WordsLoader(Configurator configurator)
 		{
 			this.configurator = configurator;			
-		}
+		}	
 
 		public ObservableCollection<Word> LoadLastFile()
 		{

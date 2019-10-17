@@ -5,7 +5,7 @@ using System.Windows.Interactivity;
 
 namespace KeepInMind.Classes
 {
-	public class WindowBehavior : Behavior<Window>
+	public class CloseWindowBehavior : Behavior<Window>
 	{
 		//public static readonly DependencyProperty CancelCloseProperty =
 		//  DependencyProperty.Register("CancelClose", typeof(bool),
@@ -23,7 +23,7 @@ namespace KeepInMind.Classes
 			{
 				args.Cancel = true;
 				(sender as Window).Hide();
-			};
+			};			
 		}
 	}
 }

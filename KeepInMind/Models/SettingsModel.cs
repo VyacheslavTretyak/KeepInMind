@@ -42,5 +42,10 @@ namespace KeepInMind.Models
 			vm.AskWordsTypeEvent = config.AskWords;
 			vm.AutoRunEvent = config.AutoRun;
 		}
+
+		internal void RollBack()
+		{
+			WordsManager.Instance.Rollback();
+		}
 	}
 }

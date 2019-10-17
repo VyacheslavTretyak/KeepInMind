@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:KeepInMind.ViewModels"
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 		xmlns:System="clr-namespace:System;assembly=mscorlib"
-		xmlns:Classes="clr-namespace:KeepInMind.Classes"
+		xmlns:classes="clr-namespace:KeepInMind.Classes"
+		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"	
         mc:Ignorable="d"
         Title="Setting Window" 
 		Height="{Binding WindowRectEvent.Height, Mode=TwoWay}"
@@ -21,7 +22,8 @@
         TextElement.FontSize="14"
 		FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
 		ResizeMode="NoResize"
-		Icon="/Resources/Icon1.ico">
+		Icon="/Resources/Icon1.ico"
+		Name="ThisWindow">
 	<Window.DataContext>
 		<local:SettingsViewModel/>
 	</Window.DataContext>
@@ -29,7 +31,7 @@
 		<ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
                             ObjectType="{x:Type System:Enum}">
 			<ObjectDataProvider.MethodParameters>
-				<x:Type TypeName="Classes:AskWordsType"/>
+				<x:Type TypeName="classes:AskWordsType"/>
 			</ObjectDataProvider.MethodParameters>
 		</ObjectDataProvider>
 	</Window.Resources>
@@ -37,6 +39,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="auto"/>
 			<RowDefinition/>
+			<RowDefinition Height="auto"/>
 			<RowDefinition Height="auto"/>
 		</Grid.RowDefinitions>
 		<materialDesign:ColorZone
@@ -76,8 +79,10 @@
 					VerticalAlignment="Center" 
 					FontSize="18"
 					AcceptsReturn="True" 
-					Width="100" 
-					PreviewTextInput="OnlyNumeric">
+					Width="100">
+				<i:Interaction.Behaviors>
+					<classes:TextInputBehavior/>
+				</i:Interaction.Behaviors>
 			</TextBox>
 			<TextBlock  
 					Grid.Row="1"
@@ -95,8 +100,10 @@
 					VerticalAlignment="Center" 
 					FontSize="18" 
 					AcceptsReturn="True"
-					Width="100" 
-					PreviewTextInput="OnlyNumeric">
+					Width="100" >
+				<i:Interaction.Behaviors>
+					<classes:TextInputBehavior/>
+				</i:Interaction.Behaviors>
 			</TextBox>
 			<TextBlock 
 					Grid.Row="2"
@@ -114,8 +121,10 @@
 					VerticalAlignment="Center"
 					FontSize="18" 
 					AcceptsReturn="True" 
-					Width="100" 
-					PreviewTextInput="OnlyNumeric">
+					Width="100" >
+				<i:Interaction.Behaviors>
+					<classes:TextInputBehavior/>
+				</i:Interaction.Behaviors>
 			</TextBox>
 			<TextBlock 
 					Grid.Row="3" 
@@ -128,12 +137,12 @@
 			<ComboBox 	
 					ItemsSource="{Binding Source={StaticResource dataFromEnum}}"					
 					SelectedValue="{Binding AskWordsTypeEvent}"
-				FontSize="18" 
+					FontSize="18" 
 					Grid.Row="3"
 					Grid.Column="1" 
+					Margin="0 0 16 0"
 					Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
-					ToolTip="Ask words, or ask translate, or ask both variants" 
-					PreviewTextInput="OnlyNumeric">
+					ToolTip="Ask words, or ask translate, or ask both variants" >
 			</ComboBox>
 			<TextBlock  
 					Grid.Row="4" 
@@ -150,24 +159,36 @@
 					HorizontalAlignment="Left"
 					Style="{StaticResource MaterialDesignSwitchToggleButton}"
 					ToolTip="Run application with Windows" />
+			
 		</Grid>
+		<Button
+			Grid.Row="2"
+			Margin="16 0"
+			Command="{Binding RollbackCommand}">
+			Rollback saved words
+		</Button>
 		<Grid 
-				Grid.Row="2" 
+				Grid.Row="3" 
 				Margin="0 16">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition/>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<Button 
-					Click="CancelButton_Click"
+					Command="{Binding CloseCommand}"
+					CommandParameter="{Binding ElementName=ThisWindow}"
 					Width="100" 
+					Margin="16 0"
+					HorizontalAlignment="Left"
 					Grid.Column="0">
 				Cancel
 			</Button>
-			<Button 
-				Click="CancelButton_Click"
+			<Button 				
 				Command="{Binding SaveSettingsCommand}"
-				Width="100"  
+				CommandParameter="{Binding ElementName=ThisWindow}"
+				Width="100" 
+				Margin="16 0"
+				HorizontalAlignment="Right"
 				Grid.Column="1">
 				Ok
 			</Button>

@@ -87,8 +87,9 @@ namespace KeepInMind.ViewModels
 		}
 
 		private void ShowNow(object obj)
-		{
-			mainModel.ShowNow();
+		{		
+			//TODO show now
+		//	mainModel.ShowNow();
 		}
 
 		private void AddWord(object obj)

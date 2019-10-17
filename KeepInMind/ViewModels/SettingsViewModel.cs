@@ -13,6 +13,8 @@ namespace KeepInMind.ViewModels
 		private SettingsModel settingsModel = new SettingsModel();
 
 		public DelegateCommand SaveSettingsCommand { get; }
+		public DelegateCommand CloseCommand { get; }
+		public DelegateCommand RollbackCommand { get; }
 
 		public WindowRect WindowRectEvent { get; }
 		public int HoursEvent { get; set; }	
@@ -25,14 +27,27 @@ namespace KeepInMind.ViewModels
 		public SettingsViewModel()
 		{
 			SaveSettingsCommand = new DelegateCommand((obj) => SaveSettings(obj), (obj) => true);
+			CloseCommand = new DelegateCommand((obj) => Close(obj), (obj) => true);
+			RollbackCommand = new DelegateCommand((obj) => Rollback(obj), (obj) => true);
 			WindowRectEvent = settingsModel.GetRect();
 			settingsModel.GetConfig(this);
 			OnPropertyChanged("WordWindowRectEvent");			
 		}
 
+		private void Rollback(object obj)
+		{
+			settingsModel.RollBack();
+		}
+
+		private void Close(object obj)
+		{
+			(obj as SettingsWindow).Close();
+		}
+
 		private void SaveSettings(object obj)
 		{
 			settingsModel.SaveSettings(this);
+			(obj as SettingsWindow).Close();
 		}		
 	}
 }

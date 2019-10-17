@@ -1,7 +1,6 @@
 ﻿using KeepInMind.Classes;
 using KeepInMind.ViewModels;
 using KeepInMind.Views;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,7 +9,8 @@ namespace KeepInMind.Models
 {
 	public class MainModel : BaseViewModel
 	{
-		private Configurator config = new ConfigLoader().LoadConfig();
+		private WordsManager wordsManager;
+		private Configurator config;
 		private GoogleTranslator translator = new GoogleTranslator();
 		private Thread thread;		
 		private bool isPreventWord = false;
@@ -23,7 +23,9 @@ namespace KeepInMind.Models
 			set { editWord = value; }
 		}
 		public MainModel()
-		{							
+		{
+			wordsManager = WordsManager.Instance;
+			config = wordsManager.GetConfig();
 			RunTask();
 			GoogleTranslator googleTranslator = new GoogleTranslator();
 		}
@@ -33,13 +35,13 @@ namespace KeepInMind.Models
 			{
 				editWord.Origin = original;
 				editWord.Translate = translate;
-				WordsManager.Instance.UpdateWord(editWord);
+				wordsManager.UpdateWord(editWord);
 				editWord = null;
 				thread.Resume();
 			}
 			else
 			{
-				WordsManager.Instance.AddWord(original, translate);
+				wordsManager.AddWord(original, translate);
 			}
 		}
 
@@ -62,7 +64,7 @@ namespace KeepInMind.Models
 			thread = Thread.CurrentThread;
 			if (word == null)
 			{
-				word = WordsManager.Instance.GetWord(isPreventWord);
+				word = wordsManager.GetWord(isPreventWord);
 			}
 			isPreventWord = false;
 			if (word != null)
@@ -83,8 +85,9 @@ namespace KeepInMind.Models
 				});
 				GetWord();
 			}
+			wordsManager.Save();
 			Thread.Sleep(config.SleepBetweenShows * 1000);
-			WordsManager.Instance.GetNextWordsList();
+			wordsManager.GetNextWordsList();
 			GetWord();
 		}
 
@@ -113,19 +116,18 @@ namespace KeepInMind.Models
 		internal void Close()
 		{
 			thread?.Abort();
-			WordsManager.Instance.Close();
+			wordsManager.Close();
 		}
 
 		private void RunTask(Word word = null)
-		{
-			//TODO показати два рази підряд
+		{			
 			thread?.Abort();
 			Task.Run(() => GetWord(word));			
 		}
 
 		internal void ShowNow()
 		{
-			WordsManager.Instance.GetNextWordsList();
+			wordsManager.GetNextWordsList();
 			RunTask();
 		}
 
