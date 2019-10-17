@@ -23,15 +23,11 @@
 		Left="{Binding MainWindowRectEvent.Left, Mode=TwoWay}"
 		ResizeMode="NoResize"
 		Icon="/Resources/Icon1.ico"
-		FocusManager.FocusedElement="{x:Reference Name=TextBoxWord}">
+		FocusManager.FocusedElement="{x:Reference Name=TextBoxWord}"
+		Name="ThisWindow">
 	<i:Interaction.Behaviors>
 		<classes:WindowBehavior/>
-	</i:Interaction.Behaviors>
-	<i:Interaction.Triggers>
-		<i:EventTrigger EventName="Closing">
-			<i:InvokeCommandAction Command="{Binding ClosingCommand}"/>
-		</i:EventTrigger>
-	</i:Interaction.Triggers>
+	</i:Interaction.Behaviors>	
 	<Window.DataContext>
 		<local:MainViewModel/>
 	</Window.DataContext>
@@ -151,7 +147,9 @@
 		<tb:TaskbarIcon x:Name="myNotifyIcon"
             Visibility="Visible"
             ToolTipText="Fallback ToolTip for Windows xp"
-            IconSource="/Resources/Icon1.ico">
+            IconSource="/Resources/Icon1.ico"			
+			LeftClickCommand="{Binding TaskbarIconClickCommand}"
+			LeftClickCommandParameter="{Binding ElementName=ThisWindow}">
 			<tb:TaskbarIcon.ContextMenu>
 				<ContextMenu Background="{DynamicResource PrimaryHueLightBrush}">
 					<MenuItem Header="Show Now" Command="{Binding ShowNowCommand}"/>

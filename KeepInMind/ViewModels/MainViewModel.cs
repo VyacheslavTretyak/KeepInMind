@@ -44,6 +44,7 @@ namespace KeepInMind.ViewModels
 		public DelegateCommand SettingsCommand { get; }
 		public DelegateCommand WordsListCommand { get; }
 		public DelegateCommand ClosingCommand { get; }
+		public DelegateCommand TaskbarIconClickCommand { get; }
 		
 		public MainViewModel()
 		{
@@ -56,6 +57,7 @@ namespace KeepInMind.ViewModels
 			SettingsCommand = new DelegateCommand((obj) => OpenSettings(obj), (obj) => true);
 			WordsListCommand = new DelegateCommand((obj) => OpenWordsList(obj), (obj) => true);
 			ClosingCommand = new DelegateCommand((obj) => Shutdown(obj), (obj) => true);
+			TaskbarIconClickCommand = new DelegateCommand((obj) => TaskbarIconClick(obj), (obj) => true);
 			MainWindowRectEvent = mainModel.GetRect(); 
 			OnPropertyChanged("MainWindowRectEvent");
 		}		
@@ -100,6 +102,11 @@ namespace KeepInMind.ViewModels
 		{			
 			mainModel.Close();
 			App.Current.Shutdown();
+		}
+
+		public void TaskbarIconClick(object obj)
+		{
+			(obj as MainWindow).Show();			
 		}
 	}
 }
