@@ -162,6 +162,7 @@
     </ApplicationDefinition>
     <Compile Include="Classes\AskWordsType.cs" />
     <Compile Include="Classes\BaseViewModel.cs" />
+    <Compile Include="Classes\WindowBehavior.cs" />
     <Compile Include="Classes\CommentEnum.cs" />
     <Compile Include="Classes\Comment.cs" />
     <Compile Include="Classes\DelegateCommand.cs" />

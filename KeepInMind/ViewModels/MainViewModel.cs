@@ -27,13 +27,14 @@ namespace KeepInMind.ViewModels
 				OnPropertyChanged("OriginTextEvent");				
 			}
 		}
+
 		private string translateText;
 		public string TranslateTextEvent
 		{
 			get { return translateText; }
 			set
 			{
-				translateText = value;				
+				translateText = value;
 				OnPropertyChanged("TranslateTextEvent");
 			}
 		}								
@@ -54,7 +55,7 @@ namespace KeepInMind.ViewModels
 			ShowNowCommand = new DelegateCommand((obj) => ShowNow(obj), (obj) => true);
 			SettingsCommand = new DelegateCommand((obj) => OpenSettings(obj), (obj) => true);
 			WordsListCommand = new DelegateCommand((obj) => OpenWordsList(obj), (obj) => true);
-			ClosingCommand = new DelegateCommand((obj) => Close(obj), (obj) => true);
+			ClosingCommand = new DelegateCommand((obj) => Shutdown(obj), (obj) => true);
 			MainWindowRectEvent = mainModel.GetRect(); 
 			OnPropertyChanged("MainWindowRectEvent");
 		}		
@@ -95,9 +96,10 @@ namespace KeepInMind.ViewModels
 			OriginTextEvent = "";
 			TranslateTextEvent = "";
 		}		
-		public void Close(object obj)
-		{
+		public void Shutdown(object obj)
+		{			
 			mainModel.Close();
+			App.Current.Shutdown();
 		}
 	}
 }
