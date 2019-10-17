@@ -9,8 +9,8 @@ using System.Windows;
 namespace KeepInMind.Models
 {
 	public class MainModel : BaseViewModel
-	{		
-		private Configurator config = new Configurator();
+	{
+		private Configurator config = new ConfigLoader().LoadConfig();
 		private GoogleTranslator translator = new GoogleTranslator();
 		private Thread thread;		
 		private bool isPreventWord = false;
@@ -60,10 +60,13 @@ namespace KeepInMind.Models
 			return translator.Translate(text);
 		}
 
-		public void GetWord()
+		public void GetWord(Word word = null)
 		{
 			thread = Thread.CurrentThread;
-			Word word = WordsManager.Instance.GetWord(isPreventWord);
+			if (word == null)
+			{
+				word = WordsManager.Instance.GetWord(isPreventWord);
+			}
 			isPreventWord = false;
 			if (word != null)
 			{
@@ -92,8 +95,16 @@ namespace KeepInMind.Models
 		{
 			WordsListWindow wnd = new WordsListWindow();
 			WordsListViewModel vm = wnd.DataContext as WordsListViewModel;
-			Word selectedWord = vm.SelectedWordEvent;
+			vm.PropertyChanged += SelectedWord_PropertyChanged;			
 			wnd.ShowDialog();
+		}
+
+		private void SelectedWord_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName == "SelectedWordEvent")
+			{			
+				RunTask(sender.GetType().GetProperty("SelectedWordEvent").GetValue(sender) as Word);
+			}
 		}
 
 		internal void OpenSettings()
@@ -107,11 +118,11 @@ namespace KeepInMind.Models
 			WordsManager.Instance.Close();
 		}
 
-		private void RunTask()
+		private void RunTask(Word word = null)
 		{
 			//TODO показати два рази підряд
 			thread?.Abort();
-			Task.Run(() => GetWord());
+			Task.Run(() => GetWord(word));
 		}
 
 		internal void ShowNow()

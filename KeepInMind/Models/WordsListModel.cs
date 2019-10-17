@@ -14,13 +14,13 @@ namespace KeepInMind.Models
 {
 	class WordsListModel
 	{
-		private WordsManager wordsManager = WordsManager.Instance;		
-		private Configurator config = new Configurator();
+		private WordsManager wordsManager = WordsManager.Instance;
 		private String originText = "";
 		private String translateText = "";
 		public List<Word> List { get; set; }
 		public WordsListModel()
 		{
+			
 			Task<List<Word>> task = new Task<List<Word>>(() => {
 				var v = wordsManager.GetWords().ToList<Word>();
 				return v;
@@ -32,8 +32,8 @@ namespace KeepInMind.Models
 		internal WindowRect GetRect()
 		{
 			WindowRect rect = new WindowRect();
-			rect.Height = config.ListWidowHeight;
-			rect.Width = config.ListWidowWidth;
+			rect.Height = wordsManager.GetConfig().ListWidowHeight;
+			rect.Width = wordsManager.GetConfig().ListWidowWidth;
 			rect.SetRightBottom();
 			return rect;
 		}

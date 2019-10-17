@@ -29,11 +29,14 @@ namespace KeepInMind.Classes
 		}
 		private WordsManager()
 		{
-			configurator = new Configurator();
+			configurator = new ConfigLoader().LoadConfig();
 			wordsLoader = new WordsLoader(configurator);
 			wordRepository = new WordRepository(wordsLoader.LoadLastFile());				
-			configurator.Load();
 			GetNextWordsList();
+		}
+		public Configurator GetConfig()
+		{
+			return configurator;
 		}
 
 		public ReadOnlyObservableCollection<Word> GetWords()

@@ -1,4 +1,5 @@
 ﻿using KeepInMind.Classes;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,20 +15,30 @@ namespace KeepInMind.Classes
 	{
 		private string fileName = "config.ini";
 		private Configurator config;
-		public ConfigLoader(Configurator configurator)
+		public ConfigLoader()
 		{
-			config = configurator;
+			
 		}
+
+		private string appName = "KeepInMind";
+		private ConfigLoader configLoader;		
+
+		private Configurator SetDefaultConfig()
+		{
+			return new Configurator();
+		}	
+		
 
 		public Configurator LoadConfig()
 		{			
 			if (!File.Exists(fileName))
 			{
-				SetDefaultConfig();
-				SaveConfig();
+				config = SetDefaultConfig();
+				SaveConfig(config);
 			}
 			else
 			{
+				config = new Configurator();
 				using (StreamReader sr = new StreamReader(fileName))
 				{
 					while (!sr.EndOfStream)
@@ -38,17 +49,17 @@ namespace KeepInMind.Classes
 							continue;
 						}
 						string[] keyVal = line.Split(":".ToCharArray());
-						SetValueToConfigurator(keyVal[0], keyVal[1]);
+						SetValueToConfigurator(config, keyVal[0], keyVal[1]);
 					}
 				}
 			}
 			return config;
 		}
 
-		private void SetValueToConfigurator(string key, string val)
+		private void SetValueToConfigurator(Configurator configurator, string key, string val)
 		{
 			PropertyInfo prop = null;
-			foreach (var p in typeof(Configurator).GetProperties())
+			foreach (var p in configurator.GetType().GetProperties())
 			{
 				if(key == p.Name)
 				{
@@ -64,36 +75,25 @@ namespace KeepInMind.Classes
 			switch (str.ToLower())
 			{
 				case "string":
-					prop.SetValue(config, val);
+					prop.SetValue(configurator, val);
 					break;
 				case "int32":
-					prop.SetValue(config, int.Parse(val));
+					prop.SetValue(configurator, int.Parse(val));
 					break;
 				case "boolean":
-					prop.SetValue(config, bool.Parse(val));
+					prop.SetValue(configurator, bool.Parse(val));
 					break;
 				case "askwordstype":
-					prop.SetValue(config, Enum.Parse(typeof(AskWordsType),val));
+					prop.SetValue(configurator, Enum.Parse(typeof(AskWordsType),val));
 					break;
 			}
-		}
+		}	
 
-		public Configurator GetConfig()
-		{
-			return config;
-		}
-
-		private void SetDefaultConfig()
-		{
-			//TODO запуск без існуючого файлу конфігурації
-			config = new Configurator();
-		}
-
-		public void SaveConfig()
+		public void SaveConfig(Configurator configurator)
 		{
 			using (StreamWriter sw = File.CreateText(fileName))
 			{
-				foreach (var p in typeof(Configurator).GetProperties())
+				foreach (var p in configurator.GetType().GetProperties())
 				{
 					foreach (var attr in p.GetCustomAttributes())
 					{
@@ -111,10 +111,27 @@ namespace KeepInMind.Classes
 							sw.Write("\n");
 						}
 					}
-					var a = p.GetValue(config).ToString();
+					var a = p.GetValue(configurator).ToString();
 					sw.WriteLine($"{p.Name}:{a}");
 				}
 			}
+		}
+		public void AutoRunSet()
+		{
+			RegistryKey curUserkey = Registry.CurrentUser;
+			RegistryKey autoRunKey = curUserkey.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+			var location = System.Reflection.Assembly.GetEntryAssembly().Location;
+			autoRunKey.SetValue(appName, location);
+			autoRunKey.Close();
+			curUserkey.Close();
+		}
+		public void AutoRunUnset()
+		{
+			RegistryKey curUserkey = Registry.CurrentUser;
+			RegistryKey autoRunKey = curUserkey.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+			autoRunKey.DeleteValue(appName);
+			autoRunKey.Close();
+			curUserkey.Close();
 		}
 	}
 }

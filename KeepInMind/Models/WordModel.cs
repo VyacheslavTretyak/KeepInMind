@@ -7,9 +7,7 @@ namespace KeepInMind.Models
 {
 	class WordModel
 	{
-		private WordsManager wordsManager = WordsManager.Instance;
-		//public  Word Word { get; set; }
-		private Configurator config = new Configurator();
+		private WordsManager wordsManager = WordsManager.Instance;				
 		public WordModel()
 		{
 			
@@ -18,8 +16,8 @@ namespace KeepInMind.Models
 		internal WindowRect GetRect()
 		{
 			WindowRect rect = new WindowRect();
-			rect.Height = config.WordWidowHeight;
-			rect.Width = config.WordWidowWidth;
+			rect.Height = wordsManager.GetConfig().WordWidowHeight;
+			rect.Width = wordsManager.GetConfig().WordWidowWidth;
 			rect.SetRightBottom();
 			return rect;
 		}		

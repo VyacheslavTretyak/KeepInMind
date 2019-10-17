@@ -7,11 +7,11 @@ using System.Runtime.CompilerServices;
 namespace KeepInMind.Models
 {
 	class SettingsModel
-	{				
-		private Configurator config = new Configurator();
+	{
+		private Configurator config;
 		public SettingsModel()
 		{
-			
+			config = WordsManager.Instance.GetConfig();
 		}
 
 		internal WindowRect GetRect()
@@ -30,7 +30,8 @@ namespace KeepInMind.Models
 			config.Days = vm.DaysEvent;
 			config.Weeks = vm.WeeksEvent;
 			config.AutoRun = vm.AutoRunEvent;
-			config.SaveConfig();
+			ConfigLoader configLoader = new ConfigLoader();
+			configLoader.SaveConfig(config);			
 		}
 
 		internal void GetConfig(SettingsViewModel vm)

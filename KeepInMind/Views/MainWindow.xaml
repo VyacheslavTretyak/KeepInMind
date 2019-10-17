@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:KeepInMind.ViewModels"
         xmlns:classes="clr-namespace:KeepInMind.Classes"		
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"		
 		xmlns:tb="http://www.hardcodet.net/taskbar"		
 		mc:Ignorable="d"
 		TextElement.Foreground="{DynamicResource MaterialDesignBody}"		
@@ -23,6 +24,11 @@
 		ResizeMode="NoResize"
 		Icon="/Resources/Icon1.ico"
 		FocusManager.FocusedElement="{x:Reference Name=TextBoxWord}">
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Closing">
+			<i:InvokeCommandAction Command="{Binding ClosingCommand}"/>
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
 	<Window.DataContext>
 		<local:MainViewModel/>
 	</Window.DataContext>

@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Windows.Controls;
+using KeepInMind.Views;
 
 namespace KeepInMind.ViewModels
 {
@@ -65,9 +66,9 @@ namespace KeepInMind.ViewModels
 		private void DoubleClick(object obj)
 		{			
 			if (SelectedWordEvent != null)
-			{
-				//TODO обробка DoubleClick в списку слів
-				//MainViewModel.EditWorld(SelectedWordEvent);
+			{				
+				(obj as WordsListWindow).DialogResult = true;
+				OnPropertyChanged("SelectedWordEvent");
 			}
 		}
 

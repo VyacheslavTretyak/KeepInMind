@@ -34,49 +34,6 @@ namespace KeepInMind.Classes
 		public int SettingsWidowWidth { get; set; } = 300;
 
 		[Comment("Time between shows (in seconds)")]
-		public int SleepBetweenShows { get; set; } = 3600;
-
-		private string appName = "KeepInMind";
-		private ConfigLoader configLoader;
-		public Configurator()
-		{
-			configLoader = new ConfigLoader(this);
-			Load();
-		}
-
-		public void Load()
-		{			
-			SetConfig(configLoader.LoadConfig());
-		}
-		private void SetConfig(Configurator config)
-		{
-			foreach (var p in typeof(Configurator).GetProperties())
-			{				
-				p.SetValue(this, p.GetValue(config));
-			}
-		}
-
-		public void SaveConfig()
-		{
-			configLoader.SaveConfig();
-		}	
-
-		public void AutoRunSet()
-		{
-			RegistryKey curUserkey = Registry.CurrentUser;
-			RegistryKey autoRunKey = curUserkey.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
-			var location = System.Reflection.Assembly.GetEntryAssembly().Location;
-			autoRunKey.SetValue(appName, location);
-			autoRunKey.Close();
-			curUserkey.Close();
-		}
-		public void AutoRunUnset()
-		{
-			RegistryKey curUserkey = Registry.CurrentUser;
-			RegistryKey autoRunKey = curUserkey.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
-			autoRunKey.DeleteValue(appName);
-			autoRunKey.Close();
-			curUserkey.Close();
-		}
+		public int SleepBetweenShows { get; set; } = 3600;		
 	}
 }

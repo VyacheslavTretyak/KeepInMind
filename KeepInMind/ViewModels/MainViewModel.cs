@@ -42,6 +42,7 @@ namespace KeepInMind.ViewModels
 		public DelegateCommand ShowNowCommand { get; }
 		public DelegateCommand SettingsCommand { get; }
 		public DelegateCommand WordsListCommand { get; }
+		public DelegateCommand ClosingCommand { get; }
 		
 		public MainViewModel()
 		{
@@ -53,6 +54,7 @@ namespace KeepInMind.ViewModels
 			ShowNowCommand = new DelegateCommand((obj) => ShowNow(obj), (obj) => true);
 			SettingsCommand = new DelegateCommand((obj) => OpenSettings(obj), (obj) => true);
 			WordsListCommand = new DelegateCommand((obj) => OpenWordsList(obj), (obj) => true);
+			ClosingCommand = new DelegateCommand((obj) => Close(obj), (obj) => true);
 			MainWindowRectEvent = mainModel.GetRect(); 
 			OnPropertyChanged("MainWindowRectEvent");
 		}		
@@ -93,7 +95,7 @@ namespace KeepInMind.ViewModels
 			OriginTextEvent = "";
 			TranslateTextEvent = "";
 		}		
-		public void Close()
+		public void Close(object obj)
 		{
 			mainModel.Close();
 		}

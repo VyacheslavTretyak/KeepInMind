@@ -13,11 +13,13 @@
         TextElement.FontSize="14"
 		FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
 		Title="Words List" 
+		Name="ThisWindow"
 		Height="{Binding ListWindowRectEvent.Height, Mode=TwoWay}" 
 		Width="{Binding ListWindowRectEvent.Width, Mode=TwoWay}"		
 		Top="{Binding ListWindowRectEvent.Top, Mode=TwoWay}"
 		Left="{Binding ListWindowRectEvent.Left, Mode=TwoWay}"		
 		Icon="/Resources/Icon1.ico">
+
 	
 	<Window.DataContext>
 		<local:WordsListViewModel/>
@@ -55,7 +57,9 @@
 			  ItemsSource ="{Binding WordsListEvent, Mode=OneWay}">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="MouseDoubleClick">
-					<i:InvokeCommandAction Command="{Binding DoubleClickCommand}" />
+					<i:InvokeCommandAction 
+						Command="{Binding DoubleClickCommand}"
+						CommandParameter="{Binding ElementName=ThisWindow}"/>					
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 		</DataGrid>
