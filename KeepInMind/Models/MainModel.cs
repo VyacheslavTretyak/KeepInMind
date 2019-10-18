@@ -109,6 +109,7 @@ namespace KeepInMind.Models
 
 		internal void OpenSettings()
 		{
+			//TODO вибір мови
 			SettingsWindow wnd = new SettingsWindow();
 			wnd.ShowDialog();			
 		}

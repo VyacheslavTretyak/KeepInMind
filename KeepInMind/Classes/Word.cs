@@ -22,20 +22,21 @@ namespace KeepInMind.Classes
 		public DateTime TimeShow { get; set; } = DateTime.Now;
 		public DateTime TimeCreate { get; set; } = DateTime.Now;
 		public int CountShow { get; set; } = 0;
-		public WordLevel Level{ get; set; } = Word.WordLevel.Normal;
-		//public int LevelNum {
-		//	get { return (int)Level; }
-		//	set {
-		//		WordLevel level;
-		//		Enum.TryParse<WordLevel>(value.ToString(), out level);				
-		//		Level = level;
-		//	}
-		//}
-
+		public WordLevel Level{ get; set; } = Word.WordLevel.Normal;		
 
 		public Word()
 		{
 			
+		}
+
+		public Word Clone()
+		{
+			Word word = new Word();
+			foreach(var p in word.GetType().GetProperties())
+			{
+				p.SetValue(word, p.GetValue(this));
+			}
+			return word;
 		}
 
 		public string ToLine()

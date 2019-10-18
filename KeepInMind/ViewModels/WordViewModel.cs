@@ -23,9 +23,9 @@ namespace KeepInMind.ViewModels
 		public Word WordEvent
 		{
 			get { return word; }
-			set {
+			set {				
 				word = value;
-				wordEvent = value;
+				wordEvent = word.Clone();
 				wordEvent = wordModel.GetWordShowType(wordEvent);
 				levelNum = (int)wordEvent.Level;
 				OnPropertyChanged("WordEvent");				
