@@ -22,7 +22,7 @@ namespace KeepInMind.ViewModels
 		private Word wordEvent;
 		public Word WordEvent
 		{
-			get { return word; }
+			get { return wordEvent; }
 			set {				
 				word = value;
 				wordEvent = word.Clone();
