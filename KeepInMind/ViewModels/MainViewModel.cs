@@ -10,8 +10,7 @@ namespace KeepInMind.ViewModels
 {
 	public class MainViewModel : BaseViewModel
 	{
-		private MainModel mainModel;		
-		//private MainWindow mainWindow;
+		private MainModel mainModel;
 
 		private string originText;
 		public string OriginTextEvent
@@ -89,7 +88,7 @@ namespace KeepInMind.ViewModels
 		private void ShowNow(object obj)
 		{		
 			//TODO show now
-		//	mainModel.ShowNow();
+			mainModel.ShowNow();
 		}
 
 		private void AddWord(object obj)

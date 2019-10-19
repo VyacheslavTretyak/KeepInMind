@@ -36,7 +36,6 @@ namespace KeepInMind.ViewModels
 		{
 			get { return levelNum; }
 			set {
-				var word = WordEvent;
 				word.Level = (Word.WordLevel)Enum.Parse(typeof(Word.WordLevel), value.ToString());
 				WordEvent = word;
 			}
