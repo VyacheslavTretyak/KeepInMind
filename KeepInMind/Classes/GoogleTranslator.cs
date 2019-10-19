@@ -17,10 +17,13 @@ using Google.Cloud.Translation.V2;
 namespace KeepInMind.Classes
 {
 	class GoogleTranslator
-	{		
+	{
+		private string fromLanguage;
+		private string toLanguage;
 		public GoogleTranslator()
-		{			
-			
+		{
+			fromLanguage = WordsManager.Instance.GetConfig().FromLanguage;
+			toLanguage = WordsManager.Instance.GetConfig().ToLanguage;
 		}
 
 		public string Translate(string text)
@@ -31,7 +34,7 @@ namespace KeepInMind.Classes
 		private string TranslateTask(string text)
 		{			
 			TranslationClient client = TranslationClient.Create();
-			var response = client.TranslateText(text, "ukr", "en");
+			var response = client.TranslateText(text, toLanguage, fromLanguage);
 			return response.TranslatedText;
 		}
 	}

@@ -17,6 +17,8 @@ namespace KeepInMind.Classes
 		public int Days { get; set; } = 7;
 		public int Weeks { get; set; } = 4;
 		public bool AutoRun { get; set; } = false;
+		public string FromLanguage { get; set; } = "en";
+		public string ToLanguage { get; set; } = "ukr";
 		public string DirectoryName { get; set; } = "data";
 		public string FileName { get; set; } = "words";
 		public string FileExtension { get; set; } = "wrd";
