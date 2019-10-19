@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
@@ -20,8 +21,12 @@ namespace KeepInMind.Classes
 	{
 		private string fromLanguage;
 		private string toLanguage;
+		private const string clientSecret = "KeepInMind-840d7e955bd7.json";
 		public GoogleTranslator()
 		{
+			Assembly asm = Assembly.GetExecutingAssembly();
+			string path = System.IO.Path.GetDirectoryName(asm.Location)+"\\"+clientSecret;
+			Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
 			fromLanguage = WordsManager.Instance.GetConfig().FromLanguage;
 			toLanguage = WordsManager.Instance.GetConfig().ToLanguage;
 		}
