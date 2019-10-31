@@ -15,8 +15,10 @@ namespace KeepInMind.ViewModels
 		public DelegateCommand DeleteWordCommand { get; }
 		public DelegateCommand EditWordCommand { get; }
 		public DelegateCommand PreviousWordCommand { get; }		
+		public DelegateCommand SkipCommand { get; }		
 		public Word EditingWord { get; set; }
 		public bool PreviousWordEvent { get; set; }
+		public bool isSkip = false;
 
 		private Word word;
 		private Word wordEvent;
@@ -45,8 +47,14 @@ namespace KeepInMind.ViewModels
 			DeleteWordCommand = new DelegateCommand((obj) => DeleteWord(obj), (obj) => true);
 			EditWordCommand = new DelegateCommand((obj) => EditWord(obj), (obj) => true);
 			PreviousWordCommand = new DelegateCommand((obj) => PreviousWord(obj), (obj) => true);
+			SkipCommand = new DelegateCommand((obj) => SkipWord(obj), (obj) => true);
 			WordWindowRectEvent = wordModel.GetRect();
 			OnPropertyChanged("WordWindowRectEvent");
+		}
+
+		private void SkipWord(object obj)
+		{
+			isSkip = true;
 		}
 
 		private void PreviousWord(object obj)
@@ -65,7 +73,7 @@ namespace KeepInMind.ViewModels
 
 		public void Close()
 		{
-			wordModel.CloseWord(word);
+			wordModel.CloseWord(word, isSkip);
 		}		
 	}
 }
