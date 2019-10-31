@@ -32,7 +32,7 @@ namespace KeepInMind.Classes
 		public int WordWidowWidth { get; set; } = 350;
 		public int ListWidowHeight { get; set; } = 800;
 		public int ListWidowWidth { get; set; } = 600;
-		public int SettingsWidowHeight { get; set; } = 450;
+		public int SettingsWidowHeight { get; set; } = 500;
 		public int SettingsWidowWidth { get; set; } = 300;
 
 		[Comment("Time between shows (in seconds)")]

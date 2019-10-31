@@ -58,6 +58,9 @@
 				<RowDefinition/>
 				<RowDefinition/>
 				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="auto"/>
@@ -127,7 +130,73 @@
 				</i:Interaction.Behaviors>
 			</TextBox>
 			<TextBlock 
+					Grid.Row="3"
+					Grid.Column="0" 
+					VerticalAlignment="Center" 
+					Margin= "16 0" 
+					ToolTip="Count old words for showing"
+					Style="{StaticResource MaterialDesignTitleTextBlock}">
+					Count Old
+			</TextBlock>
+			<TextBox 
+					Text="{Binding OldWordsEvent, Mode=TwoWay}"
 					Grid.Row="3" 
+					Grid.Column="1" 
+					HorizontalAlignment="Left" 
+					VerticalAlignment="Center"
+					FontSize="18" 
+					AcceptsReturn="True" 
+					Width="100" >
+				<i:Interaction.Behaviors>
+					<classes:TextInputBehavior/>
+				</i:Interaction.Behaviors>
+			</TextBox>
+			<TextBlock 
+					Grid.Row="4"
+					Grid.Column="0" 
+					VerticalAlignment="Center" 
+					Margin= "16 0" 
+					ToolTip="Time between showing (sec)"
+					Style="{StaticResource MaterialDesignTitleTextBlock}">
+					Time Between
+			</TextBlock>
+			<TextBox 
+					Text="{Binding TimeBetweenEvent, Mode=TwoWay}"
+					Grid.Row="4" 
+					Grid.Column="1" 
+					HorizontalAlignment="Left" 
+					VerticalAlignment="Center"
+					FontSize="18" 
+					AcceptsReturn="True" 
+					Width="100" >
+				<i:Interaction.Behaviors>
+					<classes:TextInputBehavior/>
+				</i:Interaction.Behaviors>
+			</TextBox>
+			<TextBlock 
+					Grid.Row="5"
+					Grid.Column="0" 
+					VerticalAlignment="Center" 
+					Margin= "16 0" 
+					ToolTip="Different between levels %"
+					Style="{StaticResource MaterialDesignTitleTextBlock}">
+					Level Diff
+			</TextBlock>
+			<TextBox 
+					Text="{Binding LevelDiffEvent, Mode=TwoWay}"
+					Grid.Row="5" 
+					Grid.Column="1" 
+					HorizontalAlignment="Left" 
+					VerticalAlignment="Center"
+					FontSize="18" 
+					AcceptsReturn="True" 
+					Width="100" >
+				<i:Interaction.Behaviors>
+					<classes:TextInputBehavior/>
+				</i:Interaction.Behaviors>
+			</TextBox>
+			<TextBlock 
+					Grid.Row="6" 
 					Grid.Column="0" 
 					VerticalAlignment="Center" 
 					Margin= "16 0" 
@@ -138,14 +207,14 @@
 					ItemsSource="{Binding Source={StaticResource dataFromEnum}}"					
 					SelectedValue="{Binding AskWordsTypeEvent}"
 					FontSize="18" 
-					Grid.Row="3"
+					Grid.Row="6"
 					Grid.Column="1" 
 					Margin="0 0 16 0"
 					Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
 					ToolTip="Ask words, or ask translate, or ask both variants" >
 			</ComboBox>
 			<TextBlock  
-					Grid.Row="4" 
+					Grid.Row="7" 
 					Grid.Column="0"
 					VerticalAlignment="Center" 
 					Margin= "16 0" 
@@ -154,7 +223,7 @@
 			</TextBlock>
 			<ToggleButton
 					IsChecked="{Binding AutoRunEvent, Mode=TwoWay}"
-					Grid.Row="4"
+					Grid.Row="7"
 					Grid.Column="1" 
 					HorizontalAlignment="Left"
 					Style="{StaticResource MaterialDesignSwitchToggleButton}"
