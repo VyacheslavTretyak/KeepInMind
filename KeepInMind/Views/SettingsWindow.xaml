@@ -58,8 +58,7 @@
 				<RowDefinition/>
 				<RowDefinition/>
 				<RowDefinition/>
-				<RowDefinition/>
-				<RowDefinition/>
+				<RowDefinition/>				
 				<RowDefinition/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
@@ -173,30 +172,9 @@
 					<classes:TextInputBehavior/>
 				</i:Interaction.Behaviors>
 			</TextBox>
+			
 			<TextBlock 
-					Grid.Row="5"
-					Grid.Column="0" 
-					VerticalAlignment="Center" 
-					Margin= "16 0" 
-					ToolTip="Different between levels %"
-					Style="{StaticResource MaterialDesignTitleTextBlock}">
-					Level Diff
-			</TextBlock>
-			<TextBox 
-					Text="{Binding LevelDiffEvent, Mode=TwoWay}"
 					Grid.Row="5" 
-					Grid.Column="1" 
-					HorizontalAlignment="Left" 
-					VerticalAlignment="Center"
-					FontSize="18" 
-					AcceptsReturn="True" 
-					Width="100" >
-				<i:Interaction.Behaviors>
-					<classes:TextInputBehavior/>
-				</i:Interaction.Behaviors>
-			</TextBox>
-			<TextBlock 
-					Grid.Row="6" 
 					Grid.Column="0" 
 					VerticalAlignment="Center" 
 					Margin= "16 0" 
@@ -207,14 +185,14 @@
 					ItemsSource="{Binding Source={StaticResource dataFromEnum}}"					
 					SelectedValue="{Binding AskWordsTypeEvent}"
 					FontSize="18" 
-					Grid.Row="6"
+					Grid.Row="5"
 					Grid.Column="1" 
 					Margin="0 0 16 0"
 					Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
 					ToolTip="Ask words, or ask translate, or ask both variants" >
 			</ComboBox>
 			<TextBlock  
-					Grid.Row="7" 
+					Grid.Row="6" 
 					Grid.Column="0"
 					VerticalAlignment="Center" 
 					Margin= "16 0" 
@@ -223,7 +201,7 @@
 			</TextBlock>
 			<ToggleButton
 					IsChecked="{Binding AutoRunEvent, Mode=TwoWay}"
-					Grid.Row="7"
+					Grid.Row="6"
 					Grid.Column="1" 
 					HorizontalAlignment="Left"
 					Style="{StaticResource MaterialDesignSwitchToggleButton}"

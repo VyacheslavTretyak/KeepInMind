@@ -31,7 +31,6 @@ namespace KeepInMind.Models
 			config.Weeks = vm.WeeksEvent;
 			config.CountOldWords = vm.OldWordsEvent;
 			config.SleepBetweenShows = vm.TimeBetweenEvent;
-			config.LevelPercent = vm.LevelDiffEvent;
 			config.AutoRun = vm.AutoRunEvent;
 			ConfigLoader configLoader = new ConfigLoader();
 			configLoader.SaveConfig(config);			
@@ -43,7 +42,6 @@ namespace KeepInMind.Models
 			vm.DaysEvent = config.Days;
 			vm.WeeksEvent = config.Weeks;
 			vm.OldWordsEvent = config.CountOldWords;
-			vm.LevelDiffEvent = config.LevelPercent;
 			vm.TimeBetweenEvent = config.SleepBetweenShows;
 			vm.AskWordsTypeEvent = config.AskWords;
 			vm.AutoRunEvent = config.AutoRun;
