@@ -139,7 +139,6 @@
 		</Button>		
 		<tb:TaskbarIcon x:Name="myNotifyIcon"
             Visibility="Visible"
-            ToolTipText="Fallback ToolTip for Windows xp"
             IconSource="/Resources/Icon1.ico"			
 			LeftClickCommand="{Binding TaskbarIconClickCommand}"
 			LeftClickCommandParameter="{Binding ElementName=ThisWindow}">
