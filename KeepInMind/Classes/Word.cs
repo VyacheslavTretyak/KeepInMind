@@ -10,10 +10,10 @@ namespace KeepInMind.Classes
 	{
 		public enum WordLevel
 		{
-			Easy,
-			Normal,
-			Hard
-		}
+			Easy = 1,
+			Normal = 2,
+			Hard = 3
+		}	
 		public static string spliter = ";";
 		public static string formatInWord = "dd.MM.yyyy HH:mm:ss";
 		public int Id { get; set; } = 0;
@@ -22,11 +22,21 @@ namespace KeepInMind.Classes
 		public DateTime TimeShow { get; set; } = DateTime.Now;
 		public DateTime TimeCreate { get; set; } = DateTime.Now;
 		public int CountShow { get; set; } = 0;
-		public WordLevel Level{ get; set; } = Word.WordLevel.Normal;
+		public WordLevel Level{ get; set; } = Word.WordLevel.Normal;		
 
 		public Word()
 		{
 			
+		}
+
+		public Word Clone()
+		{
+			Word word = new Word();
+			foreach(var p in word.GetType().GetProperties())
+			{
+				p.SetValue(word, p.GetValue(this));
+			}
+			return word;
 		}
 
 		public string ToLine()
@@ -46,6 +56,30 @@ namespace KeepInMind.Classes
 			stringBuilder.Append(spliter);
 			stringBuilder.Append(Level);			
 			return stringBuilder.ToString();
+		}
+
+		public void LevelDown()
+		{
+			if (Level == WordLevel.Normal)
+			{
+				Level = WordLevel.Easy;
+			}
+			else if (Level == WordLevel.Hard)
+			{
+				Level = WordLevel.Normal;
+			}
+		}
+
+		public void LevelUp()
+		{
+			if (Level == WordLevel.Normal)
+			{
+				Level = WordLevel.Hard;
+			}
+			else if (Level == WordLevel.Easy)
+			{
+				Level = WordLevel.Normal;
+			}
 		}
 	}
 }

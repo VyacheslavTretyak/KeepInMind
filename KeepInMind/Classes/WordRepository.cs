@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using KeepInMind.Classes;
 
-namespace KeepInMind.Models
+namespace KeepInMind.Classes
 {
 	class WordRepository
 	{

@@ -1,0 +1,67 @@
+﻿<Window x:Class="KeepInMind.Views.WordsListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KeepInMind.ViewModels"
+		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"		
+        mc:Ignorable="d"
+		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+		TextElement.Foreground="{DynamicResource MaterialDesignBody}"		
+        Background="{DynamicResource MaterialDesignPaper}"
+		TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+		FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+		Title="Words List" 
+		Name="ThisWindow"
+		Height="{Binding ListWindowRectEvent.Height, Mode=TwoWay}" 
+		Width="{Binding ListWindowRectEvent.Width, Mode=TwoWay}"		
+		Top="{Binding ListWindowRectEvent.Top, Mode=TwoWay}"
+		Left="{Binding ListWindowRectEvent.Left, Mode=TwoWay}"		
+		Icon="/Resources/Icon1.ico">
+
+	
+	<Window.DataContext>
+		<local:WordsListViewModel/>
+	</Window.DataContext>
+<Grid>
+	<Grid.RowDefinitions>
+		<RowDefinition Height="60"/>
+		<RowDefinition Height="*"/>
+	</Grid.RowDefinitions>
+	<StackPanel Orientation="Horizontal">
+			<TextBox 
+				Margin="30 0"
+				Width="200"				
+				materialDesign:HintAssist.Hint="original search"				
+				Text="{Binding OriginTextChangedEvent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+			<TextBox 		
+				Margin="30 0" 
+				Width="200"
+				materialDesign:HintAssist.Hint="translate search"				
+				Text="{Binding TranslateTextChangedEvent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+		</StackPanel>
+		<DataGrid Grid.Row="1"
+			  Margin="0 8 0 0"
+			  Name="DataGridWords"
+			  CanUserSortColumns="True"
+			  CanUserAddRows="False"	
+			  CanUserResizeRows="False"
+			  CanUserResizeColumns="True"
+			  CanUserDeleteRows="False"		
+			  
+			  materialDesign:DataGridAssist.CellPadding="4 2 2 2"
+			  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2"
+			  ToolTip="Double click for open word card"
+			  SelectedItem="{Binding SelectedItemEvent, Mode=TwoWay}"
+			  ItemsSource ="{Binding WordsListEvent, Mode=OneWay}">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="MouseDoubleClick">
+					<i:InvokeCommandAction 
+						Command="{Binding DoubleClickCommand}"
+						CommandParameter="{Binding ElementName=ThisWindow}"/>					
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+		</DataGrid>
+	</Grid>
+</Window>

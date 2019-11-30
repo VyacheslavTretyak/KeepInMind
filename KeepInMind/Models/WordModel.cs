@@ -7,18 +7,58 @@ namespace KeepInMind.Models
 {
 	class WordModel
 	{
-		private WordsManager wordsManager = WordsManager.Instance;
-		public  Word Word { get; set; }
+		private WordsManager wordsManager = WordsManager.Instance;				
 		public WordModel()
 		{
 			
 		}
 
-		internal void CloseWord(Word word)
+		internal WindowRect GetRect()
 		{
-			word.CountShow++;
-			word.TimeShow = DateTime.Now;
-			wordsManager.UpdateWord(word);
+			WindowRect rect = new WindowRect();
+			rect.Height = wordsManager.GetConfig().WordWidowHeight;
+			rect.Width = wordsManager.GetConfig().WordWidowWidth;
+			rect.SetRightBottom();
+			return rect;
+		}		
+
+		internal void DeleteWord(Word word)
+		{
+			wordsManager.DeleteWord(word);
+		}
+
+		internal void CloseWord(Word word, bool isSkip)
+		{
+			if (!isSkip)
+			{
+				word.CountShow++;
+				word.TimeShow = DateTime.Now;
+				wordsManager.UpdateWord(word);
+			}
+		}
+
+		internal Word GetWordShowType(Word word)
+		{
+			if(wordsManager.GetConfig().AskWords == AskWordsType.Translate)
+			{
+				word = WrapWord(word);
+			}
+			else if(wordsManager.GetConfig().AskWords == AskWordsType.Both)
+			{
+				Random rnd = new Random();
+				if(rnd.Next(0, 2) == 0)
+				{
+					word = WrapWord(word);
+				}				
+			}
+			return word;
+		}
+		private Word WrapWord(Word word)
+		{
+			string tmp = word.Translate;
+			word.Translate = word.Origin;
+			word.Origin = tmp;
+			return word;
 		}
 	}
 }

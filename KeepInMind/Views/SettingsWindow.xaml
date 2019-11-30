@@ -1,0 +1,248 @@
+﻿<Window x:Class="KeepInMind.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KeepInMind.ViewModels"
+		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+		xmlns:System="clr-namespace:System;assembly=mscorlib"
+		xmlns:classes="clr-namespace:KeepInMind.Classes"
+		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"	
+        mc:Ignorable="d"
+        Title="Setting Window" 
+		Height="{Binding WindowRectEvent.Height, Mode=TwoWay}"
+		Width="{Binding WindowRectEvent.Width, Mode=TwoWay}"
+		Top ="{Binding WindowRectEvent.Top, Mode=TwoWay}"
+		Left ="{Binding WindowRectEvent.Left, Mode=TwoWay}"
+		MinHeight="{Binding WindowRectEvent.Height, Mode=TwoWay}"
+		MinWidth="{Binding WindowRectEvent.Width, Mode=TwoWay}"		
+		TextElement.Foreground="{DynamicResource MaterialDesignBody}"		
+        Background="{DynamicResource MaterialDesignPaper}"
+		TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+		FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+		ResizeMode="NoResize"
+		Icon="/Resources/Icon1.ico"
+		Name="ThisWindow">
+	<Window.DataContext>
+		<local:SettingsViewModel/>
+	</Window.DataContext>
+	<Window.Resources>
+		<ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+                            ObjectType="{x:Type System:Enum}">
+			<ObjectDataProvider.MethodParameters>
+				<x:Type TypeName="classes:AskWordsType"/>
+			</ObjectDataProvider.MethodParameters>
+		</ObjectDataProvider>
+	</Window.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition/>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+		<materialDesign:ColorZone
+				Grid.Row="0"
+				Mode="PrimaryDark"
+				Padding="16">
+			<TextBlock 
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Style="{StaticResource MaterialDesignDisplay1TextBlock}">Settings</TextBlock>
+		</materialDesign:ColorZone>
+		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>				
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<TextBlock 					
+					Grid.Row="0" 
+					Grid.Column="0" 
+					VerticalAlignment="Center" 
+					Margin= "16 0" 					
+					Style="{StaticResource MaterialDesignTitleTextBlock}">
+					Hours
+			</TextBlock>
+			<TextBox 
+					Text="{Binding HoursEvent, Mode=TwoWay}"
+					Grid.Row="0" 
+					Grid.Column="1" 
+					HorizontalAlignment="Left" 
+					VerticalAlignment="Center" 
+					FontSize="18"
+					AcceptsReturn="True" 
+					ToolTip="How much time word will be show once an hour."
+					Width="100">
+				<i:Interaction.Behaviors>
+					<classes:TextInputBehavior/>
+				</i:Interaction.Behaviors>
+			</TextBox>
+			<TextBlock  
+					Grid.Row="1"
+					Grid.Column="0" 
+					VerticalAlignment="Center"
+					Margin= "16 0" 
+					Style="{StaticResource MaterialDesignTitleTextBlock}">
+					Days
+			</TextBlock>
+			<TextBox 
+					Text="{Binding DaysEvent, Mode=TwoWay}"
+					Grid.Row="1" 
+					Grid.Column="1" 
+					HorizontalAlignment="Left" 
+					VerticalAlignment="Center" 
+					FontSize="18" 
+					AcceptsReturn="True"				
+					ToolTip="How much time word will be show once a day."
+					Width="100" >
+				<i:Interaction.Behaviors>
+					<classes:TextInputBehavior/>
+				</i:Interaction.Behaviors>
+			</TextBox>
+			<TextBlock 
+					Grid.Row="2"
+					Grid.Column="0" 
+					VerticalAlignment="Center" 
+					Margin= "16 0" 
+					Style="{StaticResource MaterialDesignTitleTextBlock}">
+					Weeks
+			</TextBlock>
+			<TextBox 
+					Text="{Binding WeeksEvent, Mode=TwoWay}"
+					Grid.Row="2" 
+					Grid.Column="1" 
+					HorizontalAlignment="Left" 
+					VerticalAlignment="Center"
+					FontSize="18" 
+					AcceptsReturn="True" 				
+					ToolTip="How much time word will be show once a week."
+					Width="100" >
+				<i:Interaction.Behaviors>
+					<classes:TextInputBehavior/>
+				</i:Interaction.Behaviors>
+			</TextBox>
+			<TextBlock 
+					Grid.Row="3"
+					Grid.Column="0" 
+					VerticalAlignment="Center" 
+					Margin= "16 0" 
+					ToolTip="Count old words for showing"
+					Style="{StaticResource MaterialDesignTitleTextBlock}">
+					Count Old
+			</TextBlock>
+			<TextBox 
+					Text="{Binding OldWordsEvent, Mode=TwoWay}"
+					Grid.Row="3" 
+					Grid.Column="1" 
+					HorizontalAlignment="Left" 
+					VerticalAlignment="Center"
+					FontSize="18" 
+					AcceptsReturn="True" 
+					Width="100" >
+				<i:Interaction.Behaviors>
+					<classes:TextInputBehavior/>
+				</i:Interaction.Behaviors>
+			</TextBox>
+			<TextBlock 
+					Grid.Row="4"
+					Grid.Column="0" 
+					VerticalAlignment="Center" 
+					Margin= "16 0" 
+					ToolTip="Time between showing (sec)"
+					Style="{StaticResource MaterialDesignTitleTextBlock}">
+					Time Between
+			</TextBlock>
+			<TextBox 
+					Text="{Binding TimeBetweenEvent, Mode=TwoWay}"
+					Grid.Row="4" 
+					Grid.Column="1" 
+					HorizontalAlignment="Left" 
+					VerticalAlignment="Center"
+					FontSize="18" 
+					AcceptsReturn="True" 
+					Width="100" >
+				<i:Interaction.Behaviors>
+					<classes:TextInputBehavior/>
+				</i:Interaction.Behaviors>
+			</TextBox>
+			
+			<TextBlock 
+					Grid.Row="5" 
+					Grid.Column="0" 
+					VerticalAlignment="Center" 
+					Margin= "16 0" 
+					Style="{StaticResource MaterialDesignTitleTextBlock}" >
+					Ask
+			</TextBlock>
+			<ComboBox 	
+					ItemsSource="{Binding Source={StaticResource dataFromEnum}}"					
+					SelectedValue="{Binding AskWordsTypeEvent}"
+					FontSize="18" 
+					Grid.Row="5"
+					Grid.Column="1" 
+					Margin="0 0 16 0"
+					Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
+					ToolTip="Show a word, or show a translation, or show both variants" >
+			</ComboBox>
+			<TextBlock  
+					Grid.Row="6" 
+					Grid.Column="0"
+					VerticalAlignment="Center" 
+					Margin= "16 0"
+					ToolTip="Launch application when system starts" 
+					Style="{StaticResource MaterialDesignTitleTextBlock}">
+					AutoRun
+			</TextBlock>
+			<ToggleButton
+					IsChecked="{Binding AutoRunEvent, Mode=TwoWay}"
+					Grid.Row="6"
+					Grid.Column="1" 
+					HorizontalAlignment="Left"
+					Style="{StaticResource MaterialDesignSwitchToggleButton}"
+					ToolTip="Run application with Windows" />
+			
+		</Grid>
+		<Button
+			Grid.Row="2"
+			Margin="16 0"
+			Command="{Binding RollbackCommand}">
+			Rollback saved words
+		</Button>
+		<Grid 
+				Grid.Row="3" 
+				Margin="0 16">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Button 
+					Command="{Binding CloseCommand}"
+					CommandParameter="{Binding ElementName=ThisWindow}"
+					Width="100" 
+					Margin="16 0"
+					HorizontalAlignment="Left"
+					Grid.Column="0">
+				Cancel
+			</Button>
+			<Button 				
+				Command="{Binding SaveSettingsCommand}"
+				CommandParameter="{Binding ElementName=ThisWindow}"
+				Width="100" 
+				Margin="16 0"
+				HorizontalAlignment="Right"
+				Grid.Column="1">
+				Ok
+			</Button>
+		</Grid>
+	</Grid>
+</Window>

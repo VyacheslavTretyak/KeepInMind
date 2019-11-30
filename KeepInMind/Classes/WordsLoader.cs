@@ -9,16 +9,15 @@ using System.Threading.Tasks;
 using KeepInMind.Classes;
 using Microsoft.Win32;
 
-namespace KeepInMind.Models
+namespace KeepInMind.Classes
 {
 	class WordsLoader
 	{
 		private Configurator configurator;
-		public WordsLoader()
+		public WordsLoader(Configurator configurator)
 		{
-			configurator = new Configurator();
-			configurator.Load();
-		}
+			this.configurator = configurator;			
+		}	
 
 		public ObservableCollection<Word> LoadLastFile()
 		{
@@ -70,6 +69,14 @@ namespace KeepInMind.Models
 					word.CountShow = int.Parse(line[n++]);
 					word.TimeShow = DateTime.ParseExact(line[n++], Word.formatInWord, System.Globalization.CultureInfo.InvariantCulture);
 					word.TimeCreate = DateTime.ParseExact(line[n++], Word.formatInWord, System.Globalization.CultureInfo.InvariantCulture);
+					if (n > line.Length - 1)
+					{
+						word.Level = Word.WordLevel.Normal;
+					}
+					else
+					{
+						word.Level = (Word.WordLevel)Enum.Parse(typeof(Word.WordLevel), line[n++]);
+					}
 					words.Add(word);
 				}
 			}

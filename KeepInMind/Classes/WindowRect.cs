@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KeepInMind.Classes
 {
-	internal class WindowRect
+	public class WindowRect
 	{
 		public double Height { get; set; }
 		public double Width { get; set; }
@@ -16,17 +16,20 @@ namespace KeepInMind.Classes
 
 		public void SetRightBottom()
 		{
-			Left = GetWordAreaWidth() - Width;
-			Top = GetWordAreaHeight() - Height;
+			Left = GetWorkAreaWidth() - Width;
+			Top = GetWorkAreaHeight() - Height;
 		}
 
-		public static double GetWordAreaHeight()
+		public static double GetWorkAreaHeight()
 		{
-			return SystemParameters.WorkArea.Height;
+			
+			var h = SystemParameters.WorkArea.Height;
+			return h;
 		}
-		public static double GetWordAreaWidth()
+		public static double GetWorkAreaWidth()
 		{
-			return SystemParameters.WorkArea.Width;
+			var w = SystemParameters.WorkArea.Width;
+			return w;
 		}
 	}
 }
