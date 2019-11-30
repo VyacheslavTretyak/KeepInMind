@@ -81,6 +81,7 @@
 					VerticalAlignment="Center" 
 					FontSize="18"
 					AcceptsReturn="True" 
+					ToolTip="How much time word will be show once an hour."
 					Width="100">
 				<i:Interaction.Behaviors>
 					<classes:TextInputBehavior/>
@@ -101,7 +102,8 @@
 					HorizontalAlignment="Left" 
 					VerticalAlignment="Center" 
 					FontSize="18" 
-					AcceptsReturn="True"
+					AcceptsReturn="True"				
+					ToolTip="How much time word will be show once a day."
 					Width="100" >
 				<i:Interaction.Behaviors>
 					<classes:TextInputBehavior/>
@@ -122,7 +124,8 @@
 					HorizontalAlignment="Left" 
 					VerticalAlignment="Center"
 					FontSize="18" 
-					AcceptsReturn="True" 
+					AcceptsReturn="True" 				
+					ToolTip="How much time word will be show once a week."
 					Width="100" >
 				<i:Interaction.Behaviors>
 					<classes:TextInputBehavior/>
@@ -189,13 +192,14 @@
 					Grid.Column="1" 
 					Margin="0 0 16 0"
 					Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
-					ToolTip="Ask words, or ask translate, or ask both variants" >
+					ToolTip="Show a word, or show a translation, or show both variants" >
 			</ComboBox>
 			<TextBlock  
 					Grid.Row="6" 
 					Grid.Column="0"
 					VerticalAlignment="Center" 
-					Margin= "16 0" 
+					Margin= "16 0"
+					ToolTip="Launch application when system starts" 
 					Style="{StaticResource MaterialDesignTitleTextBlock}">
 					AutoRun
 			</TextBlock>
