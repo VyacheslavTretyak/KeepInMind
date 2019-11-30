@@ -25,15 +25,13 @@ namespace KeepInMind
 		public WordWindow()
 		{
 			InitializeComponent();
-			origin.SizeChanged += Origin_SizeChanged;
+			SizeToContent = SizeToContent.Height;
+			origin.SizeChanged += Origin_SizeChanged;		
 		}
 
 		private void Origin_SizeChanged(object sender, SizeChangedEventArgs e)
-		{
-			Height = card.ActualHeight;
-			backCard.Height = card.ActualHeight;
-			Top = WindowRect.GetWorkAreaHeight() - Height;
-
+		{			
+			Top = WindowRect.GetWorkAreaHeight() - ActualHeight;
 		}
 
 		private void Flipper_IsFlippedChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)

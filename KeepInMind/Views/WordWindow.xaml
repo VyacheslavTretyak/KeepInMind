@@ -39,7 +39,7 @@
 			<materialDesign:Flipper.FrontContent>
 				<materialDesign:Card 
 						Name="card"
-						Width="{Binding WordWindowRectEvent.Width, Mode=TwoWay}"						
+						Width="{Binding WordWindowRectEvent.Width, Mode=TwoWay}"							
 						MouseUp="Card_MouseUp"
 						Foreground="{DynamicResource PrimaryHueLightForegroundBrush}">
 					<materialDesign:Card.Style>
