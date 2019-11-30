@@ -103,7 +103,9 @@
 								HorizontalAlignment="Right"
 								Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
 								Command="{x:Static materialDesign:Flipper.FlipCommand}"
-								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"							Margin="8">
+								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"		
+								ToolTip="Show Translate"
+								Margin="8">
 								<materialDesign:PackIcon 
 									Kind="Help" 
 									Height="14" 
@@ -134,6 +136,7 @@
 								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
 								HorizontalAlignment="Center"
 								Margin="8"
+								ToolTip="Delete Word"
 								Click="DeleteButton_Click">
 								<materialDesign:PackIcon 
 									Kind="DeleteForever" 
@@ -147,6 +150,7 @@
 								Command="{Binding EditWordCommand}"
 								Click="CheckButton_Click"
 								HorizontalAlignment="Center"
+								ToolTip="Edit Word"
 								Margin="8">
 								<materialDesign:PackIcon 
 									Kind="Pen" 
@@ -160,6 +164,7 @@
 								Click="CheckButton_Click"
 								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
 								HorizontalAlignment="Center"
+								ToolTip="Previous Word"
 								Margin="8">
 								<materialDesign:PackIcon 
 									Kind="ArrowLeftThick" 
@@ -173,6 +178,7 @@
 								Command="{Binding SkipCommand}"
 								Click="CheckButton_Click"
 								HorizontalAlignment="Center"
+								ToolTip="Skip Word. Don't count a try"
 								Margin="8">
 								<materialDesign:PackIcon 
 									Kind="SkipNext" 
@@ -194,6 +200,7 @@
 								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
 								HorizontalAlignment="Center"
 								Margin="8"
+								ToolTip="Confirm Action"
 								Click="CheckButton_Click">
 								<materialDesign:PackIcon 
 									Kind="Check" 
@@ -206,6 +213,7 @@
 								Click="CancelButton_Click"
 								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
 								HorizontalAlignment="Center"
+								ToolTip="Cancel Action"
 								Margin="8">
 								<materialDesign:PackIcon 
 									Kind="Cancel" 

@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="KeepInMind.App" Collapsed="true">
+    <Position X="15" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.NotFoundException" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Exception\NotFoundException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.RepositoryException" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Exception\RepositoryException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="KeepInMind.SettingsWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\SettingsWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="KeepInMind.WordWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAIAAAAAAAAAAEAAACAAAEAIAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\WordWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="KeepInMind.Classes.BaseViewModel" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="KeepInMind.Classes.CloseWindowBehavior" Collapsed="true">
+    <Position X="16.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Behaviors\CloseWindowBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Classes.Comment" Collapsed="true">
+    <Position X="4" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Comment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Classes.CommentEnum" Collapsed="true">
+    <Position X="6" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\CommentEnum.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Classes.ConfigLoader" Collapsed="true">
+    <Position X="5.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAIjAAEAAAAAAAAAAAAAgACAAAAAAAAAAEAAAAAgAAA=</HashCode>
+      <FileName>Classes\ConfigLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Classes.Configurator" Collapsed="true">
+    <Position X="5.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAAAAAAAIQgQkgAABAACBAAAABAAAARAMAACBAEAE=</HashCode>
+      <FileName>Classes\Configurator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Classes.DelegateCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQEACAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\DelegateCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="KeepInMind.Classes.GoogleTranslator" Collapsed="true">
+    <Position X="5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAACAAFAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Classes\GoogleTranslator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Classes.Loger" Collapsed="true">
+    <Position X="5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAACAAAAAEEQAAEAAAA=</HashCode>
+      <FileName>Classes\Loger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Classes.MultyCommandConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\MultyCommandConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="KeepInMind.Classes.TextInputBehavior" Collapsed="true">
+    <Position X="16.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Behaviors\TextInputBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Classes.WindowRect" Collapsed="true">
+    <Position X="3" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAABAAAAAAAAQAAAEAAAAAIAAAACAAAAAAAAgA=</HashCode>
+      <FileName>Classes\WindowRect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Classes.Word" Collapsed="true">
+    <Position X="6.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACAEAAAAAAAAAAAAQAAAABIAAAAAAhAAAEAAhQABA=</HashCode>
+      <FileName>Classes\Word.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Classes.WordRepository" Collapsed="true">
+    <Position X="7.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAAAAABAAAAAAAAAAEEAAAAAACAAAAAgAAA=</HashCode>
+      <FileName>Classes\WordRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Classes.WordsLoader" Collapsed="true">
+    <Position X="6.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAIAAgACBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\WordsLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Classes.WordsManager" Collapsed="true">
+    <Position X="6" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCQQAIgCgAAAAAEKAgAAEQBAAABkAAAAQAAAAACAAAA=</HashCode>
+      <FileName>Classes\WordsManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Models.MainModel" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAACIAACAAAEAAEgAAAAUBAEABgBAAACAAAAAYCAAAA=</HashCode>
+      <FileName>Models\MainModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Models.SettingsModel" Collapsed="true">
+    <Position X="9" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAACAAAAoAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SettingsModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Models.WordModel" Collapsed="true">
+    <Position X="15" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAIAAAAQAAAAAAAAAAAAAEAAAEAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Models\WordModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Models.WordsListModel" Collapsed="true">
+    <Position X="9.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQIAAAAAAAAAAAAAAAAAAEAACAAAACAAAAAAAAAAI=</HashCode>
+      <FileName>Models\WordsListModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Properties.Settings" Collapsed="true">
+    <Position X="9" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.ViewModels.MainViewModel" Collapsed="true">
+    <Position X="9.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAAQBAABAAAEAQABAAAAAQACAAkAAAAiAAACQIAACAA=</HashCode>
+      <FileName>ViewModels\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.ViewModels.SettingsViewModel" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAIAAAABAAiAAAAAEAAYAACAAgAAACAIACAAEA=</HashCode>
+      <FileName>ViewModels\SettingsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.ViewModels.WordsListViewModel" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAACAgAAAAgAABAAgAAJQAAACAAAQAAAAAAAAQgAA=</HashCode>
+      <FileName>ViewModels\WordsListViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.ViewModels.WordViewModel" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEACQABAAAAAAAQCAAAAAEAAgIMAAAABBEAAASAgQE=</HashCode>
+      <FileName>ViewModels\WordViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeepInMind.Views.WordsListWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\WordsListWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Enum Name="KeepInMind.Classes.AskWordsType" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Classes\AskWordsType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

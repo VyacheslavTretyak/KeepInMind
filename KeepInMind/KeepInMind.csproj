@@ -165,8 +165,8 @@
     </ApplicationDefinition>
     <Compile Include="Classes\AskWordsType.cs" />
     <Compile Include="Classes\BaseViewModel.cs" />
-    <Compile Include="Classes\TextInputBehavior.cs" />
-    <Compile Include="Classes\CloseWindowBehavior.cs" />
+    <Compile Include="Classes\Behaviors\TextInputBehavior.cs" />
+    <Compile Include="Classes\Behaviors\CloseWindowBehavior.cs" />
     <Compile Include="Classes\CommentEnum.cs" />
     <Compile Include="Classes\Comment.cs" />
     <Compile Include="Classes\DelegateCommand.cs" />
@@ -242,6 +242,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
