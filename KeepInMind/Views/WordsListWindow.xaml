@@ -48,8 +48,8 @@
 			  CanUserAddRows="False"	
 			  CanUserResizeRows="False"
 			  CanUserResizeColumns="True"
-			  CanUserDeleteRows="False"		
-			  
+			  CanUserDeleteRows="False"
+			  IsReadOnly="True"
 			  materialDesign:DataGridAssist.CellPadding="4 2 2 2"
 			  materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2"
 			  ToolTip="Double click for open word card"
