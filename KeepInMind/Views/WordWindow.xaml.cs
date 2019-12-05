@@ -26,11 +26,12 @@ namespace KeepInMind
 		{
 			InitializeComponent();
 			SizeToContent = SizeToContent.Height;
-			origin.SizeChanged += Origin_SizeChanged;		
+			origin.SizeChanged += Origin_SizeChanged;			
 		}
 
 		private void Origin_SizeChanged(object sender, SizeChangedEventArgs e)
-		{			
+		{
+			backCard.Height = ActualHeight;
 			Top = WindowRect.GetWorkAreaHeight() - ActualHeight;
 		}
 

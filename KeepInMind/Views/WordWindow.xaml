@@ -227,7 +227,7 @@
 			<materialDesign:Flipper.BackContent>				
 				<materialDesign:Card
 					Name="backCard"
-					Width="{Binding WordWindowRectEvent.Width, Mode=TwoWay}"
+					Width="{Binding WordWindowRectEvent.Width, Mode=TwoWay}"					
 					MouseUp="BackCard_MouseUp"					
 					Background="{DynamicResource PrimaryHueDarkBrush}"
 					Foreground="{DynamicResource PrimaryHueLightForegroundBrush}">
