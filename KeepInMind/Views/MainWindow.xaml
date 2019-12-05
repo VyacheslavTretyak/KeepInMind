@@ -42,6 +42,7 @@
 			<RowDefinition/>
 		</Grid.RowDefinitions>
 		<materialDesign:PopupBox 
+			IsTabStop="False"
 			HorizontalAlignment="Right"
 			StaysOpen="True" 			
 			IsEnabled="{Binding IsChecked, ElementName=PopupEnabled}">
@@ -95,6 +96,7 @@
 				 Margin="20"
 				 Text="{Binding TranslateTextEvent, Mode=OneWay}"/>
 		<Button x:Name="ButtonAddWord"
+				IsTabStop="False"
 				Grid.Row="3"				
 				HorizontalAlignment="Right"
 				Command="{Binding AddWordCommand}">
