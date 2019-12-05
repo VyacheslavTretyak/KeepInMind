@@ -141,7 +141,9 @@
             Visibility="Visible"
             IconSource="/Resources/Icon1.ico"			
 			LeftClickCommand="{Binding TaskbarIconClickCommand}"
-			LeftClickCommandParameter="{Binding ElementName=ThisWindow}">
+			LeftClickCommandParameter="{Binding ElementName=ThisWindow}"
+			DoubleClickCommand="{Binding TaskbarIconClickCommand}"
+			DoubleClickCommandParameter="{Binding ElementName=ThisWindow}">			
 			<tb:TaskbarIcon.ContextMenu>
 				<ContextMenu Background="{DynamicResource PrimaryHueLightBrush}">
 					<MenuItem Header="Show Now" Command="{Binding ShowNowCommand}"/>
