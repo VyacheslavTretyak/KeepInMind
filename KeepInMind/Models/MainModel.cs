@@ -1,6 +1,7 @@
 ﻿using KeepInMind.Classes;
 using KeepInMind.ViewModels;
 using KeepInMind.Views;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,8 +32,11 @@ namespace KeepInMind.Models
 		}
 		public void AddWord(string original, string translate)
 		{
+			var config = WordsManager.Instance.GetConfig();
+			original = Regex.Replace(original, Word.spliter, Word.spliterReplace);
+			translate = Regex.Replace(translate, Word.spliter, Word.spliterReplace);
 			if (EditWordEvent != null)
-			{
+			{				
 				editWord.Origin = original;
 				editWord.Translate = translate;
 				wordsManager.UpdateWord(editWord);

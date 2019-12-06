@@ -104,7 +104,7 @@
 								Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
 								Command="{x:Static materialDesign:Flipper.FlipCommand}"
 								Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"		
-								ToolTip="Show Translate"
+								ToolTip="{Binding WordEvent.Translate, Mode=TwoWay}"
 								Margin="8">
 								<materialDesign:PackIcon 
 									Kind="Help" 
