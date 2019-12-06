@@ -1,9 +1,8 @@
-﻿using KeepInMind.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
+using System.Windows;
 
 namespace KeepInMind.Classes
 {	
@@ -22,17 +21,25 @@ namespace KeepInMind.Classes
 			{
 				if (instance == null)
 				{
-					instance = new WordsManager();
+					instance = new WordsManager();					
 				}
 				return instance;
 			}
 		}
 		private WordsManager()
 		{
-			configurator = new ConfigLoader().LoadConfig();
-			wordsLoader = new WordsLoader(configurator);
-			wordRepository = new WordRepository(wordsLoader.LoadLastFile());				
-			GetNextWordsList();
+			try
+			{
+				configurator = new ConfigLoader().LoadConfig();
+				wordsLoader = new WordsLoader(configurator);
+				wordRepository = new WordRepository(wordsLoader.LoadLastFile());
+				GetNextWordsList();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);				
+				Application.Current.Shutdown();				
+			}
 		}
 
 		

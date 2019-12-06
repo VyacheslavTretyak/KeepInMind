@@ -15,6 +15,7 @@ namespace KeepInMind.Classes
 			Hard = 3
 		}	
 		public static string spliter = ";";
+		public static string spliterReplace = ":";
 		public static string formatInWord = "dd.MM.yyyy HH:mm:ss";
 		public int Id { get; set; } = 0;
 		public string Origin { get; set; }
