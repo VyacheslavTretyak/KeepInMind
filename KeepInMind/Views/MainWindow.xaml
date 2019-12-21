@@ -28,9 +28,6 @@
 	<i:Interaction.Behaviors>
 		<classes:CloseWindowBehavior/>
 	</i:Interaction.Behaviors>	
-	<Window.DataContext>
-		<local:MainViewModel/>
-	</Window.DataContext>
 	<Window.Resources>
 		<classes:MultyCommandConverter x:Key="MainConverter"/>
 	</Window.Resources>

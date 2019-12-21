@@ -21,7 +21,7 @@ namespace KeepInMind.Classes
 
 		public ObservableCollection<Word> LoadLastFile()
 		{
-			FileInfo fi = new FileInfo(configurator.DirectoryName);
+			FileInfo fi = new FileInfo(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configurator.DirectoryName));
 			if (!fi.Exists)
 			{
 				Directory.CreateDirectory(fi.FullName);

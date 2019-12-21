@@ -1,13 +1,8 @@
-﻿using KeepInMind.Classes;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using static KeepInMind.Classes.Configurator;
+using System.Windows.Forms;
 
 namespace KeepInMind.Classes
 {
@@ -17,7 +12,7 @@ namespace KeepInMind.Classes
 		private Configurator config;
 		public ConfigLoader()
 		{
-			
+			fileName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);			
 		}
 
 		private string appName = "KeepInMind";
@@ -38,7 +33,7 @@ namespace KeepInMind.Classes
 			}
 			else
 			{
-				config = new Configurator();
+				config = new Configurator();				
 				using (StreamReader sr = new StreamReader(fileName))
 				{
 					while (!sr.EndOfStream)
@@ -109,26 +104,36 @@ namespace KeepInMind.Classes
 								sw.Write($"{val}, ");
 							}
 							sw.Write("\n");
-						}
+						}						
 					}
 					var a = p.GetValue(configurator).ToString();
 					sw.WriteLine($"{p.Name}:{a}");
+					if(p.Name == "AutoRun")
+					{
+						if ((bool)p.GetValue(configurator))
+						{
+							AutoRunSet();
+						}
+						else
+						{
+							AutoRunUnset();
+						}
+					}
 				}
 			}
 		}
 		public void AutoRunSet()
 		{
 			RegistryKey curUserkey = Registry.CurrentUser;
-			RegistryKey autoRunKey = curUserkey.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
-			var location = System.Reflection.Assembly.GetEntryAssembly().Location;
-			autoRunKey.SetValue(appName, location);
+			RegistryKey autoRunKey = curUserkey.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);			
+			autoRunKey.SetValue(appName, Assembly.GetEntryAssembly().Location);
 			autoRunKey.Close();
 			curUserkey.Close();
 		}
 		public void AutoRunUnset()
 		{
 			RegistryKey curUserkey = Registry.CurrentUser;
-			RegistryKey autoRunKey = curUserkey.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
+			RegistryKey autoRunKey = curUserkey.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
 			autoRunKey.DeleteValue(appName);
 			autoRunKey.Close();
 			curUserkey.Close();

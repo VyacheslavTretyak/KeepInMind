@@ -1,6 +1,7 @@
 ﻿using KeepInMind.Classes;
 using KeepInMind.ViewModels;
 using KeepInMind.Views;
+using System;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace KeepInMind.Models
 		private GoogleTranslator translator = new GoogleTranslator();
 		private Thread thread;		
 		private bool isPreventWord = false;
+		private MainWindow mainWindow;
 
 		private Word editWord;
 
@@ -23,8 +25,9 @@ namespace KeepInMind.Models
 			get { return editWord; }
 			set { editWord = value; }
 		}
-		public MainModel()
+		public MainModel(MainWindow mainWindow)
 		{
+			this.mainWindow = mainWindow;
 			wordsManager = WordsManager.Instance;
 			config = wordsManager.GetConfig();
 			RunTask();
@@ -83,6 +86,7 @@ namespace KeepInMind.Models
 					{
 						EditWordEvent = wordViewModel.EditingWord;
 						OnPropertyChanged("EditWordEvent");
+						mainWindow.Show();
 						thread.Suspend();
 					}
 					isPreventWord = wordViewModel.PreviousWordEvent;
@@ -125,9 +129,17 @@ namespace KeepInMind.Models
 		}
 
 		private void RunTask(Word word = null)
-		{			
-			thread?.Abort();
-			Task.Run(() => GetWord(word));			
+		{
+			try
+			{
+				thread?.Abort();
+				Task.Run(() => GetWord(word));
+			}
+			catch(Exception ex)
+			{
+
+			}
+			
 		}
 
 		internal void ShowNow()

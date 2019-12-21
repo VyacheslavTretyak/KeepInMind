@@ -60,8 +60,9 @@ namespace KeepInMind.Classes
 
 		public void GetNextWordsList()
 		{
-			currentNum = 0;
+			currentNum = 0;			
 			showList = GetWordsToShow();
+			
 		}
 		public Word FindWord(int id)
 		{
@@ -150,26 +151,35 @@ namespace KeepInMind.Classes
 			var oldWords = wordRepository.Words.Where(w =>
 										w.CountShow > GetCount(w, to) &&								
 										(now - w.TimeShow).TotalDays > GetCount(w, 30))
-								.OrderBy(w=>w.CountShow).Take(configurator.CountOldWords*3).ToList();
+								.OrderBy(w=>w.CountShow).Take(configurator.CountOldWords*3).ToList();			
 			//Виподково вибираємо CountOldWords старих слів для показу
 			Random rnd = new Random();
 			List<int> indexes = new List<int>();
-			for (int i = 0; i < configurator.CountOldWords; i++)
+
+			int count = configurator.CountOldWords;
+			if(oldWords.Count < count)
 			{
-				int index = 0; ;
+				count = oldWords.Count;
+			}
+
+			for (int i = 0; i < count; i++)
+			{
+				int index = 0;
 				do
 				{
 					index = rnd.Next(0, oldWords.Count);
 				} while (indexes.Contains(index));
-				indexes.Add(index);				
+				indexes.Add(index);
 			}
-			for(int i = 0; i<oldWords.Count; i++)
+			
+			for (int i = 0; i<oldWords.Count; i++)
 			{
 				if (indexes.Contains(i))
 				{
 					list.Add(oldWords[i]);
 				}
 			}
+			
 			//Тасуємо список слів
 			List<int> shuffle = new List<int>();
 			List<Word> newList = new List<Word>();
@@ -183,6 +193,7 @@ namespace KeepInMind.Classes
 				shuffle.Add(r);
 				newList.Add(list[r]);
 			}
+			
 			return newList;
 		}
 		public void Close()
