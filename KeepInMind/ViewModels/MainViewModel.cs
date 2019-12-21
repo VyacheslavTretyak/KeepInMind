@@ -45,10 +45,10 @@ namespace KeepInMind.ViewModels
 		public DelegateCommand ClosingCommand { get; }
 		public DelegateCommand TaskbarIconClickCommand { get; }
 		
-		public MainViewModel()
+		public MainViewModel(MainWindow mainWindow)
 		{
 			//System.Diagnostics.Debug.WriteLine("CONSTRUCTOR");
-			mainModel = new MainModel();
+			mainModel = new MainModel(mainWindow);
 			mainModel.PropertyChanged += EditWordEvent_PropertyChanged;
 
 			AddWordCommand = new DelegateCommand((obj) => AddWord(obj), (obj) => true);

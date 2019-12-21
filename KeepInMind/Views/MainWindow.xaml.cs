@@ -13,6 +13,7 @@ namespace KeepInMind
 		public MainWindow()
 		{
 			InitializeComponent();
+			DataContext = new MainViewModel(this);
 			TextBoxWord.KeyDown += TextBoxWord_KeyDown;
 			TextBoxTranslate.KeyDown += TextBoxTranslate_KeyDown; ;
 		}
