@@ -31,6 +31,7 @@ namespace KeepInMind
 				{
 					vm.AddWordCommand.Execute(obj);
 				}
+				FocusManager.SetFocusedElement(this, TextBoxWord);
 			}
 		}
 
