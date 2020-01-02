@@ -16,7 +16,8 @@ namespace KeepInMind.Classes
 		private static string GetPath()
 		{
 			if (path == null)
-			{					
+			{			
+				directoryName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, directoryName);
 				path = $"{directoryName}/{fileName}_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.{extension}";				
 				FileInfo fi = new FileInfo(directoryName);
 				if (!fi.Exists)
