@@ -44,7 +44,7 @@ namespace KeepInMind
 
 		private void Card_MouseUp(object sender, MouseButtonEventArgs e)
 		{
-			if (openTime.Second < DateTime.Now.Second)
+			if (DateTime.Now.Subtract(openTime).Milliseconds > 150)
 			{
 				(this.DataContext as WordViewModel).Close();
 				Close();
