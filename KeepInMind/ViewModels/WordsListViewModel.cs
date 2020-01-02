@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Windows.Controls;
 using KeepInMind.Views;
+using System.Threading;
 
 namespace KeepInMind.ViewModels
 {
@@ -67,7 +68,7 @@ namespace KeepInMind.ViewModels
 		{			
 			if (SelectedWordEvent != null)
 			{				
-				(obj as WordsListWindow).DialogResult = true;
+				(obj as WordsListWindow).DialogResult = true;				
 				OnPropertyChanged("SelectedWordEvent");
 			}
 		}
