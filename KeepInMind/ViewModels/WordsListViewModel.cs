@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Globalization;
-using System.Windows.Data;
 using KeepInMind.Models;
 using KeepInMind.Classes;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Windows.Threading;
-using System.Windows.Controls;
 using KeepInMind.Views;
 
 namespace KeepInMind.ViewModels
@@ -63,11 +55,11 @@ namespace KeepInMind.ViewModels
 			OnPropertyChanged("ListWindowRectEvent");			
 		}
 
-		private void DoubleClick(object obj)
+		public void DoubleClick(object obj)
 		{			
 			if (SelectedWordEvent != null)
 			{				
-				(obj as WordsListWindow).DialogResult = true;
+				(obj as WordsListWindow).DialogResult = true;				
 				OnPropertyChanged("SelectedWordEvent");
 			}
 		}

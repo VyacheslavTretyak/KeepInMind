@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeepInMind.ViewModels"
+		xmlns:classes="clr-namespace:KeepInMind.Classes"
 		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"		
         mc:Ignorable="d"
 		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -55,7 +56,10 @@
 			  ToolTip="Double click for open word card"
 			  SelectedItem="{Binding SelectedItemEvent, Mode=TwoWay}"
 			  ItemsSource ="{Binding WordsListEvent, Mode=OneWay}">
-			<i:Interaction.Triggers>
+			<i:Interaction.Behaviors>
+				<classes:PreviewKeyDownBehavior/>
+			</i:Interaction.Behaviors>
+			<i:Interaction.Triggers>				
 				<i:EventTrigger EventName="MouseDoubleClick">
 					<i:InvokeCommandAction 
 						Command="{Binding DoubleClickCommand}"

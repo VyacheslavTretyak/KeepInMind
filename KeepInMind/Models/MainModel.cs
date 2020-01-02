@@ -137,7 +137,7 @@ namespace KeepInMind.Models
 			}
 			catch(Exception ex)
 			{
-
+				Loger.Write(ex.Message);
 			}
 			
 		}

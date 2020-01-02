@@ -22,11 +22,13 @@ namespace KeepInMind
 	/// </summary>
 	public partial class WordWindow : Window
 	{
+		private DateTime openTime;
 		public WordWindow()
 		{
 			InitializeComponent();
 			SizeToContent = SizeToContent.Height;
-			origin.SizeChanged += Origin_SizeChanged;			
+			origin.SizeChanged += Origin_SizeChanged;
+			openTime = DateTime.Now;
 		}
 
 		private void Origin_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -41,9 +43,12 @@ namespace KeepInMind
 		}
 
 		private void Card_MouseUp(object sender, MouseButtonEventArgs e)
-		{			
-			(this.DataContext as WordViewModel).Close();
-			Close();
+		{
+			if (DateTime.Now.Subtract(openTime).Milliseconds > 150)
+			{
+				(this.DataContext as WordViewModel).Close();
+				Close();
+			}
 		}
 		private void CheckButton_Click(object sender, RoutedEventArgs e)
 		{			
