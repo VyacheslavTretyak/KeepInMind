@@ -165,6 +165,7 @@
     </ApplicationDefinition>
     <Compile Include="Classes\AskWordsType.cs" />
     <Compile Include="Classes\BaseViewModel.cs" />
+    <Compile Include="Classes\Behaviors\PreviewKeyDownBehavior.cs" />
     <Compile Include="Classes\Behaviors\TextInputBehavior.cs" />
     <Compile Include="Classes\Behaviors\CloseWindowBehavior.cs" />
     <Compile Include="Classes\CommentEnum.cs" />
