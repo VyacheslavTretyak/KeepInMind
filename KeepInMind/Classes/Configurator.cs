@@ -37,5 +37,10 @@ namespace KeepInMind.Classes
 
 		[Comment("Time between shows (in seconds)")]
 		public int SleepBetweenShows { get; set; } = 3600;		
+
+		public Configurator()
+		{
+			ListWidowHeight = (int)WindowRect.GetWorkAreaHeight();
+		}
 	}
 }
