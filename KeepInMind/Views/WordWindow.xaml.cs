@@ -44,14 +44,15 @@ namespace KeepInMind
 
 		private void Card_MouseUp(object sender, MouseButtonEventArgs e)
 		{
-			if (DateTime.Now.Subtract(openTime).Milliseconds > 150)
+			if (DateTime.Now.Subtract(openTime).TotalMilliseconds > 150)
 			{
 				(this.DataContext as WordViewModel).Close();
 				Close();
 			}
 		}
 		private void CheckButton_Click(object sender, RoutedEventArgs e)
-		{			
+		{
+			(this.DataContext as WordViewModel).Close();
 			Close();
 		}
 
