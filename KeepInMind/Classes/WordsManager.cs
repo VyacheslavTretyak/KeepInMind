@@ -37,7 +37,8 @@ namespace KeepInMind.Classes
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);				
+				Loger.Write(ex.Message);
+				//MessageBox.Show(ex.Message);				
 				Application.Current.Shutdown();				
 			}
 		}

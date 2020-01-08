@@ -91,12 +91,26 @@ namespace KeepInMind.Models
 					}
 					isPreventWord = wordViewModel.PreviousWordEvent;
 				});
+				try
+				{
+					GetWord();
+				}
+				catch(Exception ex)
+				{
+					Loger.Write(ex.Message);
+				}
+			}
+			try
+			{
+				wordsManager.Save();
+				Thread.Sleep(config.SleepBetweenShows * 1000);
+				wordsManager.GetNextWordsList();
 				GetWord();
 			}
-			wordsManager.Save();
-			Thread.Sleep(config.SleepBetweenShows * 1000);
-			wordsManager.GetNextWordsList();
-			GetWord();
+			catch (Exception ex)
+			{
+				Loger.Write(ex.Message);
+			}
 		}
 
 		internal void OpenWordsList()
