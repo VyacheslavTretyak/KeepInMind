@@ -125,17 +125,25 @@ namespace KeepInMind.Classes
 		public void AutoRunSet()
 		{
 			RegistryKey curUserkey = Registry.CurrentUser;
-			RegistryKey autoRunKey = curUserkey.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);			
-			autoRunKey.SetValue(appName, Assembly.GetEntryAssembly().Location);
-			autoRunKey.Close();
+			
+			using (RegistryKey autoRunKey = curUserkey.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
+			{
+				autoRunKey.SetValue(appName, Assembly.GetEntryAssembly().Location);
+				autoRunKey.Close();
+			}			
 			curUserkey.Close();
 		}
 		public void AutoRunUnset()
 		{
-			RegistryKey curUserkey = Registry.CurrentUser;
-			RegistryKey autoRunKey = curUserkey.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true);
-			autoRunKey.DeleteValue(appName);
-			autoRunKey.Close();
+			RegistryKey curUserkey = Registry.CurrentUser;			
+			using (RegistryKey autoRunKey = curUserkey.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
+			{
+				if (curUserkey.OpenSubKey(appName) != null)
+				{
+					autoRunKey.DeleteValue(appName);
+				}
+				autoRunKey.Close();
+			}
 			curUserkey.Close();
 		}
 	}
