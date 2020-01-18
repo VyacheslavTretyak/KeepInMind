@@ -194,7 +194,10 @@ namespace KeepInMind.Classes
 				shuffle.Add(r);
 				newList.Add(list[r]);
 			}
-			
+			if(newList.Count > configurator.MaxCountWordsInTurn)
+			{
+				newList.RemoveRange(configurator.MaxCountWordsInTurn, newList.Count- configurator.MaxCountWordsInTurn); 
+			}
 			return newList;
 		}
 		public void Close()

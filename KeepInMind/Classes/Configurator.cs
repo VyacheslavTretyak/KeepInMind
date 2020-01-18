@@ -11,6 +11,7 @@ namespace KeepInMind.Classes
 {
 	class Configurator
 	{
+		public string AppName { get; set; } = "KeepInMind";
 		[CommentEnum]
 		public AskWordsType AskWords { get; set; } = AskWordsType.Both;		
 		public int Hours { get; set; } = 8;		
@@ -25,6 +26,7 @@ namespace KeepInMind.Classes
 		public string FormatInFile { get; set; } = "yyyy_MM_dd_HH_mm_ss";
 		public int MaxCountFiles { get; set; } = 20;
 		public int CountOldWords { get; set; } = 1;
+		public int MaxCountWordsInTurn { get; set; } = 30;
 		public int LevelPercent { get; set; } = 30;
 		public int WidowHeight { get; set; } = 300;
 		public int WidowWidth { get; set; } = 500;				
