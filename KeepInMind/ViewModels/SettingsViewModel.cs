@@ -21,6 +21,7 @@ namespace KeepInMind.ViewModels
 		public int DaysEvent { get; set; }	
 		public int WeeksEvent { get; set; }	
 		public int OldWordsEvent { get; set; }	
+		public int MaxWordsEvent { get; set; }	
 		public int TimeBetweenEvent { get; set; }	
 		public AskWordsType AskWordsTypeEvent { get; set; }
 		public bool AutoRunEvent { get; set; }

@@ -12,10 +12,10 @@ namespace KeepInMind.Classes
 		private Configurator config;
 		public ConfigLoader()
 		{
-			fileName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);			
+			fileName = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+			config = LoadConfig();
 		}
-
-		private string appName = "KeepInMind";
+		
 		private ConfigLoader configLoader;		
 
 		private Configurator SetDefaultConfig()
@@ -128,8 +128,7 @@ namespace KeepInMind.Classes
 			
 			using (RegistryKey autoRunKey = curUserkey.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
 			{
-				autoRunKey.SetValue(appName, Assembly.GetEntryAssembly().Location);
-				autoRunKey.Close();
+				autoRunKey.SetValue(config.AppName, Assembly.GetEntryAssembly().Location);				
 			}			
 			curUserkey.Close();
 		}
@@ -138,11 +137,10 @@ namespace KeepInMind.Classes
 			RegistryKey curUserkey = Registry.CurrentUser;			
 			using (RegistryKey autoRunKey = curUserkey.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
 			{
-				if (curUserkey.OpenSubKey(appName) != null)
+				if (autoRunKey.GetValue(config.AppName) != null)
 				{
-					autoRunKey.DeleteValue(appName);
+					autoRunKey.DeleteValue(config.AppName);
 				}
-				autoRunKey.Close();
 			}
 			curUserkey.Close();
 		}

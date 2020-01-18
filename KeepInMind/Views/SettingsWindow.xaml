@@ -58,6 +58,7 @@
 				<RowDefinition/>
 				<RowDefinition/>
 				<RowDefinition/>
+				<RowDefinition/>
 				<RowDefinition/>				
 				<RowDefinition/>
 			</Grid.RowDefinitions>
@@ -153,8 +154,32 @@
 					<classes:TextInputBehavior/>
 				</i:Interaction.Behaviors>
 			</TextBox>
+
 			<TextBlock 
 					Grid.Row="4"
+					Grid.Column="0" 
+					VerticalAlignment="Center" 
+					Margin= "16 0" 
+					ToolTip="Max count words in turn"
+					Style="{StaticResource MaterialDesignTitleTextBlock}">
+					Max Count Words
+			</TextBlock>
+			<TextBox 
+					Text="{Binding MaxWordsEvent, Mode=TwoWay}"
+					Grid.Row="4" 
+					Grid.Column="1" 
+					HorizontalAlignment="Left" 
+					VerticalAlignment="Center"
+					FontSize="18" 
+					AcceptsReturn="True" 
+					Width="100" >
+				<i:Interaction.Behaviors>
+					<classes:TextInputBehavior/>
+				</i:Interaction.Behaviors>
+			</TextBox>
+
+			<TextBlock 
+					Grid.Row="5"
 					Grid.Column="0" 
 					VerticalAlignment="Center" 
 					Margin= "16 0" 
@@ -164,7 +189,7 @@
 			</TextBlock>
 			<TextBox 
 					Text="{Binding TimeBetweenEvent, Mode=TwoWay}"
-					Grid.Row="4" 
+					Grid.Row="5" 
 					Grid.Column="1" 
 					HorizontalAlignment="Left" 
 					VerticalAlignment="Center"
@@ -177,7 +202,7 @@
 			</TextBox>
 			
 			<TextBlock 
-					Grid.Row="5" 
+					Grid.Row="6" 
 					Grid.Column="0" 
 					VerticalAlignment="Center" 
 					Margin= "16 0" 
@@ -188,14 +213,14 @@
 					ItemsSource="{Binding Source={StaticResource dataFromEnum}}"					
 					SelectedValue="{Binding AskWordsTypeEvent}"
 					FontSize="18" 
-					Grid.Row="5"
+					Grid.Row="6"
 					Grid.Column="1" 
 					Margin="0 0 16 0"
 					Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
 					ToolTip="Show a word, or show a translation, or show both variants" >
 			</ComboBox>
 			<TextBlock  
-					Grid.Row="6" 
+					Grid.Row="7" 
 					Grid.Column="0"
 					VerticalAlignment="Center" 
 					Margin= "16 0"
@@ -205,7 +230,7 @@
 			</TextBlock>
 			<ToggleButton
 					IsChecked="{Binding AutoRunEvent, Mode=TwoWay}"
-					Grid.Row="6"
+					Grid.Row="7"
 					Grid.Column="1" 
 					HorizontalAlignment="Left"
 					Style="{StaticResource MaterialDesignSwitchToggleButton}"

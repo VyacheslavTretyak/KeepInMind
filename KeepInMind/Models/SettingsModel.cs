@@ -30,6 +30,7 @@ namespace KeepInMind.Models
 			config.Days = vm.DaysEvent;
 			config.Weeks = vm.WeeksEvent;
 			config.CountOldWords = vm.OldWordsEvent;
+			config.MaxCountWordsInTurn = vm.MaxWordsEvent;
 			config.SleepBetweenShows = vm.TimeBetweenEvent;
 			config.AutoRun = vm.AutoRunEvent;
 			ConfigLoader configLoader = new ConfigLoader();
@@ -42,6 +43,7 @@ namespace KeepInMind.Models
 			vm.DaysEvent = config.Days;
 			vm.WeeksEvent = config.Weeks;
 			vm.OldWordsEvent = config.CountOldWords;
+			vm.MaxWordsEvent = config.MaxCountWordsInTurn;
 			vm.TimeBetweenEvent = config.SleepBetweenShows;
 			vm.AskWordsTypeEvent = config.AskWords;
 			vm.AutoRunEvent = config.AutoRun;

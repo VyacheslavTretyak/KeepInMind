@@ -26,7 +26,7 @@ namespace KeepInMind.Classes
 		{
 			Assembly asm = Assembly.GetExecutingAssembly();
 			string path = System.IO.Path.GetDirectoryName(asm.Location)+"\\"+clientSecret;
-			Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+			Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);			
 			fromLanguage = WordsManager.Instance.GetConfig().FromLanguage;
 			toLanguage = WordsManager.Instance.GetConfig().ToLanguage;
 		}
