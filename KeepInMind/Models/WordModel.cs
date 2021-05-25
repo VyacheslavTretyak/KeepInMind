@@ -29,12 +29,17 @@ namespace KeepInMind.Models
 
 		internal void CloseWord(Word word, bool isSkip)
 		{
-			if (!isSkip)
+			if (isSkip)
 			{
-				word.CountShow++;
-				word.TimeShow = DateTime.Now;
-				wordsManager.UpdateWord(word);
-			}
+				word.Rate = 0;
+            }
+            else
+            {
+				word.Rate++;
+            }
+			word.CountShow++;			
+			word.TimeShow = DateTime.Now;
+			wordsManager.UpdateWord(word);			
 		}
 
 		internal Word GetWordShowType(Word word)

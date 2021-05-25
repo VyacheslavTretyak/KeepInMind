@@ -13,10 +13,7 @@ namespace KeepInMind.Classes
 	{
 		public string AppName { get; set; } = "KeepInMind";
 		[CommentEnum]
-		public AskWordsType AskWords { get; set; } = AskWordsType.Both;		
-		public int Hours { get; set; } = 8;		
-		public int Days { get; set; } = 7;
-		public int Weeks { get; set; } = 4;
+		public AskWordsType AskWords { get; set; } = AskWordsType.Both;	
 		public bool AutoRun { get; set; } = false;
 		public string FromLanguage { get; set; } = "en";
 		public string ToLanguage { get; set; } = "ukr";
@@ -24,10 +21,8 @@ namespace KeepInMind.Classes
 		public string FileName { get; set; } = "words";
 		public string FileExtension { get; set; } = "wrd";
 		public string FormatInFile { get; set; } = "yyyy_MM_dd_HH_mm_ss";
-		public int MaxCountFiles { get; set; } = 20;
-		public int CountOldWords { get; set; } = 1;
-		public int MaxCountWordsInTurn { get; set; } = 30;
-		public int LevelPercent { get; set; } = 30;
+		public int MaxCountFiles { get; set; } = 20;	
+		public int MaxCountWordsInTurn { get; set; } = 30;	
 		public int WidowHeight { get; set; } = 300;
 		public int WidowWidth { get; set; } = 500;				
 		public int WordWidowHeight { get; set; } = 250;//Не впливає на висоту вікна, так як вона встановлюється з розміру тексту 

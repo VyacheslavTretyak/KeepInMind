@@ -124,67 +124,13 @@ namespace KeepInMind.Classes
 		}
 		private List<Word> GetWordsToShow()
 		{
-			List<Word> list = new List<Word>();
-			DateTime now = DateTime.Now;
+			List<Word> list = wordRepository.Words.OrderBy(e => e.Rate).ThenBy(e => e.TimeCreate).Take(configurator.MaxCountWordsInTurn).ToList();
 
-			//Шукаємо слова, які маємо показувати кожну годину
-			int to = configurator.Hours;
-			int from = 0;
-			list.AddRange(wordRepository.Words.Where(w => w.CountShow <= GetCount(w, to)));
-
-			//Шукаємо слова, які маємо показувати раз в день
-			from = to;
-			to = configurator.Days + from;
-			list.AddRange(wordRepository.Words.Where(w => 
-										w.CountShow > GetCount(w, from) &&
-										w.CountShow <= GetCount(w, to) &&
-										(now - w.TimeShow).TotalHours > 24));
-
-			//Шукаємо слова, які маємо показувати раз в тиждень
-			from = to;
-			to = configurator.Weeks + from;
-			list.AddRange(wordRepository.Words.Where(w =>
-										w.CountShow > GetCount(w, from) &&
-										w.CountShow <= GetCount(w, to) &&
-										(now - w.TimeShow).TotalDays > 7));
-
-			//Шукаємо слова, які не показували більше місяця тому			
-			var oldWords = wordRepository.Words.Where(w =>
-										w.CountShow > GetCount(w, to) &&								
-										(now - w.TimeShow).TotalDays > GetCount(w, 30))
-								.OrderBy(w=>w.CountShow).Take(configurator.CountOldWords*3).ToList();			
-			//Виподково вибираємо CountOldWords старих слів для показу
-			Random rnd = new Random();
-			List<int> indexes = new List<int>();
-
-			int count = configurator.CountOldWords;
-			if(oldWords.Count < count)
-			{
-				count = oldWords.Count;
-			}
-
-			for (int i = 0; i < count; i++)
-			{
-				int index = 0;
-				do
-				{
-					index = rnd.Next(0, oldWords.Count);
-				} while (indexes.Contains(index));
-				indexes.Add(index);
-			}
-			
-			for (int i = 0; i<oldWords.Count; i++)
-			{
-				if (indexes.Contains(i))
-				{
-					list.Add(oldWords[i]);
-				}
-			}
-			
 			//Тасуємо список слів
+			Random rnd = new Random();
 			List<int> shuffle = new List<int>();
 			List<Word> newList = new List<Word>();
-			for (int i = 0; i<list.Count; i++)
+			for (int i = 0; i < list.Count; i++)
 			{
 				int r = 0;
 				do
@@ -194,9 +140,9 @@ namespace KeepInMind.Classes
 				shuffle.Add(r);
 				newList.Add(list[r]);
 			}
-			if(newList.Count > configurator.MaxCountWordsInTurn)
+			if (newList.Count > configurator.MaxCountWordsInTurn)
 			{
-				newList.RemoveRange(configurator.MaxCountWordsInTurn, newList.Count- configurator.MaxCountWordsInTurn); 
+				newList.RemoveRange(configurator.MaxCountWordsInTurn, newList.Count - configurator.MaxCountWordsInTurn);
 			}
 			return newList;
 		}
