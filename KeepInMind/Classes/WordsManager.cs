@@ -70,12 +70,14 @@ namespace KeepInMind.Classes
 			return wordRepository.Get(id);
 		}
 		public Word GetWord(bool prevent = false) {
+			bool isFirst = false;
 			if (prevent)
 			{
 				currentNum-=2;
 				if (currentNum < 0)
 				{
 					currentNum = 0;
+					isFirst = true;
 				}
 			}
 			if (currentNum >= showList.Count)
@@ -85,6 +87,11 @@ namespace KeepInMind.Classes
 				return null;
 			}
 			Word word = showList[currentNum++];
+            if (!isFirst && prevent && word.Rate>0)
+            {
+				word.Rate--;
+				word.CountShow--;
+            }
 			return word;
 		}
 		public void Save()
@@ -124,27 +131,33 @@ namespace KeepInMind.Classes
 		}
 		private List<Word> GetWordsToShow()
 		{
-			List<Word> list = wordRepository.Words.OrderBy(e => e.Rate).ThenBy(e => e.TimeCreate).Take(configurator.MaxCountWordsInTurn).ToList();
+			List<Word> list = wordRepository.Words.OrderBy(e => e.Rate).ThenByDescending(e => e.TimeCreate).ToList();
+			List<Word> takenWords = new List<Word>();
+			DateTime now = DateTime.Now;
+			foreach(Word word in list)
+            {
+				var diff = now - word.TimeShow;
+                if (diff.TotalDays >= word.Rate)
+                {
+					takenWords.Add(word);
+                }
+                if (takenWords.Count >= configurator.MaxCountWordsInTurn)
+                {
+					break;
+                }
+            }
 
-			//Тасуємо список слів
 			Random rnd = new Random();
-			List<int> shuffle = new List<int>();
-			List<Word> newList = new List<Word>();
-			for (int i = 0; i < list.Count; i++)
+			int n = takenWords.Count;
+			while (n > 1)
 			{
-				int r = 0;
-				do
-				{
-					r = rnd.Next(0, list.Count);
-				} while (shuffle.Contains(r));
-				shuffle.Add(r);
-				newList.Add(list[r]);
+				n--;
+				int k = rnd.Next(n + 1);
+				var value = takenWords[k];
+				takenWords[k] = takenWords[n];
+				takenWords[n] = value;
 			}
-			if (newList.Count > configurator.MaxCountWordsInTurn)
-			{
-				newList.RemoveRange(configurator.MaxCountWordsInTurn, newList.Count - configurator.MaxCountWordsInTurn);
-			}
-			return newList;
+			return takenWords;
 		}
 		public void Close()
 		{

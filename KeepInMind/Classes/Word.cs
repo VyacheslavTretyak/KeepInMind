@@ -24,8 +24,7 @@ namespace KeepInMind.Classes
 		public DateTime TimeCreate { get; set; } = DateTime.Now;
 		public int CountShow { get; set; } = 0;
 		public WordLevel Level{ get; set; } = Word.WordLevel.Normal;		
-		public int Rate{ get; set; } = 1;		
-
+		public int Rate{ get; set; } = 0;	
 		public Word()
 		{
 			

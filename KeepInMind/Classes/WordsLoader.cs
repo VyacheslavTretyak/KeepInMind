@@ -76,7 +76,11 @@ namespace KeepInMind.Classes
 					if (n <= line.Length - 1)					
 					{
 						word.Rate = int.Parse(line[n++]);
-					}
+                    }
+                    else
+                    {
+						word.Rate = 7;
+                    }
 					words.Add(word);
 				}
 			}
