@@ -70,12 +70,14 @@ namespace KeepInMind.Classes
 			return wordRepository.Get(id);
 		}
 		public Word GetWord(bool prevent = false) {
+			bool isFirst = false;
 			if (prevent)
 			{
 				currentNum-=2;
 				if (currentNum < 0)
 				{
 					currentNum = 0;
+					isFirst = true;
 				}
 			}
 			if (currentNum >= showList.Count)
@@ -85,6 +87,11 @@ namespace KeepInMind.Classes
 				return null;
 			}
 			Word word = showList[currentNum++];
+            if (!isFirst && prevent && word.Rate>0)
+            {
+				word.Rate--;
+				word.CountShow--;
+            }
 			return word;
 		}
 		public void Save()
@@ -124,81 +131,33 @@ namespace KeepInMind.Classes
 		}
 		private List<Word> GetWordsToShow()
 		{
-			List<Word> list = new List<Word>();
+			List<Word> list = wordRepository.Words.OrderBy(e => e.Rate).ThenByDescending(e => e.TimeCreate).ToList();
+			List<Word> takenWords = new List<Word>();
 			DateTime now = DateTime.Now;
+			foreach(Word word in list)
+            {
+				var diff = now - word.TimeShow;
+                if (diff.TotalDays >= word.Rate)
+                {
+					takenWords.Add(word);
+                }
+                if (takenWords.Count >= configurator.MaxCountWordsInTurn)
+                {
+					break;
+                }
+            }
 
-			//Шукаємо слова, які маємо показувати кожну годину
-			int to = configurator.Hours;
-			int from = 0;
-			list.AddRange(wordRepository.Words.Where(w => w.CountShow <= GetCount(w, to)));
-
-			//Шукаємо слова, які маємо показувати раз в день
-			from = to;
-			to = configurator.Days + from;
-			list.AddRange(wordRepository.Words.Where(w => 
-										w.CountShow > GetCount(w, from) &&
-										w.CountShow <= GetCount(w, to) &&
-										(now - w.TimeShow).TotalHours > 24));
-
-			//Шукаємо слова, які маємо показувати раз в тиждень
-			from = to;
-			to = configurator.Weeks + from;
-			list.AddRange(wordRepository.Words.Where(w =>
-										w.CountShow > GetCount(w, from) &&
-										w.CountShow <= GetCount(w, to) &&
-										(now - w.TimeShow).TotalDays > 7));
-
-			//Шукаємо слова, які не показували більше місяця тому			
-			var oldWords = wordRepository.Words.Where(w =>
-										w.CountShow > GetCount(w, to) &&								
-										(now - w.TimeShow).TotalDays > GetCount(w, 30))
-								.OrderBy(w=>w.CountShow).Take(configurator.CountOldWords*3).ToList();			
-			//Виподково вибираємо CountOldWords старих слів для показу
 			Random rnd = new Random();
-			List<int> indexes = new List<int>();
-
-			int count = configurator.CountOldWords;
-			if(oldWords.Count < count)
+			int n = takenWords.Count;
+			while (n > 1)
 			{
-				count = oldWords.Count;
+				n--;
+				int k = rnd.Next(n + 1);
+				var value = takenWords[k];
+				takenWords[k] = takenWords[n];
+				takenWords[n] = value;
 			}
-
-			for (int i = 0; i < count; i++)
-			{
-				int index = 0;
-				do
-				{
-					index = rnd.Next(0, oldWords.Count);
-				} while (indexes.Contains(index));
-				indexes.Add(index);
-			}
-			
-			for (int i = 0; i<oldWords.Count; i++)
-			{
-				if (indexes.Contains(i))
-				{
-					list.Add(oldWords[i]);
-				}
-			}
-			
-			//Тасуємо список слів
-			List<int> shuffle = new List<int>();
-			List<Word> newList = new List<Word>();
-			for (int i = 0; i<list.Count; i++)
-			{
-				int r = 0;
-				do
-				{
-					r = rnd.Next(0, list.Count);
-				} while (shuffle.Contains(r));
-				shuffle.Add(r);
-				newList.Add(list[r]);
-			}
-			if(newList.Count > configurator.MaxCountWordsInTurn)
-			{
-				newList.RemoveRange(configurator.MaxCountWordsInTurn, newList.Count- configurator.MaxCountWordsInTurn); 
-			}
-			return newList;
+			return takenWords;
 		}
 		public void Close()
 		{

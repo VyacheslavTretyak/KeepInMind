@@ -71,7 +71,7 @@ namespace KeepInMind.Models
 			thread = Thread.CurrentThread;
 			if (word == null)
 			{
-				word = wordsManager.GetWord(isPreventWord);
+				word = wordsManager.GetWord(isPreventWord);				
 			}
 			isPreventWord = false;
 			if (word != null)
@@ -82,6 +82,11 @@ namespace KeepInMind.Models
 					WordViewModel wordViewModel = wordWindow.DataContext as WordViewModel;
 					wordViewModel.WordEvent = word;
 					wordWindow.ShowDialog();
+                    if (wordViewModel.isSkip)
+                    {
+						word.Rate = 0;
+						wordsManager.UpdateWord(word);
+					}
 					if (wordViewModel.EditingWord != null)
 					{
 						EditWordEvent = wordViewModel.EditingWord;

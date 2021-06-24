@@ -27,14 +27,12 @@ namespace KeepInMind.Models
 			wordsManager.DeleteWord(word);
 		}
 
-		internal void CloseWord(Word word, bool isSkip)
+		internal void CloseWord(Word word)
 		{
-			if (!isSkip)
-			{
-				word.CountShow++;
-				word.TimeShow = DateTime.Now;
-				wordsManager.UpdateWord(word);
-			}
+			word.Rate++;            
+			word.CountShow++;			
+			word.TimeShow = DateTime.Now;
+			wordsManager.UpdateWord(word);			
 		}
 
 		internal Word GetWordShowType(Word word)

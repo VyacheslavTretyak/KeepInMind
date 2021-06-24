@@ -69,14 +69,18 @@ namespace KeepInMind.Classes
 					word.CountShow = int.Parse(line[n++]);
 					word.TimeShow = DateTime.ParseExact(line[n++], Word.formatInWord, System.Globalization.CultureInfo.InvariantCulture);
 					word.TimeCreate = DateTime.ParseExact(line[n++], Word.formatInWord, System.Globalization.CultureInfo.InvariantCulture);
-					if (n > line.Length - 1)
-					{
-						word.Level = Word.WordLevel.Normal;
-					}
-					else
+					if (n <= line.Length - 1)					
 					{
 						word.Level = (Word.WordLevel)Enum.Parse(typeof(Word.WordLevel), line[n++]);
 					}
+					if (n <= line.Length - 1)					
+					{
+						word.Rate = int.Parse(line[n++]);
+                    }
+                    else
+                    {
+						word.Rate = 7;
+                    }
 					words.Add(word);
 				}
 			}

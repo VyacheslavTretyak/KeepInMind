@@ -72,8 +72,8 @@ namespace KeepInMind.ViewModels
 		}
 
 		public void Close()
-		{
-			wordModel.CloseWord(word, isSkip);
+		{			
+			wordModel.CloseWord(word);
 		}		
 	}
 }

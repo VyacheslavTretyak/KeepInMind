@@ -25,11 +25,7 @@ namespace KeepInMind.Models
 
 		internal void SaveSettings(SettingsViewModel vm)
 		{
-			config.AskWords = vm.AskWordsTypeEvent;
-			config.Hours = vm.HoursEvent;
-			config.Days = vm.DaysEvent;
-			config.Weeks = vm.WeeksEvent;
-			config.CountOldWords = vm.OldWordsEvent;
+			config.AskWords = vm.AskWordsTypeEvent;	
 			config.MaxCountWordsInTurn = vm.MaxWordsEvent;
 			config.SleepBetweenShows = vm.TimeBetweenEvent;
 			config.AutoRun = vm.AutoRunEvent;
@@ -39,10 +35,6 @@ namespace KeepInMind.Models
 
 		internal void GetConfig(SettingsViewModel vm)
 		{
-			vm.HoursEvent = config.Hours;
-			vm.DaysEvent = config.Days;
-			vm.WeeksEvent = config.Weeks;
-			vm.OldWordsEvent = config.CountOldWords;
 			vm.MaxWordsEvent = config.MaxCountWordsInTurn;
 			vm.TimeBetweenEvent = config.SleepBetweenShows;
 			vm.AskWordsTypeEvent = config.AskWords;

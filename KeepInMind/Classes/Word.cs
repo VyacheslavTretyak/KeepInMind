@@ -24,7 +24,7 @@ namespace KeepInMind.Classes
 		public DateTime TimeCreate { get; set; } = DateTime.Now;
 		public int CountShow { get; set; } = 0;
 		public WordLevel Level{ get; set; } = Word.WordLevel.Normal;		
-
+		public int Rate{ get; set; } = 0;	
 		public Word()
 		{
 			
@@ -55,7 +55,9 @@ namespace KeepInMind.Classes
 			stringBuilder.Append(spliter);
 			stringBuilder.Append(TimeCreate.ToString(formatInWord));
 			stringBuilder.Append(spliter);
-			stringBuilder.Append(Level);			
+			stringBuilder.Append(Level);
+			stringBuilder.Append(spliter);
+			stringBuilder.Append(Rate);
 			return stringBuilder.ToString();
 		}
 
