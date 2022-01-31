@@ -85,6 +85,7 @@ namespace KeepInMind.Models
                     if (wordViewModel.isSkip)
                     {
 						word.Rate = 0;
+						word.CountShow++;
 						wordsManager.UpdateWord(word);
 					}
 					if (wordViewModel.EditingWord != null)
